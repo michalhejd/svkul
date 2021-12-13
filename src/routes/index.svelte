@@ -1,5 +1,9 @@
+<script>
+    import Title from "../components/title.svelte";
+</script>
+
 <svelte:head>
     <title>UJEP</title>
 </svelte:head>
 
-<h1>Tady si napiš co chceš</h1>
+<Title>Tady si napiš co chceš</Title>
