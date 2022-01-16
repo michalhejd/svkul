@@ -1,0 +1,3 @@
+[submodule "server"]
+	path = server
+	url = https://github.com/cisc0disco/ujep-db-api
