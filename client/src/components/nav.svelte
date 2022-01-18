@@ -45,7 +45,6 @@
         align-items: flex-end;
     }
     .productCount{
-        position: absolute;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -57,5 +56,7 @@
     }
     i{
         margin: 4px;
+    }
+    .productCount:hover{
     }
 </style>
