@@ -13,21 +13,22 @@
     </div>
 </div>
 <style>
-    .news{
+    .news {
         width: 100%;
+        background: #F5F5F5;
     }
-    .wrap{
+    .wrap {
         display: flex;
         flex-direction: column;
-        gap: 100px;
-        margin: 75px;
+        gap: 60px;
+        margin: 40px 75px;
     }
-    .header{
+    .header {
         text-align: center;
         font-size: 35px;
         font-weight: 500;
     }
-    .container{
+    .container {
         display: flex;
         gap: 20px;
         justify-content: center;
