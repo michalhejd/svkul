@@ -1,13 +1,11 @@
 <script>
     import NewsBox from "./news-box.svelte";
     import NewsLink from "./news-links.svelte"
-    import MainNew from "./news-main-new.svelte"
+
 </script>
 
 <div class="news">
-    <div class="news-main-new">
-        <MainNew/>
-    </div>
+
     <div class="news-container">
         <h1>Novinky</h1>
         <NewsBox/>
@@ -43,12 +41,13 @@
         display: flex;
         flex-direction: column;
         gap: 20px;
-        width: 75%;
+        width: 70%;
     }
     .news-links-container{
         display: flex;
         flex-direction: column;
         gap: 20px;
-        width: 25%;
+        width: 30%;
     }
+    
 </style>
