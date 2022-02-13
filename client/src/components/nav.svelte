@@ -28,7 +28,6 @@
 
 <style>
 	.navigationBar {
-		
 		font-family: "Roboto", sans-serif;
 		display: flex;
 		background-color: white;

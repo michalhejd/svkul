@@ -14,9 +14,9 @@
     :global(p, h1, h2, h3, h4, h5, h6){
         color: black;
         margin-block-start: 0em;
-    margin-block-end: 0em;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
+        margin-block-end: 0em;
+        margin-inline-start: 0px;
+        margin-inline-end: 0px;
     }
     :global(h1){
         font-size: 2em;
