@@ -32,7 +32,7 @@
 		display: flex;
 		background-color: white;
 		width: 100%;
-		border-bottom: 1px solid #f2f2f2;
+		border-bottom: 1px solid #e9e9e9;
 	}
 	nav {
 		margin: 25px;

@@ -3,7 +3,7 @@
 </script>
 <div class="link">
 
-    <p>alsnfos</p>
+    <p>Odkaz</p>
 </div>
 <style>
     .link{

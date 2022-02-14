@@ -11,11 +11,12 @@
         id: [false]
     };
 </script>
-
+<div class="filters">
 {#await getOptions()}
     Načítání...
 {:then options}
-    <div>
+    <div class="container">
+        <section>
         <select multiple bind:value={filters.autori}>
             <option value={false}>Jakýkoliv autor</option>
             <optgroup label="Autoři">
@@ -25,6 +26,8 @@
                 <option value="">Nespecifikováno</option>
             </optgroup>
         </select>
+    </section>
+    <section>
         <select multiple bind:value={filters.roky}>
             <option value={false}>Jakýkoliv rok vydání</option>
             <optgroup label="Léta vydání">
@@ -34,6 +37,8 @@
                 <option value={null}>Nespecifikováno</option>
             </optgroup>
         </select>
+    </section>
+    <section>
         <select multiple bind:value={filters.autori}>
             <option value={false}>Jakýkoliv nakladatel</option>
             <optgroup label="Nakladatalé">
@@ -43,6 +48,8 @@
                 <option value="">Nespecifikováno</option>
             </optgroup>
         </select>
+    </section>
+    <section>
         <select multiple bind:value={filters.mistaVydani}>
             <option value={false}>Jakékoliv místo výdání</option>
             <optgroup label="Místa vydání">
@@ -52,6 +59,8 @@
                 <option value="">Nespecifikováno</option>
             </optgroup>
         </select>
+    </section>
+    <section>
         <select multiple bind:value={filters.id}>
             <option value={false}>Jakýkoliv typ</option>
             <optgroup label="Typy">
@@ -60,20 +69,26 @@
                 {/each}
             </optgroup>
         </select>
+    </section>
     </div>
+    
 {:catch e}
     Nastala chyba :C
 {/await}
-
+</div>
 <style>
-    div {
-        display: flex;
-        gap: 15px;
-        width: calc(100% - 30px);
-        padding: 15px;
-        height: 100px;
+    .filters{
+        border: 1px solid #e9e9e9;
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+        border-top: 0;
+        width: 100%;
+        background-color: white;
     }
-    div > select {
-        flex-grow: 1;
+    .container{
+display: flex;
+flex-direction: column;
+gap: 10px;
+
     }
 </style>
