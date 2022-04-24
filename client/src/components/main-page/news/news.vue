@@ -63,6 +63,9 @@ user-select: none;
           :loop="true"
           :autoWidth="true"
           :margin="48"
+          :pullDrag="false"
+          :touchDrag="false"
+          :mouseDrag="false"
           style="margin-top: 20px; position: relative"
         >
           <new-aid-box />

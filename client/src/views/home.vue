@@ -11,14 +11,17 @@
     <news/>
     <about-project/>
     <disadv-routes/>
+    <contact/>
+    <footer-bar/>
   </div>
 </template>
 <script>
 import mapping from "../components/main-page/mapping.vue";
-import news from "../components/news/news.vue";
+import news from "../components/main-page/news/news.vue";
 import aboutProject from "../components/main-page/about-project.vue";
 import disadvRoutes from "../components/main-page/disadv-routes/disadv-routes.vue";
 import contact from "../components/main-page/contact.vue";
+import footerBar from "../components/main-page/footer-bar.vue";
 export default {
   name: "main-page",
   components: {
@@ -27,6 +30,7 @@ export default {
     aboutProject,
     disadvRoutes,
     contact,
+    footerBar
   },
 };
 </script>

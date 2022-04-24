@@ -1,7 +1,7 @@
 <style lang="scss" scoped>
 .disadv-box{
-max-width: 450px;
-max-height: 450px;
+max-width: 400px;
+max-height: 400px;
 padding: 2px;
 border: 1px solid var(--border-color);
 background-color: white;

@@ -11,7 +11,7 @@
   gap: 40px;
   .container{
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   column-gap: 10px;
   row-gap: 10px;
   }

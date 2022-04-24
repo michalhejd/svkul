@@ -1,11 +1,104 @@
 <style lang="scss" scoped>
-
+.contact {
+  width: 100%;
+  height: 500px;
+  background-color: white;
+  display: flex;
+  .contact-content {
+    width: 60%;
+    padding: 30px;
+  }
+  .form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40%;
+    background-color: var(--base-color);
+    form {
+      font-family: "Open Sans", sans-serif;
+      width: 60%;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      color: white;
+      >div{
+      display: flex;
+      }
+      input {
+        font-family: "Open Sans", sans-serif;
+        font-size: 14px;
+        padding: 10px;
+        border: 0;
+        outline: 0;
+        background-color: black;
+        border-radius: 5px;
+        color: white;
+      }
+      input[type="submit"] {
+        width: 100%;
+        cursor: pointer;
+      }
+      input[type=submit]:disabled {
+        cursor: not-allowed;
+        background-color: rgb(65, 65, 65);
+      }
+      textarea {
+        font-family: "Open Sans", sans-serif;
+        font-size: 14px;
+        height: 150px;
+        resize: none;
+        border: 0;
+        outline: 0;
+        background-color: black;
+        border-radius: 5px;
+        color: white;
+        padding-left: 10px;
+        padding-right: 10px;
+        padding-top: 12px;
+        padding-bottom: 12px;
+      }
+      input[type=checkbox]{
+      display: flex;
+      }
+      label {
+        font-family: "Open Sans", sans-serif;
+        font-size: 14px;
+        display: flex;
+        color: black;
+      }
+    }
+  }
+}
 </style>
 <template>
-    
+  <div class="contact">
+    <div class="contact-content">
+    <h2>Kontakty</h2>
+    </div>
+    <div class="form">
+      <form action="">
+        <input type="email" name="" id="" placeholder="email" />
+        <input type="text" name="" id="" placeholder="jméno a příjmení" />
+        <textarea name="" id="" placeholder="zpráva"></textarea>
+        <div>
+         <input type="checkbox" name="" id="checkbox" value="checkbox" v-model="checked" />
+        <label for="checkbox"
+          >Souhlasím s případným zveřejněním tohoto zanonymizovaného příspěvku na tyto webové
+          stránky!</label
+        >
+        </div>       
+        <input :disabled="!checked" type="submit" value="Odeslat!" />
+      </form>
+    </div>
+  </div>
 </template>
 <script>
 export default {
-    
-}
+  name: "contact",
+  data() {
+    return {
+      checked: false,
+    };
+  },
+};
 </script>
