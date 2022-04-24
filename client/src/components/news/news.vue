@@ -13,18 +13,28 @@
     font-weight: 600;
   }
   .newAids {
-    >span {
-      width: 25px;
-      height: 50px;
-      background-color: rgba(0, 0, 0, 0.185);
-      color: white;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      cursor: pointer;
-    }
-    span:hover {
-      background-color: rgb(73, 73, 73);
+    .carousel {
+      position: relative;
+      span {
+        width: 25px;
+        height: 50px;
+        background-color: rgba(0, 0, 0, 0.185);
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        position: absolute;
+        z-index: 1000;
+        transform: translate(-50%, -50%);
+        -webkit-user-select: none;       
+-moz-user-select: none; 
+-ms-user-select: none; 
+user-select: none;
+      }
+      span:hover {
+        background-color: rgb(73, 73, 73);
+      }
     }
   }
   .events {
@@ -44,44 +54,35 @@
   <div class="news">
     <div class="newAids">
       <h2>Nové pomůcky</h2>
-      <carousel
-        :dots="false"
-        :nav="false"
-        :items="6"
-        :loop="true"
-        :autoWidth="true"
-        :margin="48"
-
-        style="margin-top: 20px; position: relative"
-      >
-        <new-aid-box />
-        <new-aid-box />
-        <new-aid-box />
-        <new-aid-box />
-        <new-aid-box />
-        <new-aid-box />
-        <new-aid-box />
-        <new-aid-box />
-        <new-aid-box />
-        <template slot="prev"
-          ><span
-            ref="prev"
-            class="prev"
-            style="display: none;"
-            ></span
-          ></template
+      <div class="carousel">
+        <span @click="$refs.prev.click()" style="top: 50%;">&lt;</span>
+        <carousel
+          :dots="false"
+          :nav="false"
+          :items="6"
+          :loop="true"
+          :autoWidth="true"
+          :margin="48"
+          style="margin-top: 20px; position: relative"
         >
-        <template slot="next"
-          ><span
-            ref="next"
-            class="next"
-            style="display: none;"
-            ></span
-          ></template
-        >
-      </carousel>
-      <span @click="$refs.prev.click()">&lt;</span>
-      <span @click="$refs.next.click()">&gt;</span>
+          <new-aid-box />
+          <new-aid-box />
+          <new-aid-box />
+          <new-aid-box />
+          <new-aid-box />
+          <new-aid-box />
+          <new-aid-box />
+          <new-aid-box />
+          <new-aid-box />
+          <template slot="prev"
+            ><span ref="prev" class="prev" style="display: none"></span
+          ></template>
+          <template slot="next"
+            ><span ref="next" class="next" style="display: none"></span
+          ></template>
+        </carousel>
+        <span @click="$refs.next.click()" style="top: 50%; left:99.7%;">&gt;</span>
+      </div>
     </div>
     <div class="events">
       <h2>Eventy</h2>

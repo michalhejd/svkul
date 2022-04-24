@@ -11,7 +11,17 @@ box-sizing: border-box;
 --border-color: rgb(209, 206, 206)}
 #app{
 font-family: 'Poppins', sans-serif;
-font-weight: 500;}
+font-weight: 500;
+}
+::-moz-selection {
+  color: black;
+  background: #c4ecf4;
+}
+
+::selection {
+  color: black;
+  background: #c4ecf4;
+}
 </style>
 <template>
   <div id="app">
