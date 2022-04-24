@@ -1,8 +1,27 @@
 .DS_Store
 node_modules
-/build
-/.svelte-kit
-/package
-.env
-.env.*
-!.env.example
+/dist
+dokument_knihovna.txt
+/src/assets/templates
+/src/assets/podklady.docx
+/src/assets/credits
+package-lock.json
+
+# local env files
+.env.local
+.env.*.local
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Editor directories and files
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
