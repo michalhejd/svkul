@@ -21,8 +21,8 @@ font-size: 18px;
 </style>
 <template>
     <div class="navigation">
-    <router-link to="">Domů</router-link>
-    <router-link to="">Databáze pomůcek</router-link>
+    <router-link to="/">Domů</router-link>
+    <router-link to="/databaze">Databáze pomůcek</router-link>
     <router-link to="">Kontakty</router-link>
     </div>
 </template>

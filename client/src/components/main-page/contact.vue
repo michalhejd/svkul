@@ -77,8 +77,8 @@
     </div>
     <div class="form">
       <form action="">
-        <input type="email" name="" id="" placeholder="email" />
-        <input type="text" name="" id="" placeholder="jméno a příjmení" />
+        <input type="email" name="" id="" placeholder="email" v-model="email" />
+        <input type="text" name="" id="" placeholder="jméno a příjmení" v-model="name" />
         <textarea name="" id="" placeholder="zpráva"></textarea>
         <div>
          <input type="checkbox" name="" id="checkbox" value="checkbox" v-model="checked" />
@@ -98,6 +98,8 @@ export default {
   data() {
     return {
       checked: false,
+      name:'',
+      email:''
     };
   },
 };
