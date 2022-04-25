@@ -18,6 +18,11 @@ const routes = [
   {
     path: '/*',
     redirect: '/'
+  },
+  {
+    path: '/:id',
+    name: 'item-detail',
+    
   }
 ]
 
