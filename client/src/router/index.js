@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import home from '../views/home.vue'
+import database from '../views/database.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -8,6 +9,15 @@ const routes = [
     path: '/',
     name: 'home',
     component: home
+  },
+  {
+    path: '/databaze',
+    name: 'database',
+    component: database
+  },
+  {
+    path: '/*',
+    redirect: '/'
   }
 ]
 
