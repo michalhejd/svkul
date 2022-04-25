@@ -1,19 +1,17 @@
 <style lang="scss" scoped>
-.item-filter{
-background-color: white;
-width: 300px;
-padding: 10px 20px;
+.item-filter {
+  background-color: white;
+  width: 300px;
+  padding: 10px 20px;
 }
 </style>
 <template>
-    <div class="item-filter">
-    masmcsa
-    aslckmaslx
-    saxmlůc
-    sxqmlxm</div>
+  <div class="item-filter">
+    <h2>Kategorie</h2>
+  </div>
 </template>
 <script>
 export default {
-    name: "item-filter"
-}
+  name: "item-filter",
+};
 </script>

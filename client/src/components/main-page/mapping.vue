@@ -2,6 +2,7 @@
 .mapping {
   width: 100%;
   height: 500px;
+  height: 500px;
   background-color: white;
   display: flex;
   justify-content: center;
@@ -12,7 +13,7 @@
 </style>
 <template>
   <div class="mapping">
-    <img src="../../assets/map/mapka.jpg" alt="" />
+    <img src="../../assets/map/mapka.jpg" alt="mapa republiky, kde jsou vyznačeny instituce s pomůckami" />
   </div>
 </template>
 <script>

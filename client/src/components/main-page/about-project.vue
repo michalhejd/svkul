@@ -33,7 +33,7 @@
     <div class="img">
       <img
         src="../../assets/aboutProject/aboutProjGraphic.png"
-        alt=""
+        alt="obrázek přecházejících dětí přes knihy, o projektu"
       />
     </div>
     <div class="text">

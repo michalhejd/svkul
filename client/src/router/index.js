@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import home from '../views/home.vue'
 import database from '../views/database.vue'
+import item from '../views/item.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -21,8 +22,8 @@ const routes = [
   },
   {
     path: '/:id',
-    name: 'item-detail',
-    
+    name: 'item',
+    component: item
   }
 ]
 

@@ -9,23 +9,18 @@
   display: flex;
   flex-direction: column;
   gap: 40px;
-  .container{
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  column-gap: 10px;
-  row-gap: 10px;
+  .container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    column-gap: 10px;
+    row-gap: 10px;
   }
 }
 </style>
 <template>
   <div class="disadv-routes">
     <div class="container">
-      <disadv-box />
-      <disadv-box />
-      <disadv-box />
-      <disadv-box />
-      <disadv-box />
-      <disadv-box />
+      <disadv-box v-for="i in total_files" :image="i" :key="i"></disadv-box>
     </div>
   </div>
 </template>
@@ -35,6 +30,15 @@ export default {
   name: "disadv-routes",
   components: {
     disadvBox,
-  }
+  },
+  data() {
+    return {
+         total_files : require.context(
+  '@/assets/disadv-routes/',
+  true,
+  /^.*\.jpg$/
+).keys().map(i => i.replace('./', '')),
+    }
+  },
 };
 </script>
