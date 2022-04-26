@@ -27,10 +27,10 @@
         position: absolute;
         z-index: 1000;
         transform: translate(-50%, -50%);
-        -webkit-user-select: none;       
--moz-user-select: none; 
--ms-user-select: none; 
-user-select: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
       }
       span:hover {
         background-color: rgb(73, 73, 73);
@@ -51,11 +51,11 @@ user-select: none;
 }
 </style>
 <template>
-  <div class="news">
+  <div class="news" v-if="productLoading == false">
     <div class="newAids">
       <h2>Nové pomůcky</h2>
       <div class="carousel">
-        <span @click="$refs.prev.click()" style="top: 50%;">&lt;</span>
+        <span @click="$refs.prev.click()" style="top: 50%">&lt;</span>
         <carousel
           :dots="false"
           :nav="false"
@@ -68,15 +68,9 @@ user-select: none;
           :mouseDrag="false"
           style="margin-top: 20px; position: relative"
         >
-          <new-aid-box />
-          <new-aid-box />
-          <new-aid-box />
-          <new-aid-box />
-          <new-aid-box />
-          <new-aid-box />
-          <new-aid-box />
-          <new-aid-box />
-          <new-aid-box />
+        <template v-for="product in products.slice(0, 8)">
+          <new-aid-box  :key="product._id" :product="product"/>
+        </template>
           <template slot="prev"
             ><span ref="prev" class="prev" style="display: none"></span
           ></template>
@@ -84,7 +78,9 @@ user-select: none;
             ><span ref="next" class="next" style="display: none"></span
           ></template>
         </carousel>
-        <span @click="$refs.next.click()" style="top: 50%; left:99.7%;">&gt;</span>
+        <span @click="$refs.next.click()" style="top: 50%; left: 99.7%"
+          >&gt;</span
+        >
       </div>
     </div>
     <div class="events">
@@ -110,6 +106,14 @@ export default {
     carousel,
     newAidBox,
     newEvent,
+  },
+  computed: {
+    products() {
+      return this.$store.state.products;
+    },
+    productLoading() {
+      return this.$store.state.productLoading;
+    },
   },
 };
 </script>

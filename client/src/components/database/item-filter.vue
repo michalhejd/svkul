@@ -2,6 +2,7 @@
 .item-filter {
   background-color: white;
   width: 300px;
+  height: 700px;
   padding: 10px 20px;
 }
 </style>

@@ -1,6 +1,7 @@
 <style lang="scss" scoped>
 .database {
   width: 100%;
+  height: 100vh;
   background-color: #f5f5f5;
   display: flex;
   flex-direction: column;
@@ -14,6 +15,8 @@
       .container {
       display: grid;
       grid-template-columns: repeat(6, 1fr);
+      column-gap: 10px;
+      row-gap: 10px;
       }
     }
   }
@@ -25,12 +28,7 @@
       <item-filter />
       <div class="item-list">
         <div class="container">
-          <item-box />
-          <item-box />
-          <item-box />
-          <item-box />
-          <item-box />
-          <item-box />
+          <item-box v-for="product in products" :key="product._key" :product="product" />
         </div>
       </div>
     </div>
@@ -45,5 +43,10 @@ export default {
     itemFilter,
     itemBox,
   },
+  computed:{
+    products(){
+      return this.$store.state.products;
+    }
+  }
 };
 </script>

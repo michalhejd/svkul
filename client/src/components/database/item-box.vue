@@ -1,11 +1,20 @@
 <style lang="scss" scoped>
-
+.item-box{
+background-color: white;
+border: 1px solid var(--border-color);
+border-radius: 5px;
+padding: 5px;
+max-width: 300px;
+}
 </style>
 <template>
-    
+    <div class="item-box">
+    <p>{{product.nazev}}</p>
+    </div>
 </template>
 <script>
 export default {
-    
+    name: "item-box",
+    props:["product"]
 }
 </script>
