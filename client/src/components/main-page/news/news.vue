@@ -84,7 +84,7 @@
       </div>
     </div>
     <div class="events">
-      <h2>Eventy</h2>
+      <h2>Vzdělávací akce</h2>
       <div class="container">
         <new-event />
         <new-event />

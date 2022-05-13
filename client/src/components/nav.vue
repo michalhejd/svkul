@@ -1,6 +1,7 @@
 <style lang="scss">
 
 .navigation{
+position: relative;
 box-sizing: border-box;
 padding-right: 15px;
 width: 100%;
@@ -23,7 +24,7 @@ font-size: 18px;
     <div class="navigation">
     <router-link to="/">Domů</router-link>
     <router-link to="/databaze">Databáze pomůcek</router-link>
-    <router-link to="">Kontakty</router-link>
+    <router-link to="/#contacts">Kontakty</router-link>
     </div>
 </template>
 <script>
