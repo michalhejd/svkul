@@ -4,8 +4,6 @@ import axios from 'axios'
 
 Vue.use(Vuex)
 
-const url = 'http://localhost:3000'
-
 export default new Vuex.Store({
   state: {
     products: undefined,
@@ -32,7 +30,7 @@ export default new Vuex.Store({
   actions: {
     async getProducts({ commit }) {
       commit('PRODUCT_LOADING', true);
-      await axios.get(`${url}/pomucky/search`)
+      await axios.get(`/pomucky/search`)
         .then(response => {
           commit('SET_PRODUCTS', response.data);
           commit('PRODUCT_LOADING', false);
@@ -40,19 +38,20 @@ export default new Vuex.Store({
     },
     async getProduct({ commit }, id) {
       commit('PRODUCTS_LOADING', true);
-      await axios.get(`${url}/pomucky/${id}`)
+      await axios.get(`/pomucky/${id}`)
         .then(response => {
-          commit('SET_PRODUCT', response.data)
+          commit('SET_PRODUCT', response.data[0])
           if (response.data === '' || response.data.length === 0) {
             commit('PRODUCTS_LOADING', false);
             router.push({ name: 'home' });
           }
           else {
-            document.title = response.data.name
-            setTimeout(() => { commit('PRODUCTS_LOADING', true) }, 100);
+            document.title = response.data[0].nazev;
+            setTimeout(() => { commit('PRODUCTS_LOADING', false) }, 100);
           }
         }, error => {
           console.log(error);
+          setTimeout(() => { commit('PRODUCTS_LOADING', false) }, 100);
         })
     }
   }

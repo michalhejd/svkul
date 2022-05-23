@@ -46,7 +46,31 @@
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       row-gap: 20px;
+      column-gap: 10px;
     }
+  }
+}
+@media only screen and (max-width: 1300px){
+  .news .events .container{
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media only screen and (max-width: 875px){
+  .news .events .container{
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .news{
+    padding: 0 30px;
+  }
+}
+@media only screen and (max-width: 675px){
+  .news .events .container{
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+@media only screen and (min-width: 500px) and (max-width: 675px){
+  .news .events .container{
+    justify-items: center;
   }
 }
 </style>
@@ -59,13 +83,11 @@
         <carousel
           :dots="false"
           :nav="false"
-          :items="6"
           :loop="true"
-          :autoWidth="true"
-          :margin="48"
           :pullDrag="false"
           :touchDrag="false"
           :mouseDrag="false"
+          :responsive="{0: {items: 1, center: true}, 375: {items: 1, center: true, autoWidth: true, margin: 20}, 675: {items: 2, center: true, autoWidth: true, margin: 48}, 1620: {center: true, autoWidth: true, margin: 48}}"
           style="margin-top: 20px; position: relative"
         >
         <template v-for="product in products.slice(0, 8)">
@@ -86,8 +108,6 @@
     <div class="events">
       <h2>Vzdělávací akce</h2>
       <div class="container">
-        <new-event />
-        <new-event />
         <new-event />
         <new-event />
         <new-event />

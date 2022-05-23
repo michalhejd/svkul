@@ -3,7 +3,6 @@
 .navigation{
 position: relative;
 box-sizing: border-box;
-padding-right: 15px;
 width: 100%;
 height: 65px;
 display: flex;

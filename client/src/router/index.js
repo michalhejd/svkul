@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import home from '../views/home.vue'
 import database from '../views/database.vue'
 import item from '../views/item.vue'
+import admin from '../views/admin.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -17,8 +18,9 @@ const routes = [
     component: database
   },
   {
-    path: '/*',
-    redirect: '/'
+    path: '/admin',
+    name: 'admin',
+    component: admin
   },
   {
     path: '/:id',

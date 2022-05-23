@@ -69,6 +69,24 @@
     }
   }
 }
+@media only screen and (max-width: 875px){
+  .contact{
+    height: auto;
+    flex-direction: column;
+    .contact-content{
+      width: 100%;
+      padding: 0;
+    }
+    .form{
+      width: 100%;
+      padding: 30px 0;
+      form{
+        max-width: 400px;
+        
+      }
+    }
+  }
+}
 </style>
 <template>
   <div class="contact">
@@ -79,15 +97,15 @@
       <form action="">
         <input type="email" name="" id="" placeholder="email" v-model="email" />
         <input type="text" name="" id="" placeholder="jméno a příjmení" v-model="name" />
-        <textarea name="" id="" placeholder="zpráva"></textarea>
+        <textarea name="" id="" placeholder="zpráva" v-model="message"></textarea>
         <div>
          <input type="checkbox" name="" id="checkbox" value="checkbox" v-model="checked" />
         <label for="checkbox"
           >Souhlasím s případným zveřejněním tohoto zanonymizovaného příspěvku na tyto webové
           stránky!</label
         >
-        </div>       
-        <input :disabled="!checked" type="submit" value="Odeslat!" />
+        </div>
+        <input :disabled="disabled" type="submit" value="Odeslat!" />
       </form>
     </div>
   </div>
@@ -99,8 +117,21 @@ export default {
     return {
       checked: false,
       name:'',
-      email:''
+      email:'',
+      message:''
     };
+  },
+  computed: {
+    disabled() {
+      if(this.checked == false || this.name == '' || this.email == '' || this.message == ''){
+        console.log(true)
+        return true;
+      }
+      else{
+        console.log(false)
+        return false;
+      }
+    }
   },
 };
 </script>

@@ -1,10 +1,7 @@
 <style lang="scss" scoped>
 .disadv-routes {
   width: 100%;
-  padding-top: 30px;
-  padding-bottom: 30px;
-  padding-left: 80px;
-  padding-right: 80px;
+  padding: 30px 80px;
   background-color: #f5f5f5;
   display: flex;
   flex-direction: column;
@@ -14,6 +11,32 @@
     grid-template-columns: repeat(5, 1fr);
     column-gap: 10px;
     row-gap: 10px;
+  }
+}
+@media only screen and (max-width: 1100px) {
+  .disadv-routes .container {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+@media only screen and (max-width: 875px) {
+  .disadv-routes .container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .disadv-routes{
+    padding: 30px 50px;
+  }
+}
+@media only screen and (max-width: 675px){
+  .disadv-routes .container{
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media only screen and (max-width: 450px){
+  .disadv-routes .container{
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .disadv-routes{
+    padding: 30px 30px;
   }
 }
 </style>
