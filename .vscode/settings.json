@@ -1,0 +1,7 @@
+{
+    "jest.rootPath": "server",
+    "jest.jestCommandLine": "pnpm test --",
+    "jest.autoRun": {
+    
+    }
+}
