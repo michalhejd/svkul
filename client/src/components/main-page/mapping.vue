@@ -13,7 +13,7 @@
 </style>
 <template>
   <div class="mapping">
-    <img src="../../assets/map/mapka.jpg" alt="mapa republiky, kde jsou vyznačeny instituce s pomůckami" />
+    <!--<img src="../../assets/map/mapka.jpg" alt="mapa republiky, kde jsou vyznačeny instituce s pomůckami" />-->
   </div>
 </template>
 <script>

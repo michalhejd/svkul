@@ -13,10 +13,7 @@
     }
   }
   .text {
-  padding-left: 40px;
-  padding-right: 40px;
-  padding-top: 90px;
-  padding-bottom: 90px;
+    padding: 90px 40px;
     width: 60%;
     display: flex;
     flex-direction: column;
@@ -24,6 +21,28 @@
     h1{
     font-size: 40px;
     font-weight: 600;
+    }
+  }
+}
+@media only screen and (max-width: 975px){
+  .about-project {
+    flex-direction: column;
+    .img {
+      width: 100%;
+      overflow: hidden;
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+    .text {
+      width: 100%;
+      padding: 15px 30px;
+      gap: 10px;
+      h1{
+        font-size: 30px;
+      }
     }
   }
 }

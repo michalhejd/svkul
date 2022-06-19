@@ -24,6 +24,12 @@
     }
   }
 }
+@media only screen and (max-width: 1050px){
+  .newEvent .text p{
+    font-size: 14px;
+    line-height: 16px;
+  }
+}
 </style>
 <template>
   <div class="newEvent">
