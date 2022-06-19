@@ -9,7 +9,9 @@ export default new Vuex.Store({
     products: undefined,
     product: undefined,
     productsLoading: true,
-    productLoading: true
+    productLoading: true,
+    token: null,
+    logged: true
   },
   getters: {
   },
@@ -41,12 +43,12 @@ export default new Vuex.Store({
       await axios.get(`/pomucky/${id}`)
         .then(response => {
           commit('SET_PRODUCT', response.data[0])
+          console.log(response.data[0])
           if (response.data === '' || response.data.length === 0) {
             commit('PRODUCTS_LOADING', false);
             router.push({ name: 'home' });
           }
           else {
-            document.title = response.data[0].nazev;
             setTimeout(() => { commit('PRODUCTS_LOADING', false) }, 100);
           }
         }, error => {

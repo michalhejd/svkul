@@ -16,9 +16,9 @@
     .carousel {
       position: relative;
       span {
-        width: 25px;
+        width: 50px;
         height: 50px;
-        background-color: rgba(0, 0, 0, 0.185);
+        background-color: rgba(0, 0, 0, 0.733);
         color: white;
         display: flex;
         justify-content: center;
@@ -61,6 +61,7 @@
   }
   .news{
     padding: 0 30px;
+    padding-bottom: 30px;
   }
 }
 @media only screen and (max-width: 675px){
@@ -100,7 +101,7 @@
             ><span ref="next" class="next" style="display: none"></span
           ></template>
         </carousel>
-        <span @click="$refs.next.click()" style="top: 50%; left: 99.7%"
+        <span @click="$refs.next.click()" style="top: 50%; left: 100%"
           >&gt;</span
         >
       </div>

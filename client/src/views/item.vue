@@ -3,7 +3,6 @@
 <template>
   <div class="item">
     <div class="product" v-if="this.product != undefined">
-    
     </div>
     <div class="error"></div>
   </div>
