@@ -1,0 +1,45 @@
+---
+- name: install Docker dependencies
+  become: true
+  apt:
+    name: apt-transport-https curl ca-certificates python3-pip software-properties-default python3-setuptools
+    state: latest
+    
+- name: add Docker repository
+  when: ansible_facts['distribution'] == 'Ubuntu'
+  become: true
+  block:
+    - name: Add signing key
+      apt_key:
+        url: "https://download.docker.com/linux/{{ ansible_distribution | lower }}/gpg"
+        state: present
+
+    - name: Add repository into sources list
+      apt_repository:
+        repo: "deb [arch={{ ansible_architecture }}] https://download.docker.com/linux/{{ ansible_distribution | lower }} {{ ansible_distribution_release }} stable"
+        state: present
+        filename: docker
+
+- name: Update apt and install docker-ce
+  become: true
+  apt: 
+    update_cache: yes 
+    name: docker-ce docker-ce-cli containerd.io docker-compose-plugin
+    state: latest
+    
+- name: Ensure group docker exists
+  become: true
+  group:
+    name: docker
+    state: present
+
+- name: Install Docker Module for Python
+  pip:
+    name: docker
+
+- name: Make sure Docker is running and enabled
+  become: true
+  service: 
+    name: docker 
+    state: started 
+    enabled: yes
