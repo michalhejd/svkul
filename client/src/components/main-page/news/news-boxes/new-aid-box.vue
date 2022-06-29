@@ -50,8 +50,6 @@ a{
   </router-link>
 </template>
 <script>
-import { allowedNodeEnvironmentFlags } from 'process';
-import axios from 'axios';
 export default {
   name: "newAidBox",
   props: ["product"]
