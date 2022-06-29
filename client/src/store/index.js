@@ -1,8 +1,17 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
+import vuexPersist from 'vuex-persist'
 
 Vue.use(Vuex)
+const vuexLocalStorage = new vuexPersist({
+  key: 'vuex',
+  storage: window.localStorage,
+  reducer: (state) => ({
+    user: state.user,
+    logged: state.logged
+  })
+})
 
 export default new Vuex.Store({
   state: {
@@ -10,8 +19,8 @@ export default new Vuex.Store({
     product: undefined,
     productsLoading: true,
     productLoading: true,
-    token: null,
-    logged: true
+    logged: false,
+    user: undefined
   },
   getters: {
   },
@@ -27,6 +36,12 @@ export default new Vuex.Store({
     },
     PRODUCTS_LOADING(state, productsLoading) {
       state.productsLoading = productsLoading;
+    },
+    SET_LOGGED(state, logged) {
+      state.logged = logged;
+    },
+    SET_USER(state, user) {
+      state.user = user;
     }
   },
   actions: {
@@ -34,7 +49,11 @@ export default new Vuex.Store({
       commit('PRODUCT_LOADING', true);
       await axios.get(`/pomucky/search`)
         .then(response => {
-          commit('SET_PRODUCTS', response.data);
+          console.log(response)
+          console.log(response.data)
+          if(response.data.length > 0){
+            commit('SET_PRODUCTS', response.data)
+          }
           commit('PRODUCT_LOADING', false);
         })
     },
@@ -56,5 +75,6 @@ export default new Vuex.Store({
           setTimeout(() => { commit('PRODUCTS_LOADING', false) }, 100);
         })
     }
-  }
+  },
+  plugins: [vuexLocalStorage.plugin]
 })

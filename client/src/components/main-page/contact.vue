@@ -71,6 +71,7 @@
 }
 @media only screen and (max-width: 875px){
   .contact{
+    background-color: #f5f5f5;
     height: auto;
     flex-direction: column;
     .contact-content{

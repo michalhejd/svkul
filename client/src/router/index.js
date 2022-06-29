@@ -24,9 +24,21 @@ const routes = [
     component: admin,
     children: [
       {
-        path: 'ucet',
+        path: 'mujucet',
         name: 'account',
         component: account
+      },
+      {
+        path: '/ucty',
+        name: 'accounts',
+      },
+      {
+        path: '/produkty',
+        name: 'products'
+      },
+      {
+        path: '/eventy',
+        name: 'events'
       }
     ]
   },
