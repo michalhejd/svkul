@@ -3,6 +3,8 @@
 <template>
   <div class="item">
     <div class="product" v-if="this.product != undefined">
+      <p>{{product.name}}</p>
+      <p>{{product.signatura}}</p>
     </div>
     <div class="error"></div>
   </div>

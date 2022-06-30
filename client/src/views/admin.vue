@@ -57,11 +57,15 @@
 					font-size: 18px;
 					border-radius: 10px;
 					&:hover {
-						color: rgb(35, 32, 46);
+						color: #343455;
 						background: #dbeef1;
 					}
 					a:hover {
-						color: rgb(35, 32, 46);
+						color: #343455;
+						background: #dbeef1;
+					}
+					.router-link-active {
+						color: #343455;
 						background: #dbeef1;
 					}
 				}
@@ -77,7 +81,7 @@
 					font-size: 18px;
 					border-radius: 10px;
 					&:hover {
-						color: rgb(32, 31, 46);
+						color: #343455;
 						background: #dbeef1;
 					}
 					> a {
@@ -91,7 +95,7 @@
 						}
 					}
 					&:hover > a {
-						color: rgb(32, 31, 46);
+						color: #343455;
 						background: #dbeef1;
 					}
 					.dropdown {
@@ -107,6 +111,10 @@
 								color: #343455;
 							}
 						}
+						.dropdown .router-link-active {
+						color: #343455;
+						background: #dbeef1;
+					}
 					}
 				}
 				.logout {
@@ -134,7 +142,7 @@
 		<div class="account" v-else>
 			<nav>
 				<div class="myacc" @click="dropdown = !dropdown">
-					<router-link to=""
+					<router-link to="mujucet"
 						>Můj účet&nbsp;<font-awesome-icon
 							:class="{ active: dropdown }"
 							icon="fa-solid fa-angle-down"
@@ -144,9 +152,9 @@
 						<router-link to="">Změnit heslo</router-link>
 					</div>
 				</div>
-				<router-link to="">Správa účtů</router-link>
-				<router-link to="">Správa pomůcek</router-link>
-				<router-link to="">Správa eventů</router-link>
+				<router-link to="spravauctu">Správa účtů</router-link>
+				<router-link to="spravapomucek">Správa pomůcek</router-link>
+				<router-link to="spravaakci">Správa akcí</router-link>
 				<div class="logout" @click="logout()">Odhlásit se</div>
 			</nav>
 			<div class="main">
@@ -165,9 +173,9 @@
 				dropdown: false,
 			};
 		},
-		beforeMount() {
-			if (this.$store.state.logged == true) {
-				this.$router.push("/admin/mujucet").catch(() => {});
+		beforeMount(){
+			if(this.$router.currentRoute.path != "/admin/mujucet" || this.$router.currentRoute.path != "/admin/spravauctu" || this.$router.currentRoute.path != "/admin/spravapomucek" || this.$router.currentRoute.path != "/admin/spravaakci" && this.$store.state.logged == true){
+				this.$router.push("/admin/mujucet").catch();
 			}
 		},
 		methods: {

@@ -18,40 +18,20 @@ a{
   p {
     font-size: 12px;
   }
-  .edit {
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    button {
-      cursor: pointer;
-      background-color: transparent;
-      border: 1px solid var(--border-color);
-      border-radius: 3px;
-      outline: 0;
-      font-size: 16px;
-    }
-  }
 }
 </style>
 <template>
 <router-link :to="{ name: 'item', params: { id: product._id }}">
   <div class="newAidBox">
-    <div class="edit">
-      <button v-if="this.$store.state.user">
-        <font-awesome-icon icon="fa-solid fa-pen-to-square"/>
-      </button>
-    </div>
     <img
       src="https://cdn.prusa3d.com/content/images/product/default/3325.jpg"
       alt=""
     />
-    <p>{{ product.nazev }}</p>
+    <p>{{ product.name }}</p>
   </div>
   </router-link>
 </template>
 <script>
-import { allowedNodeEnvironmentFlags } from 'process';
-import axios from 'axios';
 export default {
   name: "newAidBox",
   props: ["product"]

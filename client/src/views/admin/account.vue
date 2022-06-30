@@ -33,7 +33,6 @@
 			<p v-if="user.role == 3">LOCAL MANAGER</p>
 			<p v-if="user.role == 4">LOCAL ADMIN</p>
 			<p v-if="user.role == 5">DEVELOPER</p>
-			<p v-else>NEURČENO</p>
 		</div>
 	</div>
 </template>

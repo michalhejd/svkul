@@ -1,19 +1,22 @@
 <style lang="scss" scoped>
 .mapping {
   width: 100%;
-  height: 500px;
-  height: 500px;
-  background-color: white;
-  display: flex;
-  justify-content: center;
+    /* height: 500px; */
+    max-height: 500px;
+    /* height: fit-content; */
+    background-color: white;
+    display: flex;
+    justify-content: center;
   img{
-  height: 100%;
+     width: 100%;
+    /* height: fit-content; */
+    object-fit: contain;
   }
 }
 </style>
 <template>
   <div class="mapping">
-    <!--<img src="../../assets/map/mapka.jpg" alt="mapa republiky, kde jsou vyznačeny instituce s pomůckami" />-->
+    <img src="../../assets/map/mapka.jpg" alt="mapa republiky, kde jsou vyznačeny instituce s pomůckami" />
   </div>
 </template>
 <script>
