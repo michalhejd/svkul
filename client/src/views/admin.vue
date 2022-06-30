@@ -174,9 +174,12 @@
 			};
 		},
 		beforeMount(){
-			if(this.$router.currentRoute.path != "/admin/mujucet" || this.$router.currentRoute.path != "/admin/spravauctu" || this.$router.currentRoute.path != "/admin/spravapomucek" || this.$router.currentRoute.path != "/admin/spravaakci" && this.$store.state.logged == true){
+			if(this.$store.state.logged == true){
+				if(this.$router.currentRoute.path != "/admin/mujucet" || this.$router.currentRoute.path != "/admin/spravauctu" || this.$router.currentRoute.path != "/admin/spravapomucek" || this.$router.currentRoute.path != "/admin/spravaakci"){
 				this.$router.push("/admin/mujucet").catch();
 			}
+			}
+			
 		},
 		methods: {
 			login() {
