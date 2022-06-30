@@ -19,7 +19,7 @@ library.add( faAngleDown, faBars )
 /* add font awesome icon component */
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
-axios.defaults.baseURL = 'http://localhost:3000'
+axios.defaults.baseURL = 'http://172.28.247.213:3002/'
 axios.defaults.withCredentials = true;
 Vue.config.productionTip = false
 Vue.use(VueCookies)

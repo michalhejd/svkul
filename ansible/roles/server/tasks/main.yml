@@ -1,0 +1,6 @@
+---
+- name: Download sources
+  git:
+    dest: /home/ssps/db
+    repo: ssh://git@github.com/danbulant/ujep-db-api
+    depth: 1

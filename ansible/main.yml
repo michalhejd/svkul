@@ -1,0 +1,11 @@
+---
+- name: Main
+  hosts: all
+  remote_user: ssps
+  become: yes
+  become_method: sudo
+
+  roles:
+    - docker
+    - server
+    - nginx
