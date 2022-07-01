@@ -9,12 +9,12 @@ import VueCookies from 'vue-cookies'
 import { library } from '@fortawesome/fontawesome-svg-core'
 
 /* import specific icons */
-import { faAngleDown, faBars, faPenToSquare, faXmark } from '@fortawesome/free-solid-svg-icons'
+import { faAngleDown, faBars, faPenToSquare, faXmark, faPlus } from '@fortawesome/free-solid-svg-icons'
 
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 /* add icons to the library */
-library.add( faAngleDown, faBars, faXmark, faPenToSquare )
+library.add( faAngleDown, faBars, faXmark, faPenToSquare, faPlus )
 
 /* add font awesome icon component */
 Vue.component('font-awesome-icon', FontAwesomeIcon)
