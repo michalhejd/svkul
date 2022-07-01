@@ -35,9 +35,9 @@
 			width: 100%;
 			display: flex;
 			min-height: calc(100vh - 65px);
-      .main{
-        width: 100%;
-      }
+			.main {
+				width: 100%;
+			}
 			nav {
 				display: flex;
 				flex-direction: column;
@@ -112,9 +112,9 @@
 							}
 						}
 						.dropdown .router-link-active {
-						color: #343455;
-						background: #dbeef1;
-					}
+							color: #343455;
+							background: #dbeef1;
+						}
 					}
 				}
 				.logout {
@@ -173,13 +173,19 @@
 				dropdown: false,
 			};
 		},
-		beforeMount(){
-			if(this.$store.state.logged == true){
-				if(this.$router.currentRoute.path != "/admin/mujucet" || this.$router.currentRoute.path != "/admin/spravauctu" || this.$router.currentRoute.path != "/admin/spravapomucek" || this.$router.currentRoute.path != "/admin/spravaakci"){
-				this.$router.push("/admin/mujucet").catch();
+		beforeMount() {
+			if (this.$store.state.logged == true) {
+				if (
+					this.$router.currentRoute.path == "/admin" ||
+					this.$router.currentRoute.path == "/admin/"
+				) {
+					this.$router.push("/admin/mujucet").catch(() => {});
+				}
+			} else {
+				if (this.$router.currentRoute.path != "/admin") {
+					this.$router.push("/admin").catch(() => {});
+				}
 			}
-			}
-			
 		},
 		methods: {
 			login() {
