@@ -88,7 +88,7 @@
 <template>
   <div class="news" v-if="productLoading == false">
     <div class="newAids" v-if="products != undefined">
-      <h2>Nové pomůcky</h2>
+      <h2>Nejnovější pomůcky</h2>
       <div class="carousel" v-if="this.$store.state.products.length > 5">
 
         <span @click="$refs.prev.click()" style="top: 50%">&lt;</span>

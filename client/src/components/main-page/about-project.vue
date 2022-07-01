@@ -58,10 +58,7 @@
     <div class="text">
       <h1>O projektu</h1>
       <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore,
-        consequatur fugiat? Minus placeat deleniti laudantium alias dolorem
-        facilis corrupti non. Quam perferendis praesentium sequi eveniet
-        quisquam accusantium, molestiae laudantium minima. Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet deserunt veritatis iusto incidunt, optio at tenetur minus quidem debitis fugiat quam ducimus error illo saepe, magnam, libero nihil aliquid nam.
+       Projekt „Databáze učebních pomůcek“ prezentuje nabídku pomůcek z fondu knihovny a dalších partnerů zapojených do projektu. Pro uživatele se specifickými vzdělávacími potřebami všech cílových skupin včetně dětí nadaných zde budou pomůcky k nahlédnutí či k zápůjčce. Pro lepší orientaci budou rozděleny do kategorií. Součástí webu je nabídka dalších služeb, které knihovna poskytuje všem typům škol a školských zařízení, pedagogickým a poradenským pracovníkům, studentům, rodičům a dalším uživatelům, pozvánky na vzdělávací akce a prostor pro dotazy.
       </p>
     </div>
   </div>
