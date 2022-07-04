@@ -9,20 +9,20 @@
 			.searchAid {
 				grid-column: 2;
 				input {
-					width: 350px;
+					width: 100%;
 					padding: 10px;
 					border: 1px solid rgb(107, 107, 107);
 					border-radius: 10px;
 					outline: none;
 				}
 			}
-			.addAid{
+			.addAid {
 				grid-column: 3;
 				display: flex;
 				justify-content: flex-end;
 				justify-items: center;
 				align-items: center;
-				.circle{
+				.circle {
 					width: 40px;
 					height: 40px;
 					border-radius: 50%;
@@ -34,7 +34,7 @@
 					font-size: 20px;
 					color: white;
 					cursor: pointer;
-					.fas.fa-plus{
+					.fas.fa-plus {
 						color: black;
 						font-size: 50px;
 						width: 50px;
@@ -58,9 +58,52 @@
 						align-items: center;
 						border-bottom: solid 1px black;
 						border-top: 0px;
-						> div {
-							border-right: solid 1px black;
-						}
+					}
+				}
+			}
+		}
+		.shadow-background.active {
+			background-color: rgba(0, 0, 0, 0.5);
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			z-index: 100;
+			transition: all 0.2s ease-in-out;
+		}
+		.addAidPopup {
+			background-color: white;
+			padding: 30px;
+			border-radius: 40px;
+			width: 500px;
+			height: 600px;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			z-index: 100000;
+			.addAidPopup-content {
+				display: flex;
+				flex-direction: column;
+				.top-content {
+					display: flex;
+					justify-content: space-between;
+					align-items: center;
+					.svg-inline--fa.fa-xmark {
+						font-size: 18px;
+						cursor: pointer;
+					}
+				}
+				.aids-inputs {
+					display: flex;
+					flex-direction: column;
+					.details {
+						display: flex;
+						flex-direction: column;
 					}
 				}
 			}
@@ -69,32 +112,87 @@
 </style>
 <template>
 	<div class="aidsmanage">
-		<div class="confirmPopup" v-show="popupDeleteBox">
+		<div class="confirmPopup" v-if="popupDeleteBox && popupProduct">
 			<div class="confirmPopup-content">
-				<h2>Opravdu chcete smazat pomůcku?</h2>
+				<h2>Opravdu chcete smazat {{ popupProduct.name }}?</h2>
 				<div class="confirmPopup-buttons">
-					<button @click="deleteProduct()">Ano</button>
+					<button @click="deleteProduct(popupProduct._id)">Ano</button>
 					<button @click="closeDeletePopup()">Ne</button>
 				</div>
 			</div>
 		</div>
 		<div class="addAidPopup" v-show="popupAddBox">
 			<div class="addAidPopup-content">
-				<h2>Přidat pomůcku</h2>
-				<div class="addAidPopup-buttons">
-					<button @click="addAid()">Přidat</button>
-					<button @click="closeAddPopup()">Zavřít</button>
+				<div class="top-content">
+					<h2>Přidat pomůcku</h2>
+					<font-awesome-icon
+						icon="fa-solid fa-xmark"
+						@click="closeAddPopup()"
+					/>
 				</div>
-				<div class="addAidPopup-inputs">
-					<input type="text" placeholder="Název" v-model="aidName">
-					<input type="text" placeholder="Popis" v-model="aidDescription">
-					<input type="text" placeholder="Cena" v-model="aidPrice">
-					<input type="text" placeholder="Kategorie" v-model="aidCategory">
-					<input type="text" placeholder="Kategorie" v-model="aidCategory">
-					<input type="text" placeholder="Kategorie" v-model="aidCategory">
+				<div class="aids-inputs">
+					<input
+						type="text"
+						v-model="newProduct.name"
+						placeholder="Název pomůcky"
+					/>
+					<input
+						type="text"
+						v-model="newProduct.signatura"
+						placeholder="Signatura"
+					/>
+					<input type="text" v-model="newProduct.ISXN" placeholder="ISXN" />
+					<div class="categories"></div>
+					<input
+						type="text"
+						v-model="newProduct.mainImage"
+						placeholder="Hlavní obrázek"
+					/>
+					<div class="details">
+						<textarea
+							v-model="newProduct.details.description"
+							name=""
+							id=""
+							cols="30"
+							rows="10"
+							placeholder="Popisek"
+						></textarea>
+						<input
+							type="text"
+							v-model="newProduct.details.company"
+							placeholder="Firma"
+						/>
+						<input
+							type="text"
+							v-model="newProduct.details.author"
+							placeholder="Autor"
+						/>
+						<input
+							type="text"
+							v-model="newProduct.details.year"
+							placeholder="Rok"
+						/>
+						<input
+							type="text"
+							v-model="newProduct.details.mistoVydani"
+							placeholder="Místo vydání"
+						/>
+						<input
+							type="file"
+							multiple="multiple"
+							accept="image/jpeg, image/png, image/jpg"
+							disabled
+						/>
+					</div>
+					<button @click="addNewAid()">Přidat</button>
 				</div>
 			</div>
 		</div>
+		<div
+			class="shadow-background"
+			:class="{ active: shadow }"
+			@click="closeAddPopup()"
+		></div>
 		<div class="top-bar">
 			<div class="searchAid" v-if="this.$store.state.products != undefined">
 				<div class="searchAid-input">
@@ -102,8 +200,8 @@
 				</div>
 			</div>
 			<div class="addAid">
-				<div class="circle">
-					<font-awesome-icon icon="fa-solid fa-plus" @click="showAddPopup()" />
+				<div class="circle" @click="showAddPopup()">
+					<font-awesome-icon icon="fa-solid fa-plus" />
 				</div>
 			</div>
 		</div>
@@ -123,7 +221,10 @@
 								<p>{{ product.place }}</p>
 							</div>
 							<div class="manage">
-								<font-awesome-icon icon="fa-solid fa-xmark" @click="showDeletePopup()" />
+								<font-awesome-icon
+									icon="fa-solid fa-xmark"
+									@click="showDeletePopup(product)"
+								/>
 								<font-awesome-icon icon="fa-solid fa-pen-to-square" />
 							</div>
 						</div>
@@ -137,13 +238,31 @@
 	</div>
 </template>
 <script>
+	import axios from "axios";
 	export default {
 		name: "searchAid",
 		data() {
 			return {
 				searchAid: "",
 				popupDeleteBox: false,
-				popupAddBox: false
+				popupAddBox: false,
+				shadow: false,
+				newProduct: {
+					name: "",
+					signatura: "",
+					ISXN: "",
+					mainImage: "",
+					categories: [],
+					details: {
+						description: "",
+						company: "",
+						author: "",
+						year: "",
+						mistoVydani: "",
+						images: [],
+					},
+				},
+				popupProduct: undefined,
 			};
 		},
 		computed: {
@@ -157,24 +276,81 @@
 						-1
 					);
 				});
-			}
+			},
 		},
 		methods: {
 			deleteProduct() {
-				console.log("delete");
+				axios
+					.delete(`/pomucky/${this.popupProduct._id}`)
+					.then((response) => {
+						if (response.status === 200) {
+							this.$store.dispatch("getProducts");
+							this.popupDeleteBox = false;
+						} else {
+							alert("Pomůcku se nepodařilo smazat");
+						}
+					})
+					.catch((error) => {
+						console.log(error);
+						alert("Pomůcku se nepodařilo smazat");
+					});
 			},
-			showDeletePopup() {
+			showDeletePopup(product) {
+				this.popupProduct = product;
+				console.log(this.popupProduct);
 				this.popupDeleteBox = true;
 			},
 			closeDeletePopup() {
 				this.popupDeleteBox = false;
 			},
-			showAddPopup(){
-				this.popupAddBox = true
+			showAddPopup() {
+				this.popupAddBox = true;
+				this.shadow = true;
 			},
-			closeAddPopup(){
-				this.popupAddBox = false
-			}
+			closeAddPopup() {
+				this.popupAddBox = false;
+				this.shadow = false;
+			},
+			addNewAid() {
+				axios
+					.post("/pomucky", {
+						name: this.newProduct.name,
+						signatura: this.newProduct.signatura,
+						ISXN: this.newProduct.ISXN,
+						categories: [{}],
+						mainImage: this.newProduct.mainImage,
+						details: {
+							author: this.newProduct.details.author,
+							year: this.newProduct.details.year,
+							company: this.newProduct.details.company,
+							mistoVydani: this.newProduct.details.mistoVydani,
+						},
+					})
+					.then((response) => {
+						if (response.status === 200) {
+							this.$store.dispatch("getProducts");
+							this.closeAddPopup();
+							this.newProduct = {
+								name: "",
+								signatura: "",
+								ISXN: "",
+								mainImage: "",
+								categories: [],
+								details: {
+									description: "",
+									company: "",
+									author: "",
+									year: "",
+									mistoVydani: "",
+									images: [],
+								},
+							};
+						}
+					})
+					.catch((error) => {
+						console.log(error);
+					});
+			},
 		},
 	};
 </script>

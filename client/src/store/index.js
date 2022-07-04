@@ -20,7 +20,8 @@ export default new Vuex.Store({
     productsLoading: true,
     productLoading: true,
     logged: false,
-    user: undefined
+    user: undefined,
+    mobileNav: false
   },
   getters: {
   },
@@ -42,6 +43,9 @@ export default new Vuex.Store({
     },
     SET_USER(state, user) {
       state.user = user;
+    },
+    SET_MOBILENAV(state, mobileNav) {
+      state.mobileNav = mobileNav;
     }
   },
   actions: {

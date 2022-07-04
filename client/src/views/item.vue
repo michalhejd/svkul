@@ -2,7 +2,7 @@
 </style>
 <template>
   <div class="item">
-    <div class="product" v-if="this.product != undefined">
+    <div class="product" v-if="this.product && this.$store.state.productsLoading != true">
       <p>{{product.name}}</p>
       <p>{{product.signatura}}</p>
     </div>

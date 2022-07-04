@@ -40,6 +40,7 @@
 </style>
 <template>
 	<div id="app">
+		<mobileNav/>
 		<navigation />
 		<router-view />
 	</div>
@@ -47,9 +48,11 @@
 <script>
 	import axios from "axios";
 	import navigation from "./components/nav.vue";
+	import mobileNav from "./components/mobile-nav.vue";
 	export default {
 		components: {
 			navigation,
+			mobileNav
 		},
 		mounted() {
 			this.$store.dispatch("getProducts");

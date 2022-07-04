@@ -30,6 +30,13 @@
 			display: flex;
 			margin-right: 20px;
 			font-size: 26px;
+			cursor: pointer;
+			z-index: 11;
+		}
+		.mobile-nav.active{
+			position: fixed;
+			top: 20px;
+			right: 0px;
 		}
         }
 	}
@@ -39,13 +46,23 @@
 		<router-link to="/">Domů</router-link>
 		<router-link to="/databaze">Databáze pomůcek</router-link>
 		<router-link to="/#contacts">Kontakty</router-link>
-		<div class="mobile-nav">
-			<font-awesome-icon icon="fa-solid fa-bars" />
+		<div class="mobile-nav" :class="{active: mobileNav}">
+			<font-awesome-icon icon="fa-solid fa-bars" @click="toggleNav()"/>
 		</div>
 	</div>
 </template>
 <script>
 	export default {
 		name: "navigation",
+		methods: {
+			toggleNav(){
+				this.$store.commit('SET_MOBILENAV', !this.$store.state.mobileNav)
+			}
+		},
+		computed: {
+			mobileNav(){
+				return this.$store.state.mobileNav
+			}
+		}
 	};
 </script>

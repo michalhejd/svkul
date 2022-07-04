@@ -1,7 +1,7 @@
 <style lang="scss" scoped>
 	.account {
 		width: 100%;
-        padding-top: 100px;
+		padding-top: 100px;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
@@ -14,8 +14,8 @@
 <template>
 	<div class="account">
 		<div class="picture">
-			<img src="" alt="" v-if="user.picture" /></div>
-			<font-awesome-icon icon="fa-solid fa-user"  />
+			<img src="" alt="" v-if="user.picture" />
+		</div>
 		<div class="name">
 			<p>Jméno:&nbsp;</p>
 			<p v-if="user.name == null || user.name == undefined">NEURČENO</p>
@@ -24,7 +24,7 @@
 		<div class="place">
 			<p>Místo:&nbsp;</p>
 			<p v-if="user.place == null || user.place == undefined">NEURČENO</p>
-			<p v-else>{{ user.place }}</p>
+			<p v-else>{{ user.place.name }}</p>
 		</div>
 		<div class="permissions">
 			<p>Role:&nbsp;</p>
