@@ -83,7 +83,7 @@
 									color: #343455;
 								}
 							}
-							&:hover > a {
+							&:hover {
 								color: #343455;
 								background: #dbeef1;
 							}
@@ -201,6 +201,9 @@
 				if (this.$router.currentRoute.path != "/admin") {
 					this.$router.push("/admin").catch(() => {});
 				}
+			}
+			if (this.$router.currentRoute.path == "/admin/mujucet") {
+				this.dropdown = true;
 			}
 		},
 		methods: {

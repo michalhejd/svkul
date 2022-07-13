@@ -47,6 +47,9 @@
 		.disadv-routes .container {
 			grid-template-columns: repeat(2, 1fr);
 		}
+		.disadv-routes {
+			padding: 30px 30px;
+		}
 	}
 	@media only screen and (max-width: 450px) {
 		.disadv-routes .container {

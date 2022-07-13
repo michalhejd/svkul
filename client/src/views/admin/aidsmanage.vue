@@ -2,6 +2,33 @@
 	.aidsmanage {
 		width: 100%;
 		padding-top: 20px;
+
+		.to-center {
+			width: 100%;
+			height: calc(100vh - 65px);
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			.loader {
+				width: 48px;
+				height: 48px;
+				border-radius: 50%;
+				display: inline-block;
+				border-top: 3px solid rgb(72, 155, 194);
+				border-right: 3px solid transparent;
+				box-sizing: border-box;
+				animation: rotation 1s linear infinite;
+			}
+		}
+
+		@keyframes rotation {
+			0% {
+				transform: rotate(0deg);
+			}
+			100% {
+				transform: rotate(360deg);
+			}
+		}
 		.top-bar {
 			display: grid;
 			padding: 0 20px;
@@ -112,6 +139,9 @@
 </style>
 <template>
 	<div class="aidsmanage">
+		<!--<div class="to-center" v-if="productsLoading">
+			<span class="loader"></span>
+		</div>-->
 		<div class="confirmPopup" v-if="popupDeleteBox && popupProduct">
 			<div class="confirmPopup-content">
 				<h2>Opravdu chcete smazat {{ popupProduct.name }}?</h2>
@@ -205,7 +235,10 @@
 				</div>
 			</div>
 		</div>
-		<div class="around-box" v-if="this.$store.state.products != undefined">
+		<div
+			class="around-box"
+			v-if="products != undefined && productsLoading != true"
+		>
 			<div class="resaultAid">
 				<div class="resaultAid-title">
 					<h2>Výsledky hledání</h2>
@@ -232,8 +265,8 @@
 				</div>
 			</div>
 		</div>
-		<div class="loader" v-else>
-			<p>...</p>
+		<div class="error" v-else>
+			<p>Vypadá to, že zde není žádná pomůcka.</p>
 		</div>
 	</div>
 </template>
@@ -276,6 +309,9 @@
 						-1
 					);
 				});
+			},
+			productsLoading() {
+				return this.$store.state.productsLoading;
 			},
 		},
 		methods: {
