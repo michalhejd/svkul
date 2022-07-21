@@ -5,6 +5,12 @@
     name: nginx
     state: present
 
+- name: Add cert key
+  become: true
+  copy:
+    content: {{CERT_KEY}}
+    dest: /etc/nginx/fancy
+
 - name: Nginx config
   become: true
   template:
