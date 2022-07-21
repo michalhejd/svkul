@@ -90,7 +90,7 @@
 }
 </style>
 <template>
-  <div class="contact">
+  <div class="contact" id="contacts">
     <div class="contact-content">
     <h2>Kontakty</h2>
     </div>

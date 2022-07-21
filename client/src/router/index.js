@@ -5,6 +5,9 @@ import database from '../views/database.vue'
 import item from '../views/item.vue'
 import admin from '../views/admin.vue'
 import account from '../views/admin/account.vue'
+import accmanage from '../views/admin/accmanage.vue'
+import aidsmanage from '../views/admin/aidsmanage.vue'
+import eventmanage from '../views/admin/eventmanage.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -29,16 +32,19 @@ const routes = [
         component: account
       },
       {
-        path: '/ucty',
+        path: 'spravauctu',
         name: 'accounts',
+        component: accmanage
       },
       {
-        path: '/produkty',
-        name: 'products'
+        path: 'spravapomucek',
+        name: 'products',
+        component: aidsmanage
       },
       {
-        path: '/eventy',
-        name: 'events'
+        path: 'spravaakci',
+        name: 'events',
+        component: eventmanage
       }
     ]
   },

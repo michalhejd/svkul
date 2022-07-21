@@ -37,6 +37,13 @@
       }
     }
   }
+  .products{
+    .product-container{
+      display: flex;
+      gap: 100px;
+      margin-top: 20px;
+    }
+  }
   .events {
     display: flex;
     flex-direction: column;
@@ -54,14 +61,17 @@
   .news .events .container{
     grid-template-columns: repeat(3, 1fr);
   }
+  .news .products .product-container{
+    justify-content: space-between;
+    gap: 5px;
+  }
 }
 @media only screen and (max-width: 875px){
   .news .events .container{
     grid-template-columns: repeat(2, 1fr);
   }
   .news{
-    padding: 0 30px;
-    padding-bottom: 30px;
+    padding: 30px;
   }
 }
 @media only screen and (max-width: 675px){
@@ -78,8 +88,9 @@
 <template>
   <div class="news" v-if="productLoading == false">
     <div class="newAids" v-if="products != undefined">
-      <h2>Nové pomůcky</h2>
-      <div class="carousel">
+      <h2>Nejnovější pomůcky</h2>
+      <div class="carousel" v-if="this.$store.state.products.length > 5">
+
         <span @click="$refs.prev.click()" style="top: 50%">&lt;</span>
         <carousel
           :dots="false"
@@ -104,6 +115,13 @@
         <span @click="$refs.next.click()" style="top: 50%; left: 100%"
           >&gt;</span
         >
+      </div>
+      <div class="products" v-else>
+        <div class="product-container" >
+          <template v-for="product in products.slice(0, 5)">
+          <new-aid-box  :key="product._id" :product="product"/>
+          </template>
+        </div>
       </div>
     </div>
     <div class="events">

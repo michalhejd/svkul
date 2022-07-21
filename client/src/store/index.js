@@ -20,7 +20,8 @@ export default new Vuex.Store({
     productsLoading: true,
     productLoading: true,
     logged: false,
-    user: undefined
+    user: undefined,
+    mobileNav: false
   },
   getters: {
   },
@@ -42,6 +43,9 @@ export default new Vuex.Store({
     },
     SET_USER(state, user) {
       state.user = user;
+    },
+    SET_MOBILENAV(state, mobileNav) {
+      state.mobileNav = mobileNav;
     }
   },
   actions: {
@@ -54,25 +58,30 @@ export default new Vuex.Store({
           if(response.data.length > 0){
             commit('SET_PRODUCTS', response.data)
           }
-          commit('PRODUCT_LOADING', false);
+          else{
+            commit('SET_PRODUCTS', undefined)
+          }
+          setTimeout(() => {
+          commit('PRODUCTS_LOADING', false);
+          }, 300);
         })
     },
     async getProduct({ commit }, id) {
-      commit('PRODUCTS_LOADING', true);
+      commit('PRODUCT_LOADING', true);
       await axios.get(`/pomucky/${id}`)
         .then(response => {
           commit('SET_PRODUCT', response.data[0])
           console.log(response.data[0])
           if (response.data === '' || response.data.length === 0) {
-            commit('PRODUCTS_LOADING', false);
+            commit('PRODUCT_LOADING', false);
             router.push({ name: 'home' });
           }
           else {
-            setTimeout(() => { commit('PRODUCTS_LOADING', false) }, 100);
+            setTimeout(() => { commit('PRODUCT_LOADING', false) }, 300);
           }
         }, error => {
           console.log(error);
-          setTimeout(() => { commit('PRODUCTS_LOADING', false) }, 100);
+          setTimeout(() => { commit('PRODUCT_LOADING', false) }, 300);
         })
     }
   },

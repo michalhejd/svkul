@@ -11,6 +11,23 @@
 			grid-template-columns: repeat(5, 1fr);
 			column-gap: 10px;
 			row-gap: 10px;
+			a {
+				max-width: 400px;
+				max-height: 400px;
+				padding: 2px;
+				border: 1px solid var(--border-color);
+				background-color: white;
+				border-radius: 5px;
+				overflow: hidden;
+				text-decoration: none;
+				text-align: center;
+				color: black;
+				padding-bottom: 5px;
+				img {
+					width: 100%;
+					height: fit-content;
+				}
+			}
 		}
 	}
 	@media only screen and (max-width: 1100px) {
@@ -30,6 +47,9 @@
 		.disadv-routes .container {
 			grid-template-columns: repeat(2, 1fr);
 		}
+		.disadv-routes {
+			padding: 30px 30px;
+		}
 	}
 	@media only screen and (max-width: 450px) {
 		.disadv-routes .container {
@@ -43,65 +63,51 @@
 <template>
 	<div class="disadv-routes">
 		<div class="container">
-			<disadv-box v-for="i in total_files" :image="i" :key="i"></disadv-box>
-<!--			<div class="box">
+			<a href="">
 				<img src="@/assets/disadv-routes/mentalni-postizeni.jpg" alt="" />
 				<p>Mentální znevýhodnění</p>
-			</div>
-			<div class="box">
-				<img src="" alt="" />
+			</a>
+			<a href="">
+				<img src="@/assets/disadv-routes/pomucky-pro-nadane.jpg" alt="" />
 				<p>Pomůcky pro nadané</p>
-			</div>
-      <div class="box">
-				<img src="" alt="" />
+			</a>
+			<a href="">
+				<img src="@/assets/disadv-routes/postizeni-autistickeho-spektra.jpg" alt="" />
 				<p>Znevýhodnění autistického spektra</p>
-			</div>
-      <div class="box">
-				<img src="" alt="" />
+			</a>
+			<a href="">
+				<img src="@/assets/disadv-routes/postizeni-komunikacnich-schopnosti.jpg" alt="" />
 				<p>Znevýhodnění komunikačních schopností</p>
-			</div>
-      <div class="box">
-				<img src="" alt="" />
+			</a>
+			<a href="">
+				<img src="@/assets/disadv-routes/sluchove-postizeni.jpg" alt="" />
 				<p>Sluchové znevýhodnění</p>
-			</div>
-      <div class="box">
-				<img src="" alt="" />
+			</a>
+			<a href="">
+				<img src="@/assets/disadv-routes/socialni-znevyhodneni.jpg" alt="" />
 				<p>Sociální znevýhodnění</p>
-			</div>
-      <div class="box">
-				<img src="" alt="" />
+			</a>
+			<a href="">
+				<img src="@/assets/disadv-routes/specificke-poruchy-chovani.jpg" alt="" />
 				<p>Specifické poruchy chování</p>
-			</div>
-      <div class="box">
-				<img src="" alt="" />
+			</a>
+			<a href="">
+				<img src="@/assets/disadv-routes/specificke-poruchy-uceni.jpg" alt="" />
 				<p>Specifické poruchy učení</p>
-			</div>
-      <div class="box">
-				<img src="" alt="" />
+			</a>
+			<a href="">
+				<img src="@/assets/disadv-routes/telesne-postizeni.jpg" alt="" />
 				<p>Tělesné znevýhodnění</p>
-			</div>
-      <div class="box">
-				<img src="" alt="" />
+			</a>
+			<a href="">
+				<img src="@/assets/disadv-routes/zrakove-postizeni.jpg" alt="" />
 				<p>Zrakové znevýhodnění</p>
-			</div>
-		</div>-->
-    </div>
+			</a>
+		</div>
 	</div>
 </template>
 <script>
-	import disadvBox from "./disadv-boxes/disadv-box.vue";
 	export default {
-		name: "disadv-routes",
-		components: {
-			disadvBox,
-		},
-		data() {
-			return {
-				total_files: require
-					.context("@/assets/disadv-routes/", true, /^.*\.jpg$/)
-					.keys()
-					.map((i) => i.replace("./", "")),
-			};
-		},
+		name: "disadv-routes"
 	};
 </script>

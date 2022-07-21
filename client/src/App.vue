@@ -15,6 +15,8 @@
 		margin: 0;
 		padding: 0;
 		box-sizing: border-box;
+		margin-block-start: 0em;
+    margin-block-end: 0em;
 	}
 
 	:root {
@@ -38,6 +40,7 @@
 </style>
 <template>
 	<div id="app">
+		<mobileNav/>
 		<navigation />
 		<router-view />
 	</div>
@@ -45,9 +48,11 @@
 <script>
 	import axios from "axios";
 	import navigation from "./components/nav.vue";
+	import mobileNav from "./components/mobile-nav.vue";
 	export default {
 		components: {
 			navigation,
+			mobileNav
 		},
 		mounted() {
 			this.$store.dispatch("getProducts");
@@ -57,7 +62,6 @@
 				if (response.status == 403 || response.status == 401 ) {
 					this.$store.commit("SET_USER", undefined);
 					this.$store.commit("SET_LOGGED", false);
-					this.$router.push("/admin");
 				}
 					this.$store.commit("SET_USER", response.data);
 					this.$store.commit("SET_LOGGED", true);
@@ -66,7 +70,6 @@
 					if(error.response.status == 403 || error.response.status == 401) {
 						this.$store.commit("SET_USER", undefined);
 						this.$store.commit("SET_LOGGED", false);
-						this.$router.push("/admin");
 					}
 				});
 			}
