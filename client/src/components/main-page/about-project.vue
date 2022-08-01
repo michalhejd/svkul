@@ -51,7 +51,7 @@
   <div class="about-project">
     <div class="img">
       <img
-        src="../../assets/aboutProject/aboutProjGraphic.png"
+        src="@/assets/aboutProject/aboutProjGraphic.jpg"
         alt="obrázek přecházejících dětí přes knihy, o projektu"
       />
     </div>

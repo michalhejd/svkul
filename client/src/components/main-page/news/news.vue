@@ -1,10 +1,7 @@
 <style lang="scss" scoped>
 .news {
   width: 100%;
-  padding-top: 30px;
-  padding-bottom: 30px;
-  padding-left: 80px;
-  padding-right: 80px;
+  padding: 30px 40px;
   background-color: #f5f5f5;
   display: flex;
   flex-direction: column;
@@ -86,7 +83,7 @@
 }
 </style>
 <template>
-  <div class="news" v-if="productLoading == false">
+  <div class="news" v-if="productsLoading == false">
     <div class="newAids" v-if="products != undefined">
       <h2>Nejnovější pomůcky</h2>
       <div class="carousel" v-if="this.$store.state.products.length > 5">
@@ -150,9 +147,12 @@ export default {
     products() {
       return this.$store.state.products;
     },
-    productLoading() {
-      return this.$store.state.productLoading;
+    productsLoading() {
+      return this.$store.state.productsLoading;
     },
   },
+  created() {
+      this.$store.dispatch('getProducts');
+    },
 };
 </script>
