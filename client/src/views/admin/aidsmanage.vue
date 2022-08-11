@@ -317,7 +317,7 @@
 		methods: {
 			deleteProduct() {
 				axios
-					.delete(`/pomucky/${this.popupProduct._id}`)
+					.delete(`pomucky/${this.popupProduct._id}`)
 					.then((response) => {
 						if (response.status === 200) {
 							this.$store.dispatch("getProducts");
@@ -349,7 +349,7 @@
 			},
 			addNewAid() {
 				axios
-					.post("/pomucky", {
+					.post("pomucky", {
 						name: this.newProduct.name,
 						signatura: this.newProduct.signatura,
 						ISXN: this.newProduct.ISXN,

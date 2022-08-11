@@ -51,7 +51,7 @@ export default new Vuex.Store({
   actions: {
     async getProducts({ commit }) {
       commit('PRODUCT_LOADING', true);
-      await axios.get(`/pomucky/search`)
+      await axios.get(`pomucky/search`)
         .then(response => {
           console.log(response)
           console.log(response.data)
@@ -68,7 +68,7 @@ export default new Vuex.Store({
     },
     async getProduct({ commit }, id) {
       commit('PRODUCT_LOADING', true);
-      await axios.get(`/pomucky/${id}`)
+      await axios.get(`pomucky/${id}`)
         .then(response => {
           commit('SET_PRODUCT', response.data[0])
           console.log(response.data[0])

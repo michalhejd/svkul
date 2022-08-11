@@ -1,16 +1,4 @@
 ---
-- name: SERVER - Download sources
-  git:
-    dest: /home/ssps/db
-    repo: ssh://git@github.com/danbulant/ujep-db-api
-    depth: 1
-  notify: restart server
-- name: CLIENT - Download sources
-  git:
-    dest: /home/ssps/web
-    repo: ssh://git@github.com/UJEP-ssps/ujep
-    depth: 1
-  notify: restart client
 - name: Start database
   roles:
     - role: matic-insurance.mongodb_container
@@ -24,3 +12,15 @@
       mongodb_docker_image_tag: 5.0.9
       mongodb_install_cli: true
       mongodb_container_memory_limit: 512m
+- name: SERVER - Download sources
+  git:
+    dest: /home/ssps/db
+    repo: ssh://git@github.com/danbulant/ujep-db-api
+    depth: 1
+  notify: restart server
+- name: CLIENT - Download sources
+  git:
+    dest: /home/ssps/web
+    repo: ssh://git@github.com/UJEP-ssps/ujep
+    depth: 1
+  notify: restart client

@@ -57,7 +57,7 @@
 		mounted() {
 			this.$store.dispatch("getProducts");
 			if (this.$store.state.logged == true) {
-				axios.get("/users/@self")
+				axios.get("users/@self")
 				.then(response => { 
 				if (response.status == 403 || response.status == 401 ) {
 					this.$store.commit("SET_USER", undefined);
