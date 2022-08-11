@@ -58,7 +58,7 @@
 		},
 		mounted() {
             this.loading = true;
-			axios.get("/users").then((response) => {
+			axios.get("users").then((response) => {
 				this.users = response.data;
                 setTimeout(() => {
                     this.loading = false;

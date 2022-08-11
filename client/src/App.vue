@@ -25,7 +25,7 @@
 		-moz-user-select: none; /* Old versions of Firefox */
 		-ms-user-select: none; /* Internet Explorer/Edge */
 		user-select: none; /* Non-prefixed version, currently
-											                                  supported by Chrome, Edge, Opera and Firefox */
+												                                  supported by Chrome, Edge, Opera and Firefox */
 	}
 	:root {
 		--base-color: #c4ecf4;
@@ -145,29 +145,29 @@
 		}
 	}
 	.adminButton__wrap {
-			position: fixed;
-			opacity: 0.5;
-			left: 0;
-			top: 85px;
-			transition: 0.3s all ease;
-			cursor: pointer;
-			.adminButton {
-				display: flex;
-				justify-content: center;
-				align-items: center;
-				border-top-right-radius: 10px;
-				border-bottom-right-radius: 10px;
-				width: 50px;
-				height: 50px;
-				background-color: #8ad6e6;
-				.svg-inline--fa.fa-user {
-					font-size: 20px;
-				}
+		position: fixed;
+		opacity: 0.5;
+		left: 0;
+		top: 85px;
+		transition: 0.3s all ease;
+		cursor: pointer;
+		.adminButton {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			border-top-right-radius: 10px;
+			border-bottom-right-radius: 10px;
+			width: 50px;
+			height: 50px;
+			background-color: #8ad6e6;
+			.svg-inline--fa.fa-user {
+				font-size: 20px;
 			}
 		}
-		.adminButton__wrap:hover{
-			opacity: 1;
-		}
+	}
+	.adminButton__wrap:hover {
+		opacity: 1;
+	}
 	@media only screen and (max-width: 850px) {
 		#app div.shadow {
 			z-index: 10;
@@ -228,11 +228,17 @@
 				<div class="logout" @click="logout()">Odhlásit se</div>
 			</nav>
 		</div>
-		<div class="adminButton__wrap" :style="{left: adminNav ? '270px' : '0', zIndex: mobileNav ? 100 : 1003}">
-				<div class="adminButton" @click="adminNav = !adminNav">
-					<font-awesome-icon icon="fa-solid fa-user" />
-				</div>
+		<div
+			class="adminButton__wrap"
+			:style="{
+				left: adminNav ? '270px' : '0',
+				zIndex: mobileNav ? 100 : 1003,
+			}"
+		>
+			<div class="adminButton" @click="adminNav = !adminNav">
+				<font-awesome-icon icon="fa-solid fa-user" />
 			</div>
+		</div>
 		<navigation />
 		<router-view />
 	</div>
@@ -264,16 +270,13 @@
 		},
 		beforeMount() {
 			if (this.$store.state.logged == true) {
-				if (
-					this.$router.currentRoute.path == "/admin" ||
-					this.$router.currentRoute.path == "/admin/"
-				) {
-					this.$router.push("/admin/mujucet").catch(() => {});
+				axios.get("users/@self")
+				.then(response => { 
+				if (response.status == 403 || response.status == 401 ) {
+					this.$store.commit("SET_USER", undefined);
+					this.$store.commit("SET_LOGGED", false);
 				}
-			} else {
-				if (this.$router.currentRoute.path != "/admin") {
-					this.$router.push("/admin");
-				}
+			})
 			}
 			if (this.$router.currentRoute.path == "/admin/mujucet") {
 				this.dropdown = true;
@@ -321,5 +324,5 @@
 					});
 			},
 		},
-	};
+	}
 </script>
