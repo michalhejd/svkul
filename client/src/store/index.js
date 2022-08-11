@@ -22,6 +22,7 @@ export default new Vuex.Store({
     logged: false,
     user: undefined,
     mobileNav: false
+
   },
   getters: {
   },
@@ -51,7 +52,18 @@ export default new Vuex.Store({
   actions: {
     async getProducts({ commit }) {
       commit('PRODUCT_LOADING', true);
-      await axios.get(`pomucky/search`)
+      let key = '';
+      let parameters = '';
+      if(obj){
+        if(obj.key != null || undefined){
+          key = '/' + obj.key;
+          key = key.toUpperCase();
+        }
+        if(obj.parameters != null || undefined){
+          parameters = obj.parameters;
+        }
+      }
+      await axios.get(`pomucky/search${key}`, { params: parameters })
         .then(response => {
           console.log(response)
           console.log(response.data)
@@ -68,15 +80,16 @@ export default new Vuex.Store({
     },
     async getProduct({ commit }, id) {
       commit('PRODUCT_LOADING', true);
-      await axios.get(`pomucky/${id}`)
+      commit('SET_PRODUCT', undefined);
+      await axios.get(`/pomucky/${id}`)
         .then(response => {
-          commit('SET_PRODUCT', response.data[0])
-          console.log(response.data[0])
+          commit('SET_PRODUCT', response.data)
           if (response.data === '' || response.data.length === 0) {
             commit('PRODUCT_LOADING', false);
             router.push({ name: 'home' });
           }
           else {
+
             setTimeout(() => { commit('PRODUCT_LOADING', false) }, 300);
           }
         }, error => {

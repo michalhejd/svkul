@@ -1,7 +1,7 @@
 <style lang="scss" scoped>
 	.disadv-routes {
 		width: 100%;
-		padding: 30px 80px;
+		padding: 30px 40px;
 		background-color: #f5f5f5;
 		display: flex;
 		flex-direction: column;
@@ -12,6 +12,8 @@
 			column-gap: 10px;
 			row-gap: 10px;
 			a {
+				display: flex;
+				flex-direction: column;
 				max-width: 400px;
 				max-height: 400px;
 				padding: 2px;
@@ -26,6 +28,13 @@
 				img {
 					width: 100%;
 					height: fit-content;
+				}
+				.text{
+					width: 100%;
+					height: auto;
+					display: flex;
+					justify-content: center;
+					align-items: center;
 				}
 			}
 		}
@@ -65,43 +74,63 @@
 		<div class="container">
 			<a href="">
 				<img src="@/assets/disadv-routes/mentalni-postizeni.jpg" alt="" />
+				<div class="text">
 				<p>Mentální znevýhodnění</p>
+				</div>
 			</a>
 			<a href="">
 				<img src="@/assets/disadv-routes/pomucky-pro-nadane.jpg" alt="" />
+				<div class="text">
 				<p>Pomůcky pro nadané</p>
+				</div>
 			</a>
 			<a href="">
 				<img src="@/assets/disadv-routes/postizeni-autistickeho-spektra.jpg" alt="" />
+				<div class="text">
 				<p>Znevýhodnění autistického spektra</p>
+				</div>
 			</a>
 			<a href="">
 				<img src="@/assets/disadv-routes/postizeni-komunikacnich-schopnosti.jpg" alt="" />
+				<div class="text">
 				<p>Znevýhodnění komunikačních schopností</p>
+				</div>
 			</a>
 			<a href="">
 				<img src="@/assets/disadv-routes/sluchove-postizeni.jpg" alt="" />
+				<div class="text">
 				<p>Sluchové znevýhodnění</p>
+				</div>
 			</a>
 			<a href="">
 				<img src="@/assets/disadv-routes/socialni-znevyhodneni.jpg" alt="" />
+				<div class="text">
 				<p>Sociální znevýhodnění</p>
+				</div>
 			</a>
 			<a href="">
 				<img src="@/assets/disadv-routes/specificke-poruchy-chovani.jpg" alt="" />
+				<div class="text">
 				<p>Specifické poruchy chování</p>
+				</div>
 			</a>
 			<a href="">
 				<img src="@/assets/disadv-routes/specificke-poruchy-uceni.jpg" alt="" />
+				<div class="text">
 				<p>Specifické poruchy učení</p>
+				</div>
 			</a>
 			<a href="">
 				<img src="@/assets/disadv-routes/telesne-postizeni.jpg" alt="" />
+				<div class="text">
 				<p>Tělesné znevýhodnění</p>
+				</div>
 			</a>
 			<a href="">
 				<img src="@/assets/disadv-routes/zrakove-postizeni.jpg" alt="" />
+				<div class="text">
 				<p>Zrakové znevýhodnění</p>
+				</div>
 			</a>
 		</div>
 	</div>

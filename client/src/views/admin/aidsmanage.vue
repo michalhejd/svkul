@@ -2,7 +2,16 @@
 	.aidsmanage {
 		width: 100%;
 		padding-top: 20px;
-
+		.confirmPopup{
+			background-color: white;
+			padding: 30px;
+			border-radius: 40px;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			z-index: 100000;
+		}
 		.to-center {
 			width: 100%;
 			height: calc(100vh - 65px);
@@ -144,7 +153,7 @@
 		</div>-->
 		<div class="confirmPopup" v-if="popupDeleteBox && popupProduct">
 			<div class="confirmPopup-content">
-				<h2>Opravdu chcete smazat {{ popupProduct.name }}?</h2>
+				<h2>Opravdu chcete smazat pomůcku {{ popupProduct.name }}?</h2>
 				<div class="confirmPopup-buttons">
 					<button @click="deleteProduct(popupProduct._id)">Ano</button>
 					<button @click="closeDeletePopup()">Ne</button>
@@ -172,7 +181,34 @@
 						placeholder="Signatura"
 					/>
 					<input type="text" v-model="newProduct.ISXN" placeholder="ISXN" />
-					<div class="categories"></div>
+					<select v-model="newProduct.disadvType">
+						<option :value="null" selected disabled >Vyberte typ pomůcky</option>
+						<option value="A">Postižení komunikačních schopností</option>
+						<option value="B">Mentální postižení</option>
+						<option value="C">Sluchové postižení</option>
+						<option value="D">Tělesné postižení</option>
+						<option value="E">Postižení autistického spektra</option>
+						<option value="F">Specifické poruchy chování</option>
+						<option value="G">Specifické poruchy učení</option>
+						<option value="H">Sociální znevýhodnění</option>
+						<option value="I">Zrakové postižení</option>
+						<option value="K">Pomůcky pro nadané</option>
+					</select>
+					<select v-model="newProduct.disadvDegree">
+						<option :value="null" disabled :selected="option = 'Vyberte stupeň postižení'">Vyberte stupeň postižení</option>
+						<option value="I" selected="selected">I.</option>
+						<option value="II">II.</option>
+						<option value="III">III.</option>
+						<option value="IV">IV.</option>
+						<option value="V">V.</option>
+					</select>
+					<select v-model="newProduct.disadvTool">
+						<option :value="null" selected disabled >Vyberte typ pomůcky</option>
+						<option value="1">Kompenzační pomůcky</option>
+						<option value="2">Speciální učebnice a pomůcky</option>
+						<option value="3">Software</option>
+						<option value="4">IT technika</option>
+					</select>
 					<input
 						type="text"
 						v-model="newProduct.mainImage"
@@ -286,6 +322,9 @@
 					ISXN: "",
 					mainImage: "",
 					categories: [],
+					disadvType: null,
+					disadvDegree: null,
+					disadvTool: null,
 					details: {
 						description: "",
 						company: "",
@@ -297,6 +336,9 @@
 				},
 				popupProduct: undefined,
 			};
+		},
+		mounted() {
+			this.$store.dispatch("getProducts");
 		},
 		computed: {
 			products() {
@@ -322,6 +364,7 @@
 						if (response.status === 200) {
 							this.$store.dispatch("getProducts");
 							this.popupDeleteBox = false;
+							this.shadow = false;
 						} else {
 							alert("Pomůcku se nepodařilo smazat");
 						}
@@ -333,11 +376,12 @@
 			},
 			showDeletePopup(product) {
 				this.popupProduct = product;
-				console.log(this.popupProduct);
 				this.popupDeleteBox = true;
+				this.shadow = true;
 			},
 			closeDeletePopup() {
 				this.popupDeleteBox = false;
+				this.shadow = false;
 			},
 			showAddPopup() {
 				this.popupAddBox = true;
@@ -355,6 +399,9 @@
 						ISXN: this.newProduct.ISXN,
 						categories: [{}],
 						mainImage: this.newProduct.mainImage,
+						disadvType: this.newProduct.disadvType,
+						disadvDegree: this.newProduct.disadvDegree,
+						disadvTool: this.newProduct.disadvTool,
 						details: {
 							author: this.newProduct.details.author,
 							year: this.newProduct.details.year,
@@ -372,6 +419,9 @@
 								ISXN: "",
 								mainImage: "",
 								categories: [],
+								disadvType: "",
+								disadvDegree: "",
+								disadvTool: null,
 								details: {
 									description: "",
 									company: "",

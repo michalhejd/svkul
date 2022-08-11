@@ -199,7 +199,7 @@
 				}
 			} else {
 				if (this.$router.currentRoute.path != "/admin") {
-					this.$router.push("/admin").catch(() => {});
+					this.$router.push("/admin")
 				}
 			}
 			if (this.$router.currentRoute.path == "/admin/mujucet") {

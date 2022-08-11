@@ -22,6 +22,11 @@ const routes = [
     component: database
   },
   {
+    path: '/databaze/:key',
+    name: 'databaseKeyed',
+    component: database
+  },
+  {
     path: '/admin',
     name: 'admin',
     component: admin,

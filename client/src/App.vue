@@ -55,7 +55,6 @@
 			mobileNav
 		},
 		mounted() {
-			this.$store.dispatch("getProducts");
 			if (this.$store.state.logged == true) {
 				axios.get("users/@self")
 				.then(response => { 
