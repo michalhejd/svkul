@@ -16,9 +16,17 @@
 		padding: 0;
 		box-sizing: border-box;
 		margin-block-start: 0em;
-    margin-block-end: 0em;
+		margin-block-end: 0em;
 	}
-
+	a {
+		-webkit-touch-callout: none; /* iOS Safari */
+		-webkit-user-select: none; /* Safari */
+		-khtml-user-select: none; /* Konqueror HTML */
+		-moz-user-select: none; /* Old versions of Firefox */
+		-ms-user-select: none; /* Internet Explorer/Edge */
+		user-select: none; /* Non-prefixed version, currently
+											                                  supported by Chrome, Edge, Opera and Firefox */
+	}
 	:root {
 		--base-color: #c4ecf4;
 		--main-color: #f5f5f5;
@@ -37,10 +45,194 @@
 		color: black;
 		background: #c4ecf4;
 	}
+	.adminNav {
+		display: flex;
+		position: fixed;
+		height: 100vh;
+		z-index: 100;
+		nav.active {
+			left: 0;
+		}
+		nav {
+			display: flex;
+			flex-direction: column;
+			gap: 5px;
+			width: 250px;
+			min-height: 100%;
+			padding: 10px;
+			padding-top: 75px;
+			position: absolute;
+			left: -270px;
+			background-color: var(--base-color);
+			transition: 0.3s all ease;
+			> a {
+				padding: 10px;
+				display: flex;
+				flex-direction: column;
+				gap: 5px;
+				text-decoration: none;
+				color: rgb(32, 31, 46);
+				font-family: "Poppins", sans-serif;
+				font-weight: 600;
+				font-size: 18px;
+				border-radius: 10px;
+				&:hover {
+					color: #343455;
+					background: #dbeef1;
+				}
+				a:hover {
+					color: #343455;
+					background: #dbeef1;
+				}
+				.myacc {
+					.svg-inline--fa.fa-angle-down.active {
+						transform: rotate(180deg);
+					}
+					.dropdown {
+						display: flex;
+						flex-direction: column;
+						gap: 7px;
+						a {
+							padding: 5px;
+							text-decoration: none;
+							color: rgb(32, 31, 46);
+							font-weight: 600;
+							&:hover {
+								color: #343455;
+							}
+						}
+						&:hover {
+							color: #343455;
+							background: #dbeef1;
+						}
+					}
+				}
+			}
+			> .router-link-active {
+				color: #343455;
+				background: #dbeef1;
+			}
+			> div {
+				padding: 10px;
+				display: flex;
+				flex-direction: column;
+				gap: 5px;
+				text-decoration: none;
+				color: rgb(32, 31, 46);
+				font-family: "Poppins", sans-serif;
+				font-weight: 600;
+				font-size: 18px;
+				border-radius: 10px;
+				&:hover {
+					color: #343455;
+					background: #dbeef1;
+				}
+				& .router-link-active > a {
+					display: flex;
+					align-items: center;
+					gap: 5px;
+					text-decoration: none;
+					color: rgb(32, 31, 46);
+				}
+				&:hover > a {
+					color: #343455;
+					background: #dbeef1;
+				}
+			}
+			.logout {
+				cursor: pointer;
+			}
+		}
+	}
+	.adminButton__wrap {
+			position: fixed;
+			opacity: 0.5;
+			left: 0;
+			top: 85px;
+			transition: 0.3s all ease;
+			cursor: pointer;
+			.adminButton {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				border-top-right-radius: 10px;
+				border-bottom-right-radius: 10px;
+				width: 50px;
+				height: 50px;
+				background-color: #8ad6e6;
+				.svg-inline--fa.fa-user {
+					font-size: 20px;
+				}
+			}
+		}
+		.adminButton__wrap:hover{
+			opacity: 1;
+		}
+	@media only screen and (max-width: 850px) {
+		#app div.shadow {
+			z-index: 10;
+			background-color: rgba(0, 0, 0, 0.5);
+			top: 0;
+			left: 0;
+			display: none;
+			position: fixed;
+			width: 100%;
+			height: 100vh;
+		}
+		#app div.shadow.active {
+			display: block;
+		}
+	}
+	@media only screen and (min-width: 850px) {
+		.adminNav {
+			display: none;
+		}
+		.adminButton__wrap {
+			display: none;
+		}
+	}
 </style>
 <template>
 	<div id="app">
-		<mobileNav/>
+		<mobileNav />
+		<div
+			class="shadow"
+			:class="{ active: adminNav }"
+			@click="adminNav = !adminNav"
+			v-if="this.logged"
+			:style="{ zIndex: mobileNav ? 10 : 1002 }"
+		></div>
+		<div
+			class="adminNav"
+			v-if="this.$store.state.logged && this.$store.state.user"
+			:style="{ zIndex: mobileNav ? 100 : 1003 }"
+		>
+			<nav :class="{ active: adminNav }">
+				<router-link to="/admin/mujucet">
+					<div class="myacc">
+						<div class="route" @click="dropdown = !dropdown">
+							Můj účet&nbsp;<font-awesome-icon
+								:class="{ active: dropdown }"
+								icon="fa-solid fa-angle-down"
+							/>
+						</div>
+						<div class="dropdown" v-show="dropdown">
+							<router-link to="">Upravit</router-link>
+							<router-link to="">Změnit heslo</router-link>
+						</div>
+					</div>
+				</router-link>
+				<router-link to="/admin/spravauctu">Správa účtů</router-link>
+				<router-link to="/admin/spravapomucek">Správa pomůcek</router-link>
+				<router-link to="/admin/spravaakci">Správa akcí</router-link>
+				<div class="logout" @click="logout()">Odhlásit se</div>
+			</nav>
+		</div>
+		<div class="adminButton__wrap" :style="{left: adminNav ? '270px' : '0', zIndex: mobileNav ? 100 : 1003}">
+				<div class="adminButton" @click="adminNav = !adminNav">
+					<font-awesome-icon icon="fa-solid fa-user" />
+				</div>
+			</div>
 		<navigation />
 		<router-view />
 	</div>
@@ -52,26 +244,82 @@
 	export default {
 		components: {
 			navigation,
-			mobileNav
+			mobileNav,
+		},
+		data() {
+			return {
+				adminNav: false,
+				dropdown: false,
+				dragState: false,
+			};
+		},
+		watch: {
+			$route(to, from) {
+				if (to.path == "/admin/mujucet") {
+					this.dropdown = true;
+				} else {
+					this.dropdown = false;
+				}
+			},
+		},
+		beforeMount() {
+			if (this.$store.state.logged == true) {
+				if (
+					this.$router.currentRoute.path == "/admin" ||
+					this.$router.currentRoute.path == "/admin/"
+				) {
+					this.$router.push("/admin/mujucet").catch(() => {});
+				}
+			} else {
+				if (this.$router.currentRoute.path != "/admin") {
+					this.$router.push("/admin");
+				}
+			}
+			if (this.$router.currentRoute.path == "/admin/mujucet") {
+				this.dropdown = true;
+			}
 		},
 		mounted() {
 			if (this.$store.state.logged == true) {
-				axios.get("/users/@self")
-				.then(response => { 
-				if (response.status == 403 || response.status == 401 ) {
-					this.$store.commit("SET_USER", undefined);
-					this.$store.commit("SET_LOGGED", false);
-				}
-					this.$store.commit("SET_USER", response.data);
-					this.$store.commit("SET_LOGGED", true);
-				})
-				.catch(error => {
-					if(error.response.status == 403 || error.response.status == 401) {
-						this.$store.commit("SET_USER", undefined);
-						this.$store.commit("SET_LOGGED", false);
-					}
-				});
+				axios
+					.get("/users/@self")
+					.then((response) => {
+						if (response.status == 403 || response.status == 401) {
+							this.$store.commit("SET_USER", undefined);
+							this.$store.commit("SET_LOGGED", false);
+						}
+						this.$store.commit("SET_USER", response.data);
+						this.$store.commit("SET_LOGGED", true);
+					})
+					.catch((error) => {
+						if (error.response.status == 403 || error.response.status == 401) {
+							this.$store.commit("SET_USER", undefined);
+							this.$store.commit("SET_LOGGED", false);
+						}
+					});
 			}
+		},
+		computed: {
+			logged() {
+				return this.$store.state.logged;
+			},
+			mobileNav() {
+				return this.$store.state.mobileNav;
+			},
+		},
+		methods: {
+			logout() {
+				axios
+					.delete("/token")
+					.then((response) => {
+						console.log(response);
+						this.$store.commit("SET_LOGGED", false);
+						this.$store.commit("SET_USER", undefined);
+					})
+					.catch((error) => {
+						console.log(error);
+					});
+			},
 		},
 	};
 </script>

@@ -5,7 +5,7 @@
 		.confirmPopup{
 			background-color: white;
 			padding: 30px;
-			border-radius: 40px;
+			border-radius: 20px;
 			position: absolute;
 			top: 50%;
 			left: 50%;
@@ -41,19 +41,21 @@
 		.top-bar {
 			display: grid;
 			padding: 0 20px;
-			grid-template-columns: repeat(3, 1fr);
+			grid-template-columns: repeat(5, 1fr);
 			.searchAid {
-				grid-column: 2;
+				grid-column-start: 2;
+    grid-column-end: 5;
 				input {
 					width: 100%;
 					padding: 10px;
 					border: 1px solid rgb(107, 107, 107);
 					border-radius: 10px;
 					outline: none;
+					font-size: 16px;
 				}
 			}
 			.addAid {
-				grid-column: 3;
+				grid-column: 5;
 				display: flex;
 				justify-content: flex-end;
 				justify-items: center;
@@ -114,7 +116,7 @@
 		.addAidPopup {
 			background-color: white;
 			padding: 30px;
-			border-radius: 40px;
+			border-radius: 20px;
 			width: 500px;
 			height: 600px;
 			position: absolute;
@@ -182,7 +184,7 @@
 					/>
 					<input type="text" v-model="newProduct.ISXN" placeholder="ISXN" />
 					<select v-model="newProduct.disadvType">
-						<option :value="null" selected disabled >Vyberte typ pomůcky</option>
+						<option value="" selected disabled >Vyberte typ pomůcky</option>
 						<option value="A">Postižení komunikačních schopností</option>
 						<option value="B">Mentální postižení</option>
 						<option value="C">Sluchové postižení</option>
@@ -195,7 +197,7 @@
 						<option value="K">Pomůcky pro nadané</option>
 					</select>
 					<select v-model="newProduct.disadvDegree">
-						<option :value="null" disabled :selected="option = 'Vyberte stupeň postižení'">Vyberte stupeň postižení</option>
+						<option value="" disabled :selected="option = 'Vyberte stupeň postižení'">Vyberte stupeň postižení</option>
 						<option value="I" selected="selected">I.</option>
 						<option value="II">II.</option>
 						<option value="III">III.</option>
@@ -203,7 +205,7 @@
 						<option value="V">V.</option>
 					</select>
 					<select v-model="newProduct.disadvTool">
-						<option :value="null" selected disabled >Vyberte typ pomůcky</option>
+						<option value="" selected disabled >Vyberte typ pomůcky</option>
 						<option value="1">Kompenzační pomůcky</option>
 						<option value="2">Speciální učebnice a pomůcky</option>
 						<option value="3">Software</option>
@@ -273,7 +275,7 @@
 		</div>
 		<div
 			class="around-box"
-			v-if="products != undefined && productsLoading != true"
+			v-if="products"
 		>
 			<div class="resaultAid">
 				<div class="resaultAid-title">
@@ -322,9 +324,9 @@
 					ISXN: "",
 					mainImage: "",
 					categories: [],
-					disadvType: null,
-					disadvDegree: null,
-					disadvTool: null,
+					disadvType: "",
+					disadvDegree: "",
+					disadvTool: "",
 					details: {
 						description: "",
 						company: "",
@@ -351,9 +353,6 @@
 						-1
 					);
 				});
-			},
-			productsLoading() {
-				return this.$store.state.productsLoading;
 			},
 		},
 		methods: {
@@ -392,12 +391,13 @@
 				this.shadow = false;
 			},
 			addNewAid() {
+				console.log(this.newProduct);
 				axios
 					.post("/pomucky", {
 						name: this.newProduct.name,
 						signatura: this.newProduct.signatura,
 						ISXN: this.newProduct.ISXN,
-						categories: [{}],
+						categories: [],
 						mainImage: this.newProduct.mainImage,
 						disadvType: this.newProduct.disadvType,
 						disadvDegree: this.newProduct.disadvDegree,

@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
 import vuexPersist from 'vuex-persist'
+import router from '../router'
 
 Vue.use(Vuex)
 const vuexLocalStorage = new vuexPersist({
@@ -63,6 +64,8 @@ export default new Vuex.Store({
           parameters = obj.parameters;
         }
       }
+      console.log(key);
+      console.log(parameters);
       await axios.get(`/pomucky/search${key}`, { params: parameters })
         .then(response => {
           console.log(response)
@@ -93,7 +96,7 @@ export default new Vuex.Store({
             setTimeout(() => { commit('PRODUCT_LOADING', false) }, 300);
           }
         }, error => {
-          console.log(error);
+          router.push({ name: 'notFound', params: {key: id} });
           setTimeout(() => { commit('PRODUCT_LOADING', false) }, 300);
         })
     }

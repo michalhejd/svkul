@@ -8,6 +8,7 @@ import account from '../views/admin/account.vue'
 import accmanage from '../views/admin/accmanage.vue'
 import aidsmanage from '../views/admin/aidsmanage.vue'
 import eventmanage from '../views/admin/eventmanage.vue'
+import notFound from '../views/notFound.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -57,6 +58,15 @@ const routes = [
     path: '/:id',
     name: 'item',
     component: item
+  },
+  {
+    path: '/:key',
+    name: 'notFound',
+    component: notFound
+  },
+  {
+    path: '*',
+    component: notFound
   }
 ]
 

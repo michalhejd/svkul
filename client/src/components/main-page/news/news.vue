@@ -10,35 +10,16 @@
     font-weight: 600;
   }
   .newAids {
-    .carousel {
-      position: relative;
-      span {
-        width: 50px;
-        height: 50px;
-        background-color: rgba(0, 0, 0, 0.733);
-        color: white;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        cursor: pointer;
-        position: absolute;
-        z-index: 1000;
-        transform: translate(-50%, -50%);
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-      }
-      span:hover {
-        background-color: rgb(73, 73, 73);
-      }
-    }
-  }
-  .products{
-    .product-container{
-      display: flex;
-      gap: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    .container{
       margin-top: 20px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      row-gap: 20px;
+      column-gap: 10px;
+      justify-items: center;
     }
   }
   .events {
@@ -58,13 +39,15 @@
   .news .events .container{
     grid-template-columns: repeat(3, 1fr);
   }
-  .news .products .product-container{
-    justify-content: space-between;
-    gap: 5px;
+  .news .newAids .container{
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 @media only screen and (max-width: 875px){
   .news .events .container{
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .news .newAids .container{
     grid-template-columns: repeat(2, 1fr);
   }
   .news{
@@ -73,6 +56,9 @@
 }
 @media only screen and (max-width: 675px){
   .news .events .container{
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .news .newAids .container{
     grid-template-columns: repeat(1, 1fr);
   }
 }
@@ -86,39 +72,10 @@
   <div class="news" v-if="productsLoading == false">
     <div class="newAids" v-if="products != undefined">
       <h2>Nejnovější pomůcky</h2>
-      <div class="carousel" v-if="this.$store.state.products.length > 5">
-
-        <span @click="$refs.prev.click()" style="top: 50%">&lt;</span>
-        <carousel
-          :dots="false"
-          :nav="false"
-          :loop="true"
-          :pullDrag="false"
-          :touchDrag="false"
-          :mouseDrag="false"
-          :responsive="{0: {items: 1, center: true}, 375: {items: 1, center: true, autoWidth: true, margin: 20}, 675: {items: 2, center: true, autoWidth: true, margin: 48}, 1620: {center: true, autoWidth: true, margin: 48}}"
-          style="margin-top: 20px; position: relative"
-        >
-        <template v-for="product in products.slice(0, 8)">
-          <new-aid-box  :key="product._id" :product="product"/>
-        </template>
-          <template slot="prev"
-            ><span ref="prev" class="prev" style="display: none"></span
-          ></template>
-          <template slot="next"
-            ><span ref="next" class="next" style="display: none"></span
-          ></template>
-        </carousel>
-        <span @click="$refs.next.click()" style="top: 50%; left: 100%"
-          >&gt;</span
-        >
-      </div>
-      <div class="products" v-else>
-        <div class="product-container" >
-          <template v-for="product in products.slice(0, 5)">
+        <div class="container" >
+          <template v-for="product in products.slice(0, 4)">
           <new-aid-box  :key="product._id" :product="product"/>
           </template>
-        </div>
       </div>
     </div>
     <div class="events">

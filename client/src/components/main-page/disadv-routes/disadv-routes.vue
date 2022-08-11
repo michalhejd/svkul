@@ -11,10 +11,11 @@
 			grid-template-columns: repeat(5, 1fr);
 			column-gap: 10px;
 			row-gap: 10px;
+			justify-items: center;
 			a {
 				display: flex;
 				flex-direction: column;
-				max-width: 400px;
+				max-width: 300px;
 				max-height: 400px;
 				padding: 2px;
 				border: 1px solid var(--border-color);
@@ -29,7 +30,7 @@
 					width: 100%;
 					height: fit-content;
 				}
-				.text{
+				.text {
 					width: 100%;
 					height: auto;
 					display: flex;
@@ -72,71 +73,80 @@
 <template>
 	<div class="disadv-routes">
 		<div class="container">
-			<a href="">
+			<router-link to="/databaze/B">
 				<img src="@/assets/disadv-routes/mentalni-postizeni.jpg" alt="" />
 				<div class="text">
-				<p>Mentální znevýhodnění</p>
+					<p>Mentální znevýhodnění</p>
 				</div>
-			</a>
-			<a href="">
+			</router-link>
+			<router-link to="/databaze/K">
 				<img src="@/assets/disadv-routes/pomucky-pro-nadane.jpg" alt="" />
 				<div class="text">
-				<p>Pomůcky pro nadané</p>
+					<p>Pomůcky pro nadané</p>
 				</div>
-			</a>
-			<a href="">
-				<img src="@/assets/disadv-routes/postizeni-autistickeho-spektra.jpg" alt="" />
+			</router-link>
+			<router-link to="/databaze/E">
+				<img
+					src="@/assets/disadv-routes/postizeni-autistickeho-spektra.jpg"
+					alt=""
+				/>
 				<div class="text">
-				<p>Znevýhodnění autistického spektra</p>
+					<p>Znevýhodnění autistického spektra</p>
 				</div>
-			</a>
-			<a href="">
-				<img src="@/assets/disadv-routes/postizeni-komunikacnich-schopnosti.jpg" alt="" />
+			</router-link>
+			<router-link to="/databaze/A">
+				<img
+					src="@/assets/disadv-routes/postizeni-komunikacnich-schopnosti.jpg"
+					alt=""
+				/>
 				<div class="text">
-				<p>Znevýhodnění komunikačních schopností</p>
+					<p>Znevýhodnění komunikačních schopností</p>
 				</div>
-			</a>
-			<a href="">
+			</router-link>
+			<router-link to="/databaze/C">
 				<img src="@/assets/disadv-routes/sluchove-postizeni.jpg" alt="" />
 				<div class="text">
-				<p>Sluchové znevýhodnění</p>
+					<p>Sluchové znevýhodnění</p>
 				</div>
-			</a>
-			<a href="">
+			</router-link>
+			<router-link to="/databaze/H">
 				<img src="@/assets/disadv-routes/socialni-znevyhodneni.jpg" alt="" />
 				<div class="text">
-				<p>Sociální znevýhodnění</p>
+					<p>Sociální znevýhodnění</p>
 				</div>
-			</a>
-			<a href="">
-				<img src="@/assets/disadv-routes/specificke-poruchy-chovani.jpg" alt="" />
+			</router-link>
+			<router-link to="/databaze/F">
+				<img
+					src="@/assets/disadv-routes/specificke-poruchy-chovani.jpg"
+					alt=""
+				/>
 				<div class="text">
-				<p>Specifické poruchy chování</p>
+					<p>Specifické poruchy chování</p>
 				</div>
-			</a>
-			<a href="">
+			</router-link>
+			<router-link to="/databaze/G">
 				<img src="@/assets/disadv-routes/specificke-poruchy-uceni.jpg" alt="" />
 				<div class="text">
-				<p>Specifické poruchy učení</p>
+					<p>Specifické poruchy učení</p>
 				</div>
-			</a>
-			<a href="">
+			</router-link>
+			<router-link to="/databaze/D">
 				<img src="@/assets/disadv-routes/telesne-postizeni.jpg" alt="" />
 				<div class="text">
-				<p>Tělesné znevýhodnění</p>
+					<p>Tělesné znevýhodnění</p>
 				</div>
-			</a>
-			<a href="">
+			</router-link>
+			<router-link to="/databaze/I">
 				<img src="@/assets/disadv-routes/zrakove-postizeni.jpg" alt="" />
 				<div class="text">
-				<p>Zrakové znevýhodnění</p>
+					<p>Zrakové znevýhodnění</p>
 				</div>
-			</a>
+			</router-link>
 		</div>
 	</div>
 </template>
 <script>
 	export default {
-		name: "disadv-routes"
+		name: "disadv-routes",
 	};
 </script>

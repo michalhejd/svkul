@@ -1,20 +1,20 @@
 <style lang="scss" scoped>
 	.database {
 		width: 100%;
-		height: 100vh;
 		background-color: #f5f5f5;
 		display: flex;
 		flex-direction: column;
+		gap: 20px;
 		.content {
 			margin-top: 20px;
 			display: flex;
 			.item-list {
-				width: 100%;
 				padding-left: 20px;
 				padding-right: 20px;
+				width: calc(100% - 300px);
 				.container {
 					display: grid;
-					grid-template-columns: repeat(6, 1fr);
+					grid-template-columns: repeat(4, 1fr);
 					column-gap: 10px;
 					row-gap: 10px;
 				}
@@ -25,6 +25,24 @@
 				height: 700px;
 				padding: 10px 20px;
 			}
+		}
+	}
+	@media only screen and (max-width: 1200px){
+		.database .content .item-list .container{
+			grid-template-columns: repeat(3, 1fr);
+		}
+	}
+	@media only screen and (max-width: 900px){
+		.database .content .item-filter {
+			width: 200px;
+		}
+		.database .content .item-list {
+			width: calc(100% - 200px);
+		}
+	}
+	@media only screen and (max-width: 700px){
+		.database .content .item-list .container{
+			grid-template-columns: repeat(2, 1fr);
 		}
 	}
 </style>
@@ -44,39 +62,52 @@
 				</div>
 			</div>
 		</div>
+		<footer-bar />
 	</div>
 </template>
 <script>
 	import itemBox from "../components/database/item-box.vue";
+	import footerBar from "../components/main-page/footer-bar.vue";
 	export default {
 		name: "database",
 		components: {
-			itemBox
+			itemBox,
+			footerBar,
 		},
 		mounted() {
-			if(this.$route.query){
-				this.filterProducts(this.$route.query);
-			}
-			if(this.$route.params.key){
+			if (this.$route.query && this.$route.params.key) {
+				console.log("OBOJÍ")
+				console.log(this.$route.query)
+				console.log(this.$route.params.key)
+				this.filterProducts(this.$route.query, this.$route.params.key);
+			} else if (this.$route.query) {
+				console.log("QUERY")
+				console.log(this.$route.query)
+				this.filterProducts(this.$route.query, null);
+			} else if (this.$route.params.key) {
+				console.log("KEY")
+				console.log(this.$route.params.key)
 				this.filterProducts(null, this.$route.params.key);
 			}
 		},
 		data() {
 			return {
-				loading: false
+				loading: false,
 			};
 		},
 		computed: {
 			products() {
 				return this.$store.state.products;
-			}
+			},
 		},
 		methods: {
-			filterProducts(parameters, key){
+			filterProducts(parameters, key) {
 				const obj = {
 					parameters: parameters,
-					key: key
-				}
+					key: key,
+				};
+				console.log("DATABASE COMPONENT");
+				console.log(obj);
 				this.$store.dispatch("getProducts", obj);
 			},
 		},

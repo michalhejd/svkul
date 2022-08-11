@@ -47,6 +47,7 @@
 				min-height: 100%;
 				padding: 10px;
 				background-color: var(--base-color);
+				transition: 0.3s all ease;
 				> a {
 					padding: 10px;
 					display: flex;
@@ -127,6 +128,17 @@
 			}
 		}
 	}
+	@media only screen and (max-width: 850px) {
+		.admin {
+			.admin-menu {
+				nav {
+					position: fixed;
+					transform: translateX(-270px);
+					transition: 0.3s all ease;
+				}
+			}
+		}
+	}
 </style>
 <template>
 	<div class="admin">
@@ -199,7 +211,7 @@
 				}
 			} else {
 				if (this.$router.currentRoute.path != "/admin") {
-					this.$router.push("/admin")
+					this.$router.push("/admin");
 				}
 			}
 			if (this.$router.currentRoute.path == "/admin/mujucet") {

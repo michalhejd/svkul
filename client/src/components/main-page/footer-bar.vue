@@ -13,11 +13,11 @@
 				align-items: center;
 				grid-template-columns: repeat(4, 1fr);
 				width: 100%;
-				img {
-					max-height: 100px;
-					width: auto;
-				}
-				.smaller{
+				a {
+					img {
+						max-height: 80px;
+						width: auto;
+					}
 				}
 			}
 		}
@@ -26,11 +26,20 @@
 			justify-content: center;
 			align-items: center;
 			width: 100%;
-			padding-top: 30px;
-			padding-bottom: 30px;
-			padding-left: 80px;
-			padding-right: 80px;
+			padding: 20px 30px;
 			background-color: #f5f5f5;
+		}
+	}
+	@media only screen and (max-width: 800px) {
+		.footer-bar .partners .static {
+			row-gap: 20px;
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+	@media only screen and (max-width: 450px) {
+		.footer-bar .partners .static {
+			row-gap: 30px;
+			grid-template-columns: repeat(1, 1fr);
 		}
 	}
 </style>
@@ -57,10 +66,18 @@
 				</carousel>
 			</div>
 			<div class="static">
-				<img src="@/assets/logo-eu/EN_RO_B_C.jpg" alt="" />
-				<img src="@/assets/logo-msmt/MSMT_logo_bez_textu_RGB.jpg" alt="" />
-				<img src="@/assets/logo-svkul/svkul_rgb.jpg" alt="" />
-				<img class="smaller" src="@/assets/logo-uk/logo text A1.jpg" alt="">
+				<a href="https://european-union.europa.eu/index_cs" target="_blank">
+					<img src="@/assets/logo-eu/EN_RO_B_C.jpg" alt="" />
+				</a>
+				<a href="https://www.msmt.cz/" target="_blank">
+					<img src="@/assets/logo-msmt/MSMT_logo_bez_textu_RGB.jpg" alt="" />
+				</a>
+				<a href="https://www.kr-ustecky.cz/" target="_blank">
+					<img class="smaller" src="@/assets/logo-uk/logo text A1.jpg" alt="" />
+				</a>
+				<a href="https://www.svkul.cz/" target="_blank">
+					<img src="@/assets/logo-svkul/svkul_rgb.jpg" alt="" />
+				</a>
 			</div>
 		</div>
 		<div class="copyright">
