@@ -51,7 +51,7 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    async getProducts({ commit }) {
+    async getProducts({ commit }, obj) {
       commit('PRODUCT_LOADING', true);
       let key = '';
       let parameters = '';
@@ -66,8 +66,8 @@ export default new Vuex.Store({
       }
       await axios.get(`pomucky/search${key}`, { params: parameters })
         .then(response => {
-          console.log(response)
-          console.log(response.data)
+          
+          
           if(response.data.length > 0){
             commit('SET_PRODUCTS', response.data)
           }

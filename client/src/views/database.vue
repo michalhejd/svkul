@@ -76,17 +76,17 @@
 		},
 		mounted() {
 			if (this.$route.query && this.$route.params.key) {
-				console.log("OBOJÍ")
-				console.log(this.$route.query)
-				console.log(this.$route.params.key)
+				
+				
+				
 				this.filterProducts(this.$route.query, this.$route.params.key);
 			} else if (this.$route.query) {
-				console.log("QUERY")
-				console.log(this.$route.query)
+				
+				
 				this.filterProducts(this.$route.query, null);
 			} else if (this.$route.params.key) {
-				console.log("KEY")
-				console.log(this.$route.params.key)
+				
+				
 				this.filterProducts(null, this.$route.params.key);
 			}
 		},
@@ -106,8 +106,8 @@
 					parameters: parameters,
 					key: key,
 				};
-				console.log("DATABASE COMPONENT");
-				console.log(obj);
+				
+				
 				this.$store.dispatch("getProducts", obj);
 			},
 		},

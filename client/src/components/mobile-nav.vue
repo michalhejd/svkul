@@ -47,7 +47,7 @@
 		},
 		methods: {
 			setNav() {
-				console.log("dd")
+				
 				this.$store.commit("SET_MOBILENAV", false);
 			},
 		},

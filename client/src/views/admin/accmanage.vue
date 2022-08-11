@@ -65,7 +65,7 @@
                 }, 100);
 			})
             .catch((error) => {
-                console.log(error);
+                
                 setTimeout(() => {
                     this.loading = false;
                 }, 100);

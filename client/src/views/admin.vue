@@ -230,25 +230,25 @@
 						{ withCredentials: true }
 					)
 					.then((response) => {
-						console.log(response);
+						
 						this.$store.commit("SET_LOGGED", true);
 						this.$store.commit("SET_USER", response.data);
 						this.$router.push("/admin/mujucet").catch(() => {});
 					})
 					.catch((error) => {
-						console.log(error);
+						
 					});
 			},
 			logout() {
 				axios
 					.delete("/token")
 					.then((response) => {
-						console.log(response);
+						
 						this.$store.commit("SET_LOGGED", false);
 						this.$store.commit("SET_USER", undefined);
 					})
 					.catch((error) => {
-						console.log(error);
+						
 					});
 			},
 		},

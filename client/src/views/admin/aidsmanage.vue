@@ -369,7 +369,7 @@
 						}
 					})
 					.catch((error) => {
-						console.log(error);
+						
 						alert("Pomůcku se nepodařilo smazat");
 					});
 			},
@@ -391,7 +391,7 @@
 				this.shadow = false;
 			},
 			addNewAid() {
-				console.log(this.newProduct);
+				
 				axios
 					.post("pomucky", {
 						name: this.newProduct.name,
@@ -434,7 +434,7 @@
 						}
 					})
 					.catch((error) => {
-						console.log(error);
+						
 					});
 			},
 		},

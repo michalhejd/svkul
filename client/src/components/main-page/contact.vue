@@ -125,11 +125,11 @@ export default {
   computed: {
     disabled() {
       if(this.checked == false || this.name == '' || this.email == '' || this.message == ''){
-        console.log(true)
+        
         return true;
       }
       else{
-        console.log(false)
+        
         return false;
       }
     }

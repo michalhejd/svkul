@@ -25,7 +25,7 @@
 		-moz-user-select: none; /* Old versions of Firefox */
 		-ms-user-select: none; /* Internet Explorer/Edge */
 		user-select: none; /* Non-prefixed version, currently
-												                                  supported by Chrome, Edge, Opera and Firefox */
+													                                  supported by Chrome, Edge, Opera and Firefox */
 	}
 	:root {
 		--base-color: #c4ecf4;
@@ -230,6 +230,7 @@
 		</div>
 		<div
 			class="adminButton__wrap"
+			v-if="this.$store.state.logged && this.$store.state.user"
 			:style="{
 				left: adminNav ? '270px' : '0',
 				zIndex: mobileNav ? 100 : 1003,
@@ -270,13 +271,12 @@
 		},
 		beforeMount() {
 			if (this.$store.state.logged == true) {
-				axios.get("users/@self")
-				.then(response => { 
-				if (response.status == 403 || response.status == 401 ) {
-					this.$store.commit("SET_USER", undefined);
-					this.$store.commit("SET_LOGGED", false);
-				}
-			})
+				axios.get("users/@self").then((response) => {
+					if (response.status == 403 || response.status == 401) {
+						this.$store.commit("SET_USER", undefined);
+						this.$store.commit("SET_LOGGED", false);
+					}
+				});
 			}
 			if (this.$router.currentRoute.path == "/admin/mujucet") {
 				this.dropdown = true;
@@ -315,14 +315,14 @@
 				axios
 					.delete("/token")
 					.then((response) => {
-						console.log(response);
+						
 						this.$store.commit("SET_LOGGED", false);
 						this.$store.commit("SET_USER", undefined);
 					})
 					.catch((error) => {
-						console.log(error);
+						
 					});
 			},
 		},
-	}
+	};
 </script>
