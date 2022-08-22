@@ -2,7 +2,7 @@
 	.aidsmanage {
 		width: 100%;
 		padding-top: 20px;
-		.confirmPopup{
+		.confirmPopup {
 			background-color: white;
 			padding: 30px;
 			border-radius: 20px;
@@ -44,7 +44,7 @@
 			grid-template-columns: repeat(5, 1fr);
 			.searchAid {
 				grid-column-start: 2;
-    grid-column-end: 5;
+				grid-column-end: 5;
 				input {
 					width: 100%;
 					padding: 10px;
@@ -183,8 +183,8 @@
 						placeholder="Signatura"
 					/>
 					<input type="text" v-model="newProduct.ISXN" placeholder="ISXN" />
-					<select v-model="newProduct.disadvType">
-						<option value="" selected disabled >Vyberte typ pomůcky</option>
+					<select v-model="newProduct.details.disadvType">
+						<option value="" selected disabled>Vyberte typ pomůcky</option>
 						<option value="A">Postižení komunikačních schopností</option>
 						<option value="B">Mentální postižení</option>
 						<option value="C">Sluchové postižení</option>
@@ -196,16 +196,22 @@
 						<option value="I">Zrakové postižení</option>
 						<option value="K">Pomůcky pro nadané</option>
 					</select>
-					<select v-model="newProduct.disadvDegree">
-						<option value="" disabled :selected="option = 'Vyberte stupeň postižení'">Vyberte stupeň postižení</option>
+					<select v-model="newProduct.details.disadvDegree">
+						<option
+							value=""
+							disabled
+							:selected="(option = 'Vyberte stupeň postižení')"
+						>
+							Vyberte stupeň postižení
+						</option>
 						<option value="I" selected="selected">I.</option>
 						<option value="II">II.</option>
 						<option value="III">III.</option>
 						<option value="IV">IV.</option>
 						<option value="V">V.</option>
 					</select>
-					<select v-model="newProduct.disadvTool">
-						<option value="" selected disabled >Vyberte typ pomůcky</option>
+					<select v-model="newProduct.details.disadvTool">
+						<option value="" selected disabled>Vyberte typ pomůcky</option>
 						<option value="1">Kompenzační pomůcky</option>
 						<option value="2">Speciální učebnice a pomůcky</option>
 						<option value="3">Software</option>
@@ -273,10 +279,7 @@
 				</div>
 			</div>
 		</div>
-		<div
-			class="around-box"
-			v-if="products"
-		>
+		<div class="around-box" v-if="products">
 			<div class="resaultAid">
 				<div class="resaultAid-title">
 					<h2>Výsledky hledání</h2>
@@ -324,16 +327,16 @@
 					ISXN: "",
 					mainImage: "",
 					categories: [],
-					disadvType: "",
-					disadvDegree: "",
-					disadvTool: "",
+					images: [],
 					details: {
 						description: "",
 						company: "",
 						author: "",
 						year: "",
 						mistoVydani: "",
-						images: [],
+						disadvType: "",
+						disadvDegree: "",
+						disadvTool: "",
 					},
 				},
 				popupProduct: undefined,
@@ -369,7 +372,6 @@
 						}
 					})
 					.catch((error) => {
-						
 						alert("Pomůcku se nepodařilo smazat");
 					});
 			},
@@ -391,7 +393,6 @@
 				this.shadow = false;
 			},
 			addNewAid() {
-				
 				axios
 					.post("pomucky", {
 						name: this.newProduct.name,
@@ -399,14 +400,16 @@
 						ISXN: this.newProduct.ISXN,
 						categories: [],
 						mainImage: this.newProduct.mainImage,
-						disadvType: this.newProduct.disadvType,
-						disadvDegree: this.newProduct.disadvDegree,
-						disadvTool: this.newProduct.disadvTool,
+						images: [],
 						details: {
 							author: this.newProduct.details.author,
 							year: this.newProduct.details.year,
 							company: this.newProduct.details.company,
 							mistoVydani: this.newProduct.details.mistoVydani,
+							disadvType: this.newProduct.details.disadvType,
+							disadvDegree: this.newProduct.details.disadvDegree,
+							disadvTool: this.newProduct.details.disadvTool,
+							place: null
 						},
 					})
 					.then((response) => {
@@ -419,23 +422,21 @@
 								ISXN: "",
 								mainImage: "",
 								categories: [],
-								disadvType: "",
-								disadvDegree: "",
-								disadvTool: null,
+								images: [],
 								details: {
 									description: "",
 									company: "",
 									author: "",
 									year: "",
 									mistoVydani: "",
-									images: [],
+									disadvType: "",
+									disadvDegree: "",
+									disadvTool: "",
 								},
 							};
 						}
 					})
-					.catch((error) => {
-						
-					});
+					.catch((error) => {});
 			},
 		},
 	};

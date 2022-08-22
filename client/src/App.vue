@@ -11,7 +11,9 @@
 	h5,
 	h6,
 	div,
-	span {
+	span,
+	input,
+	button {
 		margin: 0;
 		padding: 0;
 		box-sizing: border-box;

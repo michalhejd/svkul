@@ -17,7 +17,7 @@
       margin-top: 20px;
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      row-gap: 20px;
+      row-gap: 10px;
       column-gap: 10px;
       justify-items: center;
     }
@@ -30,7 +30,7 @@
       margin-top: 20px;
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      row-gap: 20px;
+      row-gap: 10px;
       column-gap: 10px;
     }
   }
