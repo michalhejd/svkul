@@ -38,6 +38,9 @@
 		font-family: "Poppins", sans-serif;
 		font-weight: 500;
 	}
+	body.active{
+		overflow: hidden;
+	}
 	::-moz-selection {
 		color: black;
 		background: #c4ecf4;
@@ -195,7 +198,7 @@
 	}
 </style>
 <template>
-	<div id="app">
+	<div id="app" :class="{active: this.$store.state.mobileNav}">
 		<mobileNav />
 		<div
 			class="shadow"
@@ -227,6 +230,7 @@
 				<router-link to="/admin/spravauctu">Správa účtů</router-link>
 				<router-link to="/admin/spravapomucek">Správa pomůcek</router-link>
 				<router-link to="/admin/spravaakci">Správa akcí</router-link>
+				<router-link to="/admin/spravamista">Správa míst</router-link>
 				<div class="logout" @click="logout()">Odhlásit se</div>
 			</nav>
 		</div>

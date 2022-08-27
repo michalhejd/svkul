@@ -51,7 +51,7 @@
 <template>
 	<div class="navigation">
 		<router-link to="/">Domů</router-link>
-		<router-link to="/databaze">Databáze pomůcek</router-link>
+		<router-link to="/databaze" @click.native="getProducts()">Databáze pomůcek</router-link>
 		<router-link to="/#contacts">Kontakty</router-link>
 		<div class="mobile-nav" :class="{ active: mobileNav }">
 			<font-awesome-icon icon="fa-solid fa-bars" @click="toggleNav()" />
@@ -63,7 +63,13 @@
 		name: "navigation",
 		methods: {
 			toggleNav() {
+				document.body.classList.toggle("active");
 				this.$store.commit("SET_MOBILENAV", !this.$store.state.mobileNav);
+			},
+			getProducts() {
+				if(this.$route.path === "/databaze") {
+					this.$store.dispatch("getProducts");
+				}
 			},
 		},
 		computed: {

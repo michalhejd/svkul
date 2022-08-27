@@ -22,10 +22,8 @@ export default new Vuex.Store({
     productLoading: true,
     logged: false,
     user: undefined,
-    mobileNav: false
-
-  },
-  getters: {
+    mobileNav: false,
+    searchOptions: undefined
   },
   mutations: {
     SET_PRODUCTS(state, products) {
@@ -48,6 +46,9 @@ export default new Vuex.Store({
     },
     SET_MOBILENAV(state, mobileNav) {
       state.mobileNav = mobileNav;
+    },
+    SET_SEARCH_OPTIONS(state, searchOptions) {
+      state.searchOptions = searchOptions;
     }
   },
   actions: {
@@ -55,28 +56,34 @@ export default new Vuex.Store({
       commit('PRODUCT_LOADING', true);
       let key = '';
       let parameters = '';
-      if(obj){
-        if(obj.key != null || undefined){
+      if (obj) {
+        if (obj.key != null || undefined) {
           key = '/' + obj.key;
           key = key.toUpperCase();
         }
-        if(obj.parameters != null || undefined){
+        if (obj.parameters != null || undefined) {
           parameters = obj.parameters;
         }
       }
+
       await axios.get(`pomucky/search${key}`, { params: parameters })
         .then(response => {
-          
-          
-          if(response.data.length > 0){
+          if (response.data.length > 0) {
             commit('SET_PRODUCTS', response.data)
           }
-          else{
+          else {
             commit('SET_PRODUCTS', undefined)
           }
           setTimeout(() => {
-          commit('PRODUCTS_LOADING', false);
+            commit('PRODUCTS_LOADING', false);
           }, 300);
+        })
+        axios.get('pomucky/searchOptions')
+        .then(response => {
+          commit('SET_SEARCH_OPTIONS', response.data.searchOptions)
+        })
+        .catch(error => {
+          console.log(error)
         })
     },
     async getProduct({ commit }, id) {
@@ -94,10 +101,10 @@ export default new Vuex.Store({
             setTimeout(() => { commit('PRODUCT_LOADING', false) }, 300);
           }
         }, error => {
-          router.push({ name: 'notFound', params: {key: id} });
+          router.push({ name: 'notFound', params: { key: id } });
           setTimeout(() => { commit('PRODUCT_LOADING', false) }, 300);
         })
-    }
+    },
   },
   plugins: [vuexLocalStorage.plugin]
 })

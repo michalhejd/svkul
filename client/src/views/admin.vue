@@ -157,7 +157,7 @@
 		</div>
 		<div class="admin-menu" v-else>
 			<nav>
-				<router-link to="mujucet">
+				<router-link to="/admin/mujucet">
 					<div class="myacc">
 						<div class="route" @click="dropdown = !dropdown">
 							Můj účet&nbsp;<font-awesome-icon
@@ -167,13 +167,14 @@
 						</div>
 						<div class="dropdown" v-show="dropdown">
 							<router-link to="">Upravit</router-link>
-							<router-link to="">Změnit heslo</router-link>
+							<router-link to="/admin/mujucet/changePassword">Změnit heslo</router-link>
 						</div>
 					</div>
 				</router-link>
-				<router-link to="spravauctu">Správa účtů</router-link>
-				<router-link to="spravapomucek">Správa pomůcek</router-link>
-				<router-link to="spravaakci">Správa akcí</router-link>
+				<router-link to="/admin/spravauctu">Správa účtů</router-link>
+				<router-link to="/admin/spravapomucek">Správa pomůcek</router-link>
+				<router-link to="/admin/spravaakci">Správa akcí</router-link>
+				<router-link to="/admin/spravamista">Správa míst</router-link>
 				<div class="logout" @click="logout()">Odhlásit se</div>
 			</nav>
 			<div class="main">
@@ -194,7 +195,7 @@
 		},
 		watch: {
 			$route(to, from) {
-				if (to.path == "/admin/mujucet") {
+				if (to.path == "/admin/mujucet" || to.path == "/admin/mujucet/changePassword") {
 					this.dropdown = true;
 				} else {
 					this.dropdown = false;
@@ -214,7 +215,7 @@
 					this.$router.push("/admin");
 				}
 			}
-			if (this.$router.currentRoute.path == "/admin/mujucet") {
+			if (this.$router.currentRoute.path == "/admin/mujucet" || this.$router.currentRoute.path == "/admin/mujucet/changePassword") {
 				this.dropdown = true;
 			}
 		},

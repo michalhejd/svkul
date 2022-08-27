@@ -82,21 +82,16 @@
 			}
 		}
 		.around-box {
+			padding: 0 5px;
 			.resaultAid {
 				.resaultAid-content {
-					border-top: solid 1px black;
-					.aid {
-						display: grid;
-						grid-template-columns: repeat(3, 1fr);
-						padding-left: 5px;
-						column-gap: 10px;
-						justify-content: center;
-						place-content: center;
-						align-content: center;
-						align-items: center;
-						border-bottom: solid 1px black;
-						border-top: 0px;
-					}
+					padding: 10px;
+					display: flex;
+					flex-direction: column;
+					gap: 10px;
+					width: 100%;
+					height: calc(100vh - 160px);
+					overflow-y: auto;
 				}
 			}
 		}
@@ -118,7 +113,6 @@
 			padding: 30px;
 			border-radius: 20px;
 			width: 500px;
-			height: 600px;
 			position: absolute;
 			top: 50%;
 			left: 50%;
@@ -128,6 +122,7 @@
 				display: flex;
 				flex-direction: column;
 				.top-content {
+					margin-bottom: 10px;
 					display: flex;
 					justify-content: space-between;
 					align-items: center;
@@ -139,10 +134,63 @@
 				.aids-inputs {
 					display: flex;
 					flex-direction: column;
+					gap: 10px;
+					input,
+					select {
+						width: 100%;
+						padding: 5px;
+						border: 1px solid rgb(88, 88, 88);
+						border-radius: 5px;
+						outline: none;
+					}
+
+					textarea {
+						font-family: "Arial";
+						width: 100%;
+						padding: 5px;
+						box-sizing: border-box;
+						border: 1px solid rgb(88, 88, 88);
+						border-radius: 5px;
+						outline: none;
+						resize: none;
+					}
+					input:focus,
+					select:focus,
+					textarea:focus {
+						outline: solid 3px rgb(104, 104, 104);
+						transition: 0.05s;
+					}
+					button {
+						width: 100%;
+						padding: 10px;
+						border: none;
+						border-radius: 5px;
+						background-color: rgb(72, 155, 194);
+						color: white;
+						font-size: 16px;
+						cursor: pointer;
+						transition: 0.2s;
+						&:hover {
+							background-color: rgb(104, 104, 104);
+						}
+						box-shadow: 3px 3px 5px 0px rgb(206, 206, 206);
+					}
 					.details {
 						display: flex;
 						flex-direction: column;
+						gap: 7px;
 					}
+				}
+			}
+		}
+	}
+	@media only screen and (max-width: 600px){
+		.aidsmanage .addAidPopup{
+			width: 85%;
+			.addAidPopup-content .aids-inputs{
+				gap: 5px;
+				input, select, textarea{
+					padding: 3px;
 				}
 			}
 		}
@@ -265,12 +313,16 @@
 		<div
 			class="shadow-background"
 			:class="{ active: shadow }"
-			@click="closeAddPopup()"
+			@click="closeAddPopup(), closeDeletePopup()"
 		></div>
 		<div class="top-bar">
-			<div class="searchAid" v-if="this.$store.state.products != undefined">
+			<div class="searchAid" >
 				<div class="searchAid-input">
-					<input type="text" v-model="searchAid" placeholder="Hledat pomůcku" />
+					<input
+						type="text"
+						v-model="searchAid"
+						placeholder="Hledat pomůcku"
+					/>
 				</div>
 			</div>
 			<div class="addAid">
@@ -285,23 +337,12 @@
 					<h2>Výsledky hledání</h2>
 				</div>
 				<div class="resaultAid-content">
-					<template v-for="product in filteredProducts">
-						<div class="aid" :key="product._id">
-							<div class="aid-title">
-								<h3>{{ product.name }}</h3>
-							</div>
-							<div class="aidContent">
-								<p>{{ product.signatura }}</p>
-								<p>{{ product.place }}</p>
-							</div>
-							<div class="manage">
-								<font-awesome-icon
-									icon="fa-solid fa-xmark"
-									@click="showDeletePopup(product)"
-								/>
-								<font-awesome-icon icon="fa-solid fa-pen-to-square" />
-							</div>
-						</div>
+					<template v-for="product in products">
+						<aids-manage-item-box
+							:key="product._id"
+							:product="product"
+							@delete="showDeletePopup(product)"
+						/>
 					</template>
 				</div>
 			</div>
@@ -313,8 +354,32 @@
 </template>
 <script>
 	import axios from "axios";
+	import aidsManageItemBox from "@/components/aids-manage/aids-manage-item-box.vue";
 	export default {
 		name: "searchAid",
+		components: {
+			aidsManageItemBox,
+		},
+		watch: {
+			async searchAid(newSearch, oldSearch) {
+				setTimeout(() => {
+					if (newSearch != oldSearch) {
+						if (newSearch.length >= 2) {
+							let obj = {
+								parameters: {
+									search: newSearch.toString(),
+								},
+								key: null,
+							};
+							this.$store.dispatch("getProducts", obj);
+						}
+					}
+					if(newSearch.length == 0){
+						this.$store.dispatch("getProducts");
+					}
+				}, 1000);
+			},
+		},
 		data() {
 			return {
 				searchAid: "",
@@ -342,20 +407,12 @@
 				popupProduct: undefined,
 			};
 		},
-		mounted() {
+		beforeMount() {
 			this.$store.dispatch("getProducts");
 		},
 		computed: {
 			products() {
 				return this.$store.state.products;
-			},
-			filteredProducts() {
-				return this.products.filter((product) => {
-					return (
-						product.name.toLowerCase().indexOf(this.searchAid.toLowerCase()) !==
-						-1
-					);
-				});
 			},
 		},
 		methods: {
@@ -409,7 +466,7 @@
 							disadvType: this.newProduct.details.disadvType,
 							disadvDegree: this.newProduct.details.disadvDegree,
 							disadvTool: this.newProduct.details.disadvTool,
-							place: null
+							place: undefined,
 						},
 					})
 					.then((response) => {
@@ -436,7 +493,9 @@
 							};
 						}
 					})
-					.catch((error) => {});
+					.catch((error) => {
+						console.log(error.response);
+					});
 			},
 		},
 	};

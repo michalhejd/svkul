@@ -9,7 +9,7 @@ max-width: 300px;
 }
 </style>
 <template>
-    <div class="item-box" @click="click()">
+    <div class="item-box" @click="click()" draggable="true">
     <p>{{product.name}}</p>
     </div>
 </template>

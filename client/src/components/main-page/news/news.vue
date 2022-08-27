@@ -67,6 +67,7 @@
     justify-items: center;
   }
 }
+
 </style>
 <template>
   <div class="news" v-if="productsLoading == false">
@@ -90,13 +91,11 @@
   </div>
 </template>
 <script>
-import carousel from "vue-owl-carousel";
 import newAidBox from "./news-boxes/new-aid-box.vue";
 import newEvent from "./news-boxes/new-event-box.vue";
 export default {
   name: "news",
   components: {
-    carousel,
     newAidBox,
     newEvent,
   },

@@ -47,7 +47,7 @@
 		},
 		methods: {
 			setNav() {
-				
+				document.body.classList.remove('active')
 				this.$store.commit("SET_MOBILENAV", false);
 			},
 		},

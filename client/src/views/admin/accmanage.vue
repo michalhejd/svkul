@@ -41,6 +41,7 @@
 			<template v-for="user in users">
 				<div class="user" :key="user._id">
 					<p>{{ user.name }}</p>
+					<p>role: {{user.role}}</p>
 				</div>
 			</template>
 		</div>

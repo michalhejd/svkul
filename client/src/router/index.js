@@ -9,6 +9,8 @@ import accmanage from '../views/admin/accmanage.vue'
 import aidsmanage from '../views/admin/aidsmanage.vue'
 import eventmanage from '../views/admin/eventmanage.vue'
 import notFound from '../views/notFound.vue'
+import placemanage from '../views/admin/placemanage.vue'
+import changePassword from '../views/admin/changePassword.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -35,7 +37,12 @@ const routes = [
       {
         path: 'mujucet',
         name: 'account',
-        component: account
+        component: account,
+      },
+      {
+        path: 'mujucet/changePassword',
+        name: 'changePassword',
+        component: changePassword
       },
       {
         path: 'spravauctu',
@@ -51,6 +58,11 @@ const routes = [
         path: 'spravaakci',
         name: 'events',
         component: eventmanage
+      },
+      {
+        path: 'spravamista',
+        name: 'places',
+        component: placemanage
       }
     ]
   },
@@ -73,7 +85,10 @@ const routes = [
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
-  routes
+  routes,
+  scrollBehavior() {
+    return { x: 0, y: 0 }
+  }
 })
 
 export default router
