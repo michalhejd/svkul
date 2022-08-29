@@ -10,6 +10,7 @@
 - name: Build docker image
   listen: restart service
   docker_image:
+    pull: true
     build:
       path: /home/ssps/web/server
       rm: false
@@ -22,9 +23,10 @@
     name: api
     image: api
     state: started
-    network_mode: host
-    # published_ports:
-    #   - 3001:3001
+    published_ports:
+      - 3001:3001
+    networks:
+      - name: mongodb
     env:
       PRIVATE_RSA_KEY: "{{PRIVATE_RSA_KEY}}"
       PUBLIC_RSA_KEY: "{{PUBLIC_RSA_KEY}}"

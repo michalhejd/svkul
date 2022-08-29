@@ -14,6 +14,14 @@
     mongodb_docker_image_tag: 5.0.9
     mongodb_install_cli: false
     mongodb_container_memory_limit: 512m
+- name: create docker network
+  docker_network:
+    name: mongodb
+- name: Connect mongodb to correct network
+  docker_container: 
+    name: mongodb
+    networks:
+      - name: mongodb
 - name: CLIENT - Download sources
   become: false
   git:
