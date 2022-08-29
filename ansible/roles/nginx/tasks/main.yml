@@ -8,12 +8,18 @@
 - name: Add cert key
   become: true
   copy:
-    content: {{CERT_KEY}}
+    content: "{{CERT_KEY}}"
     dest: /etc/nginx/fancy
 
 - name: Nginx config
   become: true
   template:
     src: default.conf
-    dest: /etc/nginx/conf.d/default.conf
+    dest: /etc/nginx/sites-enabled/default
   notify: restart nginx
+
+- name: Nginx is running
+  service:
+    name: nginx
+    state: started
+    enabled: yes

@@ -2,7 +2,14 @@
 - name: install Docker dependencies
   become: true
   apt:
-    name: apt-transport-https curl ca-certificates python3-pip software-properties-default python3-setuptools
+    name:
+      - apt-transport-https
+      - curl
+      - ca-certificates
+      - python3-pip
+      - lsb-release
+      - python3-setuptools
+      - gnupg
     state: latest
     
 - name: add Docker repository
@@ -24,7 +31,11 @@
   become: true
   apt: 
     update_cache: yes 
-    name: docker-ce docker-ce-cli containerd.io docker-compose-plugin
+    name:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+      - docker-compose-plugin
     state: latest
     
 - name: Ensure group docker exists

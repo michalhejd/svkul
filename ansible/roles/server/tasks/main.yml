@@ -1,26 +1,23 @@
 ---
-- name: Start database
-  roles:
-    - role: matic-insurance.mongodb_container
-      tags: ['database']
-      mongodb_container_name: 'mongodb'
-      mongodb_port: 27017
-      mongodb_db: databaze
-      mongodb_user: dbuzivatel
-      mongodb_password: {{ MONGODB_PASSWORD }}
-      mongodb_docker_image: mongo
-      mongodb_docker_image_tag: 5.0.9
-      mongodb_install_cli: true
-      mongodb_container_memory_limit: 512m
-- name: SERVER - Download sources
-  git:
-    dest: /home/ssps/db
-    repo: ssh://git@github.com/danbulant/ujep-db-api
-    depth: 1
-  notify: restart server
+- name: MongoDB server
+  include_role:
+    name: matic-insurance.mongodb_container
+  vars:
+    tags: ['database']
+    mongodb_container_name: 'mongodb'
+    mongodb_port: 27017
+    mongodb_auth: true
+    mongodb_db: databaze
+    mongodb_user: dbuzivatel
+    mongodb_password: "{{ MONGODB_PASSWORD }}"
+    mongodb_docker_image: mongo
+    mongodb_docker_image_tag: 5.0.9
+    mongodb_install_cli: false
+    mongodb_container_memory_limit: 512m
 - name: CLIENT - Download sources
+  become: false
   git:
     dest: /home/ssps/web
     repo: ssh://git@github.com/UJEP-ssps/ujep
     depth: 1
-  notify: restart client
+  notify: restart service

@@ -1,23 +1,47 @@
 ---
-- name: restart server
-  tasks:
-    - name: Build docker image
-      docker_image:
-        path: /home/ssps/db
-        name: api
-        tag: latest
-    - name: Start docker container
-      docker_container:
-        name: api
-        image: api
-        state: restarted
-      become: true
-- name: restart client
-  tasks:
-    - name: update dependencies
-      community.general.npm:
-        path: /home/ssps/web
-    - name: build the client
-      command:
-        cmd: npx vue-cli-service build
-        chdir: /home/ssps/web
+# Restart server
+- name: Stop and remove docker container
+  listen: restart service
+  docker_container:
+    name: api
+    image: api
+    state: absent
+  become: true
+- name: Build docker image
+  listen: restart service
+  docker_image:
+    build:
+      path: /home/ssps/web/server
+      rm: false
+    source: build
+    name: api
+    tag: latest
+- name: Start docker container
+  listen: restart service
+  docker_container:
+    name: api
+    image: api
+    state: started
+    network_mode: host
+    # published_ports:
+    #   - 3001:3001
+    env:
+      PRIVATE_RSA_KEY: "{{PRIVATE_RSA_KEY}}"
+      PUBLIC_RSA_KEY: "{{PUBLIC_RSA_KEY}}"
+      MONGODB: "{{MONGODB}}"
+      MONGODB_PASSWORD: "{{MONGODB_PASSWORD}}"
+  become: true
+
+# Restart client
+- name: update dependencies
+  listen: restart service
+  become: false
+  community.general.npm:
+    path: /home/ssps/web/client
+    ci: yes
+- name: build the client
+  listen: restart service
+  become: false
+  command:
+    cmd: npx vue-cli-service build
+    chdir: /home/ssps/web/client
