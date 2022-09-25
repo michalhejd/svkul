@@ -4,6 +4,7 @@
 		padding-top: 20px;
 		.confirmPopup {
 			background-color: white;
+			width: 500px;
 			padding: 30px;
 			border-radius: 20px;
 			position: absolute;
@@ -11,6 +12,24 @@
 			left: 50%;
 			transform: translate(-50%, -50%);
 			z-index: 100000;
+			display: flex;
+			flex-direction: column;
+			button {
+				width: 100%;
+				padding: 10px;
+				border: none;
+				border-radius: 5px;
+				background-color: rgb(72, 155, 194);
+				color: white;
+				font-size: 16px;
+				margin-top: 10px;
+				cursor: pointer;
+				transition: 0.2s;
+				&:hover {
+					background-color: rgb(104, 104, 104);
+				}
+				box-shadow: 3px 3px 5px 0px rgb(206, 206, 206);
+			}
 		}
 		.to-center {
 			width: 100%;
@@ -184,12 +203,14 @@
 			}
 		}
 	}
-	@media only screen and (max-width: 600px){
-		.aidsmanage .addAidPopup{
+	@media only screen and (max-width: 600px) {
+		.aidsmanage .addAidPopup {
 			width: 85%;
-			.addAidPopup-content .aids-inputs{
+			.addAidPopup-content .aids-inputs {
 				gap: 5px;
-				input, select, textarea{
+				input,
+				select,
+				textarea {
 					padding: 3px;
 				}
 			}
@@ -316,13 +337,9 @@
 			@click="closeAddPopup(), closeDeletePopup()"
 		></div>
 		<div class="top-bar">
-			<div class="searchAid" >
+			<div class="searchAid">
 				<div class="searchAid-input">
-					<input
-						type="text"
-						v-model="searchAid"
-						placeholder="Hledat pomůcku"
-					/>
+					<input type="text" v-model="searchAid" placeholder="Hledat pomůcku" />
 				</div>
 			</div>
 			<div class="addAid">
@@ -374,7 +391,7 @@
 							this.$store.dispatch("getProducts", obj);
 						}
 					}
-					if(newSearch.length == 0){
+					if (newSearch.length == 0) {
 						this.$store.dispatch("getProducts");
 					}
 				}, 1000);
@@ -416,6 +433,9 @@
 			},
 		},
 		methods: {
+			convertToBase64(){
+				
+			},
 			deleteProduct() {
 				axios
 					.delete(`pomucky/${this.popupProduct._id}`)
@@ -433,6 +453,7 @@
 					});
 			},
 			showDeletePopup(product) {
+				console.log(product);
 				this.popupProduct = product;
 				this.popupDeleteBox = true;
 				this.shadow = true;

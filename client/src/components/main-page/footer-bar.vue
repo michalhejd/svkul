@@ -67,16 +67,16 @@
 			</div>
 			<div class="static">
 				<a href="https://european-union.europa.eu/index_cs" target="_blank">
-					<img src="@/assets/logo-eu/EN_RO_B_C.jpg" alt="" />
+					<img src="/gfx/logo-eu/EN_RO_B_C.jpg" alt="" />
 				</a>
 				<a href="https://www.msmt.cz/" target="_blank">
-					<img src="@/assets/logo-msmt/MSMT_logo_bez_textu_RGB.jpg" alt="" />
+					<img src="/gfx/logo-msmt/MSMT_logo_bez_textu_RGB.jpg" alt="" />
 				</a>
 				<a href="https://www.kr-ustecky.cz/" target="_blank">
-					<img class="smaller" src="@/assets/logo-uk/logo text A1.jpg" alt="" />
+					<img class="smaller" src="/gfx/logo-uk/logo text A1.jpg" alt="" />
 				</a>
 				<a href="https://www.svkul.cz/" target="_blank">
-					<img src="@/assets/logo-svkul/svkul_rgb.jpg" alt="" />
+					<img src="/gfx/logo-svkul/svkul_rgb.jpg" alt="" />
 				</a>
 			</div>
 		</div>

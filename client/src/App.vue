@@ -27,7 +27,7 @@
 		-moz-user-select: none; /* Old versions of Firefox */
 		-ms-user-select: none; /* Internet Explorer/Edge */
 		user-select: none; /* Non-prefixed version, currently
-													                                  supported by Chrome, Edge, Opera and Firefox */
+														                                  supported by Chrome, Edge, Opera and Firefox */
 	}
 	:root {
 		--base-color: #c4ecf4;
@@ -38,7 +38,7 @@
 		font-family: "Poppins", sans-serif;
 		font-weight: 500;
 	}
-	body.active{
+	body.active {
 		overflow: hidden;
 	}
 	::-moz-selection {
@@ -55,97 +55,21 @@
 		position: fixed;
 		height: 100vh;
 		z-index: 100;
-		nav.active {
+		.admin-menu__wrap.active{
 			left: 0;
+			transition: 0.3s all ease;
 		}
-		nav {
-			display: flex;
-			flex-direction: column;
-			gap: 5px;
-			width: 250px;
-			min-height: 100%;
-			padding: 10px;
-			padding-top: 75px;
+		.admin-menu__wrap{
 			position: absolute;
 			left: -270px;
-			background-color: var(--base-color);
+			width: 270px;
 			transition: 0.3s all ease;
-			> a {
-				padding: 10px;
-				display: flex;
-				flex-direction: column;
-				gap: 5px;
-				text-decoration: none;
-				color: rgb(32, 31, 46);
-				font-family: "Poppins", sans-serif;
-				font-weight: 600;
-				font-size: 18px;
-				border-radius: 10px;
-				&:hover {
-					color: #343455;
-					background: #dbeef1;
-				}
-				a:hover {
-					color: #343455;
-					background: #dbeef1;
-				}
-				.myacc {
-					.svg-inline--fa.fa-angle-down.active {
-						transform: rotate(180deg);
-					}
-					.dropdown {
-						display: flex;
-						flex-direction: column;
-						gap: 7px;
-						a {
-							padding: 5px;
-							text-decoration: none;
-							color: rgb(32, 31, 46);
-							font-weight: 600;
-							&:hover {
-								color: #343455;
-							}
-						}
-						&:hover {
-							color: #343455;
-							background: #dbeef1;
-						}
-					}
-				}
-			}
-			> .router-link-active {
-				color: #343455;
-				background: #dbeef1;
-			}
-			> div {
-				padding: 10px;
-				display: flex;
-				flex-direction: column;
-				gap: 5px;
-				text-decoration: none;
-				color: rgb(32, 31, 46);
-				font-family: "Poppins", sans-serif;
-				font-weight: 600;
-				font-size: 18px;
-				border-radius: 10px;
-				&:hover {
-					color: #343455;
-					background: #dbeef1;
-				}
-				& .router-link-active > a {
-					display: flex;
-					align-items: center;
-					gap: 5px;
-					text-decoration: none;
-					color: rgb(32, 31, 46);
-				}
-				&:hover > a {
-					color: #343455;
-					background: #dbeef1;
-				}
-			}
-			.logout {
-				cursor: pointer;
+			height: 100%;
+			min-height: 100%;
+			nav{
+				padding-top: 75px;
+				height: 100%;
+				min-height: 100%;
 			}
 		}
 	}
@@ -198,7 +122,8 @@
 	}
 </style>
 <template>
-	<div id="app" :class="{active: this.$store.state.mobileNav}">
+	<div id="app" :class="{ active: this.$store.state.mobileNav }">
+		<loader/>
 		<mobileNav />
 		<div
 			class="shadow"
@@ -212,7 +137,7 @@
 			v-if="this.$store.state.logged && this.$store.state.user"
 			:style="{ zIndex: mobileNav ? 100 : 1003 }"
 		>
-			<nav :class="{ active: adminNav }">
+			<!--<nav :class="{ active: adminNav }">
 				<router-link to="/admin/mujucet">
 					<div class="myacc">
 						<div class="route" @click="dropdown = !dropdown">
@@ -232,7 +157,10 @@
 				<router-link to="/admin/spravaakci">Správa akcí</router-link>
 				<router-link to="/admin/spravamista">Správa míst</router-link>
 				<div class="logout" @click="logout()">Odhlásit se</div>
-			</nav>
+			</nav>-->
+			<div class="admin-menu__wrap" :class="{ active: adminNav }">
+				<admin-menu />
+			</div>
 		</div>
 		<div
 			class="adminButton__wrap"
@@ -254,10 +182,14 @@
 	import axios from "axios";
 	import navigation from "./components/nav.vue";
 	import mobileNav from "./components/mobile-nav.vue";
+	import adminMenu from "@/components/admin/admin-menu.vue";
+	import loader from "@/components/loader.vue";
 	export default {
 		components: {
 			navigation,
 			mobileNav,
+			adminMenu,
+			loader
 		},
 		data() {
 			return {
@@ -321,13 +253,10 @@
 				axios
 					.delete("/token")
 					.then((response) => {
-						
 						this.$store.commit("SET_LOGGED", false);
 						this.$store.commit("SET_USER", undefined);
 					})
-					.catch((error) => {
-						
-					});
+					.catch((error) => {});
 			},
 		},
 	};

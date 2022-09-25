@@ -74,20 +74,20 @@
 	<div class="disadv-routes">
 		<div class="container">
 			<router-link to="/databaze/B">
-				<img src="@/assets/disadv-routes/mentalni-postizeni.jpg" alt="" />
+				<img src="/gfx/disadv-routes/mentalni-postizeni.jpg" alt="" />
 				<div class="text">
 					<p>Mentální znevýhodnění</p>
 				</div>
 			</router-link>
 			<router-link to="/databaze/K">
-				<img src="@/assets/disadv-routes/pomucky-pro-nadane.jpg" alt="" />
+				<img src="/gfx/disadv-routes/pomucky-pro-nadane.jpg" alt="" />
 				<div class="text">
 					<p>Pomůcky pro nadané</p>
 				</div>
 			</router-link>
 			<router-link to="/databaze/E">
 				<img
-					src="@/assets/disadv-routes/postizeni-autistickeho-spektra.jpg"
+					src="/gfx/disadv-routes/postizeni-autistickeho-spektra.jpg"
 					alt=""
 				/>
 				<div class="text">
@@ -96,7 +96,7 @@
 			</router-link>
 			<router-link to="/databaze/A">
 				<img
-					src="@/assets/disadv-routes/postizeni-komunikacnich-schopnosti.jpg"
+					src="/gfx/disadv-routes/postizeni-komunikacnich-schopnosti.jpg"
 					alt=""
 				/>
 				<div class="text">
@@ -104,20 +104,20 @@
 				</div>
 			</router-link>
 			<router-link to="/databaze/C">
-				<img src="@/assets/disadv-routes/sluchove-postizeni.jpg" alt="" />
+				<img src="/gfx/disadv-routes/sluchove-postizeni.jpg" alt="" />
 				<div class="text">
 					<p>Sluchové znevýhodnění</p>
 				</div>
 			</router-link>
 			<router-link to="/databaze/H">
-				<img src="@/assets/disadv-routes/socialni-znevyhodneni.jpg" alt="" />
+				<img src="/gfx/disadv-routes/socialni-znevyhodneni.jpg" alt="" />
 				<div class="text">
 					<p>Sociální znevýhodnění</p>
 				</div>
 			</router-link>
 			<router-link to="/databaze/F">
 				<img
-					src="@/assets/disadv-routes/specificke-poruchy-chovani.jpg"
+					src="/gfx/disadv-routes/specificke-poruchy-chovani.jpg"
 					alt=""
 				/>
 				<div class="text">
@@ -125,19 +125,19 @@
 				</div>
 			</router-link>
 			<router-link to="/databaze/G">
-				<img src="@/assets/disadv-routes/specificke-poruchy-uceni.jpg" alt="" />
+				<img src="/gfx/disadv-routes/specificke-poruchy-uceni.jpg" alt="" />
 				<div class="text">
 					<p>Specifické poruchy učení</p>
 				</div>
 			</router-link>
 			<router-link to="/databaze/D">
-				<img src="@/assets/disadv-routes/telesne-postizeni.jpg" alt="" />
+				<img src="/gfx/disadv-routes/telesne-postizeni.jpg" alt="" />
 				<div class="text">
 					<p>Tělesné znevýhodnění</p>
 				</div>
 			</router-link>
 			<router-link to="/databaze/I">
-				<img src="@/assets/disadv-routes/zrakove-postizeni.jpg" alt="" />
+				<img src="/gfx/disadv-routes/zrakove-postizeni.jpg" alt="" />
 				<div class="text">
 					<p>Zrakové znevýhodnění</p>
 				</div>

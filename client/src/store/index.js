@@ -18,8 +18,7 @@ export default new Vuex.Store({
   state: {
     products: undefined,
     product: undefined,
-    productsLoading: true,
-    productLoading: true,
+    loading: false,
     logged: false,
     user: undefined,
     mobileNav: false,
@@ -32,12 +31,6 @@ export default new Vuex.Store({
     SET_PRODUCT(state, product) {
       state.product = product
     },
-    PRODUCT_LOADING(state, productLoading) {
-      state.productLoading = productLoading;
-    },
-    PRODUCTS_LOADING(state, productsLoading) {
-      state.productsLoading = productsLoading;
-    },
     SET_LOGGED(state, logged) {
       state.logged = logged;
     },
@@ -49,11 +42,14 @@ export default new Vuex.Store({
     },
     SET_SEARCH_OPTIONS(state, searchOptions) {
       state.searchOptions = searchOptions;
+    },
+    SET_LOADING(state, loading) {
+      state.loading = loading;
     }
   },
   actions: {
     async getProducts({ commit }, obj) {
-      commit('PRODUCT_LOADING', true);
+      commit('SET_LOADING', true)
       let key = '';
       let parameters = '';
       if (obj) {
@@ -75,7 +71,7 @@ export default new Vuex.Store({
             commit('SET_PRODUCTS', undefined)
           }
           setTimeout(() => {
-            commit('PRODUCTS_LOADING', false);
+            commit('SET_LOADING', false);
           }, 300);
         })
         axios.get('pomucky/searchOptions')
@@ -87,22 +83,24 @@ export default new Vuex.Store({
         })
     },
     async getProduct({ commit }, id) {
-      commit('PRODUCT_LOADING', true);
+      commit('SET_LOADING', true)
       commit('SET_PRODUCT', undefined);
       await axios.get(`/pomucky/${id}`)
         .then(response => {
           commit('SET_PRODUCT', response.data)
           if (response.data === '' || response.data.length === 0) {
-            commit('PRODUCT_LOADING', false);
+            commit('SET_LOADING', false);
             router.push({ name: 'home' });
           }
           else {
 
-            setTimeout(() => { commit('PRODUCT_LOADING', false) }, 300);
+            setTimeout(() => { 
+              commit('SET_LOADING', false);
+             }, 300);
           }
         }, error => {
           router.push({ name: 'notFound', params: { key: id } });
-          setTimeout(() => { commit('PRODUCT_LOADING', false) }, 300);
+          setTimeout(() => { commit('SET_LOADING', false) }, 300);
         })
     },
   },

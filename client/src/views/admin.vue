@@ -39,93 +39,6 @@
 				flex: 1 1 auto;
 				max-width: 100%;
 			}
-			nav {
-				display: flex;
-				flex-direction: column;
-				gap: 5px;
-				width: 250px;
-				min-height: 100%;
-				padding: 10px;
-				background-color: var(--base-color);
-				transition: 0.3s all ease;
-				> a {
-					padding: 10px;
-					display: flex;
-					flex-direction: column;
-					gap: 5px;
-					text-decoration: none;
-					color: rgb(32, 31, 46);
-					font-family: "Poppins", sans-serif;
-					font-weight: 600;
-					font-size: 18px;
-					border-radius: 10px;
-					&:hover {
-						color: #343455;
-						background: #dbeef1;
-					}
-					a:hover {
-						color: #343455;
-						background: #dbeef1;
-					}
-					.myacc {
-						.svg-inline--fa.fa-angle-down.active {
-							transform: rotate(180deg);
-						}
-						.dropdown {
-							display: flex;
-							flex-direction: column;
-							gap: 7px;
-							a {
-								padding: 5px;
-								text-decoration: none;
-								color: rgb(32, 31, 46);
-								font-weight: 600;
-								&:hover {
-									color: #343455;
-								}
-							}
-							&:hover {
-								color: #343455;
-								background: #dbeef1;
-							}
-						}
-					}
-				}
-				> .router-link-active {
-					color: #343455;
-					background: #dbeef1;
-				}
-				> div {
-					padding: 10px;
-					display: flex;
-					flex-direction: column;
-					gap: 5px;
-					text-decoration: none;
-					color: rgb(32, 31, 46);
-					font-family: "Poppins", sans-serif;
-					font-weight: 600;
-					font-size: 18px;
-					border-radius: 10px;
-					&:hover {
-						color: #343455;
-						background: #dbeef1;
-					}
-					& .router-link-active > a {
-						display: flex;
-						align-items: center;
-						gap: 5px;
-						text-decoration: none;
-						color: rgb(32, 31, 46);
-					}
-					&:hover > a {
-						color: #343455;
-						background: #dbeef1;
-					}
-				}
-				.logout {
-					cursor: pointer;
-				}
-			}
 		}
 	}
 	@media only screen and (max-width: 850px) {
@@ -156,27 +69,7 @@
 			</form>
 		</div>
 		<div class="admin-menu" v-else>
-			<nav>
-				<router-link to="/admin/mujucet">
-					<div class="myacc">
-						<div class="route" @click="dropdown = !dropdown">
-							Můj účet&nbsp;<font-awesome-icon
-								:class="{ active: dropdown }"
-								icon="fa-solid fa-angle-down"
-							/>
-						</div>
-						<div class="dropdown" v-show="dropdown">
-							<router-link to="">Upravit</router-link>
-							<router-link to="/admin/mujucet/changePassword">Změnit heslo</router-link>
-						</div>
-					</div>
-				</router-link>
-				<router-link to="/admin/spravauctu">Správa účtů</router-link>
-				<router-link to="/admin/spravapomucek">Správa pomůcek</router-link>
-				<router-link to="/admin/spravaakci">Správa akcí</router-link>
-				<router-link to="/admin/spravamista">Správa míst</router-link>
-				<div class="logout" @click="logout()">Odhlásit se</div>
-			</nav>
+			<adminMenu/>
 			<div class="main">
 				<router-view></router-view>
 			</div>
@@ -185,6 +78,7 @@
 </template>
 <script>
 	import axios from "axios";
+	import adminMenu from '@/components/admin/admin-menu.vue'
 	export default {
 		data() {
 			return {
@@ -192,6 +86,9 @@
 				password: "",
 				dropdown: false,
 			};
+		},
+		components: {
+			adminMenu
 		},
 		watch: {
 			$route(to, from) {
@@ -234,7 +131,11 @@
 						
 						this.$store.commit("SET_LOGGED", true);
 						this.$store.commit("SET_USER", response.data);
+						if(this.$store.state.user.forceChangePassword == true){
+							this.$router.push("/admin/mujucet/changePassword").catch(() => {});
+						}else{
 						this.$router.push("/admin/mujucet").catch(() => {});
+						}
 					})
 					.catch((error) => {
 						
@@ -257,6 +158,9 @@
 			logged() {
 				return this.$store.state.logged;
 			},
+			user(){
+				return this.$store.state.user;
+			}
 		},
 	};
 </script>

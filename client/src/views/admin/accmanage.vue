@@ -1,5 +1,6 @@
 <style lang="scss" scoped>
 	.accmanage {
+		padding-top: 20px;
 		.to-center {
 			width: 100%;
 			height: calc(100vh - 65px);
@@ -37,19 +38,10 @@
 		<!--<div class="to-center" v-if="loading == true">
 			<span class="loader"></span>
 		</div>-->
-		<div class="users" v-if="users != undefined && loading != true">
-			<template v-for="user in users">
-				<div class="user" :key="user._id">
-					<p>{{ user.name }}</p>
-					<p>role: {{user.role}}</p>
-				</div>
-			</template>
-		</div>
 	</div>
 </template>
 <script>
 	import axios from "axios";
-
 	export default {
 		data() {
 			return {
@@ -57,18 +49,19 @@
                 loading: false
 			};
 		},
+		components: {
+		},
 		mounted() {
-            this.loading = true;
+            this.$store.commit('SET_LOADING', true)
 			axios.get("users").then((response) => {
 				this.users = response.data;
                 setTimeout(() => {
-                    this.loading = false;
+            this.$store.commit('SET_LOADING', false)
                 }, 100);
 			})
             .catch((error) => {
-                
                 setTimeout(() => {
-                    this.loading = false;
+            this.$store.commit('SET_LOADING', false)
                 }, 100);
             });
 		},
