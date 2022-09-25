@@ -325,6 +325,7 @@
 							multiple="multiple"
 							accept="image/jpeg, image/png, image/jpg"
 							disabled
+							ref="images"
 						/>
 					</div>
 					<button @click="addNewAid()">Přidat</button>
@@ -433,8 +434,27 @@
 			},
 		},
 		methods: {
-			convertToBase64(){
-				
+			//convert images to base64 and post it as json
+			//json : {alt: "alt", mimetype: "mimetype", data: "base64"}
+			convertImagesToBase64() {
+				let images = this.$refs.images.files;
+				let imagesBase64 = [];
+				for (let i = 0; i < images.length; i++) {
+					let reader = new FileReader();
+					reader.readAsDataURL(images[i]);
+					reader.onload = () => {
+						let image = {
+							alt: images[i].name,
+							mimetype: images[i].type,
+							data: reader.result,
+						};
+						imagesBase64.push(image);
+						if (imagesBase64.length == images.length) {
+							this.newProduct.images = imagesBase64;
+							this.postNewProduct();
+						}
+					};
+				}
 			},
 			deleteProduct() {
 				axios

@@ -70,7 +70,7 @@
 
 </style>
 <template>
-  <div class="news" v-if="productsLoading == false">
+  <div class="news" v-if="loading == false">
     <div class="newAids" v-if="products != undefined">
       <h2>Nejnovější pomůcky</h2>
         <div class="container" >
@@ -103,8 +103,8 @@ export default {
     products() {
       return this.$store.state.products;
     },
-    productsLoading() {
-      return this.$store.state.productsLoading;
+    loading() {
+      return this.$store.state.loading;
     },
   },
   created() {
