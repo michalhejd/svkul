@@ -51,10 +51,10 @@
 			</div>
 		</div>
 		<div class="product-icons">
-			<font-awesome-icon
+			<!--<font-awesome-icon
 				icon="fa-solid fa-pen-to-square"
 				@click="$emit('edit', product)"
-			/>
+			/>-->
 			<font-awesome-icon
 				icon="fa-solid fa-xmark"
 				@click="$emit('delete', user ? user : product)"

@@ -23,6 +23,7 @@
       color: white;
       >div{
       display: flex;
+      gap: 5px;
       }
       input {
         font-family: "Open Sans", sans-serif;

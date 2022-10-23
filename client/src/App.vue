@@ -123,7 +123,7 @@
 </style>
 <template>
 	<div id="app" :class="{ active: this.$store.state.mobileNav }">
-		<loader/>
+		<loader v-if="this.$route.path != '/admin/spravapomucek'"/>
 		<mobileNav />
 		<div
 			class="shadow"

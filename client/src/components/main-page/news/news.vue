@@ -79,15 +79,6 @@
           </template>
       </div>
     </div>
-    <div class="events">
-      <h2>Vzdělávací akce</h2>
-      <div class="container">
-        <new-event />
-        <new-event />
-        <new-event />
-        <new-event />
-      </div>
-    </div>
   </div>
 </template>
 <script>

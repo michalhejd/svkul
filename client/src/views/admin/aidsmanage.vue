@@ -161,10 +161,11 @@
 						border: 1px solid rgb(88, 88, 88);
 						border-radius: 5px;
 						outline: none;
+						font-size: 14px;
 					}
 
 					textarea {
-						font-family: "Arial";
+						font-family: "Poppins", sans-serif;
 						width: 100%;
 						padding: 5px;
 						box-sizing: border-box;
@@ -172,6 +173,7 @@
 						border-radius: 5px;
 						outline: none;
 						resize: none;
+						font-size: 14px;
 					}
 					input:focus,
 					select:focus,
@@ -179,7 +181,7 @@
 						outline: solid 3px rgb(104, 104, 104);
 						transition: 0.05s;
 					}
-					button {
+					.addButton {
 						width: 100%;
 						padding: 10px;
 						border: none;
@@ -189,15 +191,115 @@
 						font-size: 16px;
 						cursor: pointer;
 						transition: 0.2s;
+						.addLoader {
+							width: 14px;
+							height: 14px;
+							border: 3px solid #fff;
+							border-bottom-color: transparent;
+							border-radius: 50%;
+							display: inline-block;
+							box-sizing: border-box;
+							animation: rotation 1s linear infinite;
+						}
+
+						@keyframes rotation {
+							0% {
+								transform: rotate(0deg);
+							}
+							100% {
+								transform: rotate(360deg);
+							}
+						}
 						&:hover {
 							background-color: rgb(104, 104, 104);
 						}
 						box-shadow: 3px 3px 5px 0px rgb(206, 206, 206);
 					}
+					.addButton:disabled {
+						background-color: rgb(104, 104, 104);
+						box-shadow: none;
+					}
 					.details {
 						display: flex;
 						flex-direction: column;
 						gap: 7px;
+					}
+				}
+			}
+			.addImages {
+				.top-content {
+					display: flex;
+					justify-content: space-between;
+					align-items: center;
+					.svg-inline--fa.fa-xmark {
+						font-size: 18px;
+						cursor: pointer;
+					}
+				}
+				.dropzone {
+					width: 100%;
+					height: 200px;
+					border: 2px dashed rgb(88, 88, 88);
+					border-radius: 5px;
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					cursor: pointer;
+					transition: 0.2s;
+					&:hover {
+						border: 2px dashed rgb(104, 104, 104);
+					}
+					&.active {
+						border: 2px dashed rgb(104, 104, 104);
+					}
+					.dropzone__input {
+						display: none;
+					}
+					.dropzone__preview {
+						width: 100%;
+						height: 100%;
+						display: flex;
+						flex-wrap: wrap;
+						gap: 5px;
+						.dropzone__preview__item {
+							width: 100px;
+							height: 100px;
+							border-radius: 5px;
+							background-color: rgb(88, 88, 88);
+							position: relative;
+							&:hover {
+								.dropzone__preview__item__delete {
+									display: flex;
+								}
+							}
+							.dropzone__preview__item__delete {
+								display: none;
+								position: absolute;
+								top: 0;
+								right: 0;
+								width: 20px;
+								height: 20px;
+								border-radius: 50%;
+								background-color: rgb(104, 104, 104);
+								justify-content: center;
+								align-items: center;
+								cursor: pointer;
+								transition: 0.2s;
+								&:hover {
+									background-color: rgb(88, 88, 88);
+								}
+								.svg-inline--fa.fa-times {
+									font-size: 12px;
+									color: white;
+								}
+							}
+							.dropzone__preview__item__image {
+								width: 100%;
+								height: 100%;
+								object-fit: cover;
+								border-radius: 5px;
+							}
+						}
 					}
 				}
 			}
@@ -240,7 +342,7 @@
 						@click="closeAddPopup()"
 					/>
 				</div>
-				<div class="aids-inputs">
+				<div class="aids-inputs" data-app>
 					<input
 						type="text"
 						v-model="newProduct.name"
@@ -252,45 +354,6 @@
 						placeholder="Signatura"
 					/>
 					<input type="text" v-model="newProduct.ISXN" placeholder="ISXN" />
-					<select v-model="newProduct.details.disadvType">
-						<option value="" selected disabled>Vyberte typ pomůcky</option>
-						<option value="A">Postižení komunikačních schopností</option>
-						<option value="B">Mentální postižení</option>
-						<option value="C">Sluchové postižení</option>
-						<option value="D">Tělesné postižení</option>
-						<option value="E">Postižení autistického spektra</option>
-						<option value="F">Specifické poruchy chování</option>
-						<option value="G">Specifické poruchy učení</option>
-						<option value="H">Sociální znevýhodnění</option>
-						<option value="I">Zrakové postižení</option>
-						<option value="K">Pomůcky pro nadané</option>
-					</select>
-					<select v-model="newProduct.details.disadvDegree">
-						<option
-							value=""
-							disabled
-							:selected="(option = 'Vyberte stupeň postižení')"
-						>
-							Vyberte stupeň postižení
-						</option>
-						<option value="I" selected="selected">I.</option>
-						<option value="II">II.</option>
-						<option value="III">III.</option>
-						<option value="IV">IV.</option>
-						<option value="V">V.</option>
-					</select>
-					<select v-model="newProduct.details.disadvTool">
-						<option value="" selected disabled>Vyberte typ pomůcky</option>
-						<option value="1">Kompenzační pomůcky</option>
-						<option value="2">Speciální učebnice a pomůcky</option>
-						<option value="3">Software</option>
-						<option value="4">IT technika</option>
-					</select>
-					<input
-						type="text"
-						v-model="newProduct.mainImage"
-						placeholder="Hlavní obrázek"
-					/>
 					<div class="details">
 						<textarea
 							v-model="newProduct.details.description"
@@ -320,15 +383,45 @@
 							v-model="newProduct.details.mistoVydani"
 							placeholder="Místo vydání"
 						/>
-						<input
-							type="file"
-							multiple="multiple"
-							accept="image/jpeg, image/png, image/jpg"
-							disabled
-							ref="images"
-						/>
 					</div>
-					<button @click="addNewAid()">Přidat</button>
+
+					<v-autocomplete
+						clearable
+						deletable-chips
+						dense
+						multiple
+						small-chips
+						outlined
+						:items="items"
+						v-model="newProduct.categories"
+						label="kategorie"
+					></v-autocomplete>
+
+					<!-- drag n drop -->
+					<div
+						class="dropzone"
+						@dragover.prevent
+						@drop.prevent="onDrop($event)"
+					>
+						<v-file-input
+							dense
+							multiple
+							label="Přidat obrázky"
+							append
+							outlined
+							v-model="images"
+							@change="log()"
+						></v-file-input>
+					</div>
+					<button
+						@click="addNewAid()"
+						class="addButton"
+						:disabled="addLoading"
+						:class="{ acitve: addLoading == true }"
+					>
+						<span class="add" v-show="addLoading == false">Přidat</span
+						><span class="addLoader" v-show="addLoading == true"></span>
+					</button>
 				</div>
 			</div>
 		</div>
@@ -378,6 +471,52 @@
 		components: {
 			aidsManageItemBox,
 		},
+		data() {
+			return {
+				searchAid: "",
+				popupDeleteBox: false,
+				popupAddBox: false,
+				shadow: false,
+				addLoading: false,
+				images: [],
+				checked: [],
+				items: [
+					"Postižení komunikačních schopností",
+					"Mentální postižení",
+					"Sluchové postižení",
+					"Tělesné postižení",
+					"Postižení autistického spektra",
+					"Specifické poruchy chování",
+					"Specifické poruchy učení",
+					"Sociální znevýhodnění",
+					"Zrakové postižení",
+					"Pomůcky pro nadané",
+					"I",
+					"II",
+					"III",
+					"IV",
+					"V",
+					"Kompenzační pomůcky",
+					"Výukové pomůcky",
+					"Komunikační pomůcky",
+					"Ostatní",
+				],
+				newProduct: {
+					name: "",
+					signatura: "",
+					ISXN: "",
+					categories: [],
+					details: {
+						description: "",
+						company: "",
+						author: "",
+						year: "",
+						mistoVydani: "",
+					},
+				},
+				popupProduct: undefined,
+			};
+		},
 		watch: {
 			async searchAid(newSearch, oldSearch) {
 				setTimeout(() => {
@@ -398,33 +537,6 @@
 				}, 1000);
 			},
 		},
-		data() {
-			return {
-				searchAid: "",
-				popupDeleteBox: false,
-				popupAddBox: false,
-				shadow: false,
-				newProduct: {
-					name: "",
-					signatura: "",
-					ISXN: "",
-					mainImage: "",
-					categories: [],
-					images: [],
-					details: {
-						description: "",
-						company: "",
-						author: "",
-						year: "",
-						mistoVydani: "",
-						disadvType: "",
-						disadvDegree: "",
-						disadvTool: "",
-					},
-				},
-				popupProduct: undefined,
-			};
-		},
 		beforeMount() {
 			this.$store.dispatch("getProducts");
 		},
@@ -434,27 +546,14 @@
 			},
 		},
 		methods: {
-			//convert images to base64 and post it as json
-			//json : {alt: "alt", mimetype: "mimetype", data: "base64"}
-			convertImagesToBase64() {
-				let images = this.$refs.images.files;
-				let imagesBase64 = [];
-				for (let i = 0; i < images.length; i++) {
-					let reader = new FileReader();
-					reader.readAsDataURL(images[i]);
-					reader.onload = () => {
-						let image = {
-							alt: images[i].name,
-							mimetype: images[i].type,
-							data: reader.result,
-						};
-						imagesBase64.push(image);
-						if (imagesBase64.length == images.length) {
-							this.newProduct.images = imagesBase64;
-							this.postNewProduct();
-						}
-					};
+			onDrop(e) {
+				for (let i = 0; i < e.dataTransfer.files.length; i++) {
+					this.images.push(e.dataTransfer.files[i]);
 				}
+				this.log();
+			},
+			log() {
+				console.log(this.images);
 			},
 			deleteProduct() {
 				axios
@@ -485,57 +584,100 @@
 			showAddPopup() {
 				this.popupAddBox = true;
 				this.shadow = true;
+				this.addLoading = false;
 			},
 			closeAddPopup() {
 				this.popupAddBox = false;
 				this.shadow = false;
+				this.addLoading = false;
 			},
 			addNewAid() {
+				this.addLoading = true;
 				axios
 					.post("pomucky", {
 						name: this.newProduct.name,
 						signatura: this.newProduct.signatura,
 						ISXN: this.newProduct.ISXN,
-						categories: [],
-						mainImage: this.newProduct.mainImage,
-						images: [],
+						categories: this.newProduct.categories,
 						details: {
-							author: this.newProduct.details.author,
-							year: this.newProduct.details.year,
+							description: this.newProduct.details.description,
 							company: this.newProduct.details.company,
+							author: 		this.newProduct.details.author,
+							year: this.newProduct.details.year,
 							mistoVydani: this.newProduct.details.mistoVydani,
-							disadvType: this.newProduct.details.disadvType,
-							disadvDegree: this.newProduct.details.disadvDegree,
-							disadvTool: this.newProduct.details.disadvTool,
-							place: undefined,
 						},
 					})
 					.then((response) => {
 						if (response.status === 200) {
 							this.$store.dispatch("getProducts");
-							this.closeAddPopup();
 							this.newProduct = {
 								name: "",
 								signatura: "",
 								ISXN: "",
-								mainImage: "",
 								categories: [],
-								images: [],
 								details: {
 									description: "",
 									company: "",
 									author: "",
 									year: "",
 									mistoVydani: "",
-									disadvType: "",
-									disadvDegree: "",
-									disadvTool: "",
 								},
 							};
+							if(this.images.length > 0){
+							for (let i = 0; i < this.images.length; i++) {
+								let reader = new FileReader();
+								reader.readAsDataURL(this.images[i]);
+								reader.onload = () => {
+									//log just base64
+									console.log(reader.result);
+									console.log(reader.result.split(",")[1]);
+									console.log(reader.result.split(",")[0]);
+									console.log(
+										reader.result.split(",")[0].split(":")[1].split(";")[0]
+									);
+
+									axios
+										.put(`pomucky/${response.data._id}/images`, {
+											alt: `Obrázek pomůcky ${response.data.name}`,
+											mimetype: reader.result
+												.split(",")[0]
+												.split(":")[1]
+												.split(";")[0],
+											data: reader.result.split(",")[1],
+										})
+										.then((response) => {
+											if (response.status === 200) {
+												this.$store.dispatch("getProducts");
+												this.popupAddBox = false;
+												this.shadow = false;
+												this.addLoading = false;
+											} else {
+												alert("Obrázky se nepodařilo nahrát");
+											}
+										})
+										.catch((error) => {
+											alert("Obrázky se nepodařilo nahrát");
+										});
+									this.addLoading = false;
+									this.popupAddBox = false;
+									this.shadow = false;
+								};
+								reader.onerror = (error) => {
+									console.log("Error: ", error);
+								};
+							}
+							}
+							else{
+								this.addLoading = false;
+								this.popupAddBox = false;
+								this.shadow = false;
+							}
 						}
 					})
 					.catch((error) => {
 						console.log(error.response);
+						alert("Pomůcku se nepodařilo přidat");
+						this.addLoading = false;
 					});
 			},
 		},

@@ -117,9 +117,9 @@
 			v-if="user.forceChangePassword != true"
 			>Správa pomůcek</router-link
 		>
-		<router-link to="/admin/spravaakci" v-if="user.forceChangePassword != true"
+		<!--<router-link to="/admin/spravaakci" v-if="user.forceChangePassword != true"
 			>Správa akcí</router-link
-		>
+		>-->
 		<router-link to="/admin/spravamista" v-if="user.forceChangePassword != true"
 			>Správa míst</router-link
 		>
