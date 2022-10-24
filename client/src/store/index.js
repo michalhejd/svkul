@@ -61,11 +61,29 @@ export default new Vuex.Store({
           parameters = obj.parameters;
         }
       }
-
       await axios.get(`pomucky/search${key}`, { params: parameters })
         .then(response => {
           if (response.data.length > 0) {
             commit('SET_PRODUCTS', response.data)
+            for(let i = 0; i < response.data.length; i++) {
+              axios.get(`pomucky/${response.data[i]._id}/images`)
+                .then(res => {
+                  for(let i = 0; i < res.data.length; i++) {
+                    axios.get(`pomucky/${response.data[i]._id}/images/${res.data[i]._id}`)
+                      .then(resp => {
+                        if (resp.data.length > 0) {
+                          commit('SET_PRODUCTS', resp.data)
+                        }
+                      })
+                      .catch(error => {
+                        console.log(error)
+                      })
+                  }
+                })
+                .catch(error => {
+                  console.log(error)
+                })
+            }
           }
           else {
             commit('SET_PRODUCTS', undefined)
@@ -74,7 +92,7 @@ export default new Vuex.Store({
             commit('SET_LOADING', false);
           }, 300);
         })
-        axios.get('pomucky/searchOptions')
+        await axios.get('pomucky/searchOptions')
         .then(response => {
           commit('SET_SEARCH_OPTIONS', response.data.searchOptions)
         })

@@ -21,7 +21,7 @@
 			-moz-user-select: none; /* Old versions of Firefox */
 			-ms-user-select: none; /* Internet Explorer/Edge */
 			user-select: none; /* Non-prefixed version, currently
-		                                  supported by Chrome, Edge, Opera and Firefox */
+						                                  supported by Chrome, Edge, Opera and Firefox */
 		}
 	}
 	.mobile-nav {
@@ -30,11 +30,13 @@
 	@media only screen and (max-width: 550px) {
 		.navigation {
 			justify-content: flex-end;
-			a {
+			> a, > button {
 				display: none;
 			}
 			.mobile-nav {
 				display: flex;
+				align-items: center;
+				gap: 15px;
 				margin-right: 20px;
 				font-size: 26px;
 				cursor: pointer;
@@ -51,9 +53,22 @@
 <template>
 	<div class="navigation">
 		<router-link to="/">Domů</router-link>
-		<router-link to="/databaze" @click.native="getProducts()">Databáze pomůcek</router-link>
+		<router-link to="/databaze" @click.native="getProducts()"
+			>Databáze pomůcek</router-link
+		>
 		<router-link to="/#contacts">Kontakty</router-link>
+		<v-btn class="mx-2" fab dark small color="#dbeef1" v-if="logged">
+			<a href="https://github.com/UJEP-ssps/issues/issues" target="_blank"
+				><font-awesome-icon icon="fa-solid fa-bug"
+			/></a>
+		</v-btn>
+
 		<div class="mobile-nav" :class="{ active: mobileNav }">
+			<v-btn class="mx-2" fab dark small color="#dbeef1" v-if="logged">
+				<a href="https://github.com/UJEP-ssps/issues/issues" target="_blank"
+					><font-awesome-icon icon="fa-solid fa-bug"
+				/></a>
+			</v-btn>
 			<font-awesome-icon icon="fa-solid fa-bars" @click="toggleNav()" />
 		</div>
 	</div>
@@ -67,7 +82,7 @@
 				this.$store.commit("SET_MOBILENAV", !this.$store.state.mobileNav);
 			},
 			getProducts() {
-				if(this.$route.path === "/databaze") {
+				if (this.$route.path === "/databaze") {
 					this.$store.dispatch("getProducts");
 				}
 			},
@@ -75,6 +90,9 @@
 		computed: {
 			mobileNav() {
 				return this.$store.state.mobileNav;
+			},
+			logged() {
+				return this.$store.state.logged;
 			},
 		},
 	};

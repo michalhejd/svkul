@@ -102,15 +102,13 @@
 		}
 		.around-box {
 			padding: 0 5px;
+			.action{
+				cursor: pointer;
+			}
 			.resaultAid {
 				.resaultAid-content {
 					padding: 10px;
-					display: flex;
-					flex-direction: column;
-					gap: 10px;
-					width: 100%;
-					height: calc(100vh - 160px);
-					overflow-y: auto;
+					text-align: left;
 				}
 			}
 		}
@@ -348,11 +346,6 @@
 						v-model="newProduct.name"
 						placeholder="Název pomůcky"
 					/>
-					<input
-						type="text"
-						v-model="newProduct.signatura"
-						placeholder="Signatura"
-					/>
 					<input type="text" v-model="newProduct.ISXN" placeholder="ISXN" />
 					<div class="details">
 						<textarea
@@ -366,7 +359,7 @@
 						<input
 							type="text"
 							v-model="newProduct.details.company"
-							placeholder="Firma"
+							placeholder="Výrobce"
 						/>
 						<input
 							type="text"
@@ -376,12 +369,7 @@
 						<input
 							type="text"
 							v-model="newProduct.details.year"
-							placeholder="Rok"
-						/>
-						<input
-							type="text"
-							v-model="newProduct.details.mistoVydani"
-							placeholder="Místo vydání"
+							placeholder="Rok vydání"
 						/>
 					</div>
 
@@ -448,12 +436,49 @@
 					<h2>Výsledky hledání</h2>
 				</div>
 				<div class="resaultAid-content">
-					<template v-for="product in products">
-						<aids-manage-item-box
-							:key="product._id"
-							:product="product"
-							@delete="showDeletePopup(product)"
-						/>
+					<template>
+						<v-simple-table dense fixed-header>
+							<template v-slot:default>
+								<thead>
+									<tr>
+										<th class="text-left">Název</th>
+										<th class="text-left">ISXN</th>
+										<th class="text-left">Kategorie</th>
+										<th class="text-left">Výrobce</th>
+										<th class="text-left">Autor</th>
+										<th class="text-left">Rok vydání</th>
+										<th class="text-left">Smazat</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr v-for="product in products" :key="product._id">
+										<td>{{ product.name }}</td>
+										<td>{{ product.ISXN }}</td>
+										<td>
+											<v-chip-group column>
+												<v-chip
+													x-small
+													v-for="category in product.categories"
+													:key="category"
+													>{{ category }}</v-chip
+												>
+											</v-chip-group>
+										</td>
+										<td>{{product.details.company}}</td>
+										<td>{{ product.details.author }}</td>
+										<td>{{ product.details.year }}</td>
+										<td>
+											<div class="action">
+												<font-awesome-icon
+													icon="fa-solid fa-xmark"
+													@click="showDeletePopup(product)"
+												/>
+											</div>
+										</td>
+									</tr>
+								</tbody>
+							</template>
+						</v-simple-table>
 					</template>
 				</div>
 			</div>
@@ -481,25 +506,26 @@
 				images: [],
 				checked: [],
 				items: [
-					"Postižení komunikačních schopností",
-					"Mentální postižení",
-					"Sluchové postižení",
-					"Tělesné postižení",
-					"Postižení autistického spektra",
-					"Specifické poruchy chování",
-					"Specifické poruchy učení",
-					"Sociální znevýhodnění",
-					"Zrakové postižení",
-					"Pomůcky pro nadané",
-					"I",
-					"II",
-					"III",
-					"IV",
-					"V",
+					"A) Postižení komunikačních schopností",
+					"B) Mentální postižení",
+					"C) Sluchové postižení",
+					"D) Tělesné postižení",
+					"E) Postižení autistického spektra",
+					"F) Specifické poruchy chování",
+					"G) Specifické poruchy učení",
+					"H) Sociální znevýhodnění",
+					"I) Zrakové postižení",
+					"K) Pomůcky pro nadané",
+					"U) Univerzální pomůcky",
+					"I.",
+					"II.",
+					"III.",
+					"IV.",
+					"V.",
 					"Kompenzační pomůcky",
 					"Výukové pomůcky",
-					"Komunikační pomůcky",
-					"Ostatní",
+					"Software",
+					"Hardware",
 				],
 				newProduct: {
 					name: "",
@@ -602,7 +628,7 @@
 						details: {
 							description: this.newProduct.details.description,
 							company: this.newProduct.details.company,
-							author: 		this.newProduct.details.author,
+							author: this.newProduct.details.author,
 							year: this.newProduct.details.year,
 							mistoVydani: this.newProduct.details.mistoVydani,
 						},
@@ -623,51 +649,50 @@
 									mistoVydani: "",
 								},
 							};
-							if(this.images.length > 0){
-							for (let i = 0; i < this.images.length; i++) {
-								let reader = new FileReader();
-								reader.readAsDataURL(this.images[i]);
-								reader.onload = () => {
-									//log just base64
-									console.log(reader.result);
-									console.log(reader.result.split(",")[1]);
-									console.log(reader.result.split(",")[0]);
-									console.log(
-										reader.result.split(",")[0].split(":")[1].split(";")[0]
-									);
+							if (this.images.length > 0) {
+								for (let i = 0; i < this.images.length; i++) {
+									let reader = new FileReader();
+									reader.readAsDataURL(this.images[i]);
+									reader.onload = () => {
+										//log just base64
+										console.log(reader.result);
+										console.log(reader.result.split(",")[1]);
+										console.log(reader.result.split(",")[0]);
+										console.log(
+											reader.result.split(",")[0].split(":")[1].split(";")[0]
+										);
 
-									axios
-										.put(`pomucky/${response.data._id}/images`, {
-											alt: `Obrázek pomůcky ${response.data.name}`,
-											mimetype: reader.result
-												.split(",")[0]
-												.split(":")[1]
-												.split(";")[0],
-											data: reader.result.split(",")[1],
-										})
-										.then((response) => {
-											if (response.status === 200) {
-												this.$store.dispatch("getProducts");
-												this.popupAddBox = false;
-												this.shadow = false;
-												this.addLoading = false;
-											} else {
+										axios
+											.put(`pomucky/${response.data._id}/images`, {
+												alt: `Obrázek pomůcky ${response.data.name}`,
+												mimetype: reader.result
+													.split(",")[0]
+													.split(":")[1]
+													.split(";")[0],
+												data: reader.result.split(",")[1],
+											})
+											.then((response) => {
+												if (response.status === 200) {
+													this.$store.dispatch("getProducts");
+													this.popupAddBox = false;
+													this.shadow = false;
+													this.addLoading = false;
+												} else {
+													alert("Obrázky se nepodařilo nahrát");
+												}
+											})
+											.catch((error) => {
 												alert("Obrázky se nepodařilo nahrát");
-											}
-										})
-										.catch((error) => {
-											alert("Obrázky se nepodařilo nahrát");
-										});
-									this.addLoading = false;
-									this.popupAddBox = false;
-									this.shadow = false;
-								};
-								reader.onerror = (error) => {
-									console.log("Error: ", error);
-								};
-							}
-							}
-							else{
+											});
+										this.addLoading = false;
+										this.popupAddBox = false;
+										this.shadow = false;
+									};
+									reader.onerror = (error) => {
+										console.log("Error: ", error);
+									};
+								}
+							} else {
 								this.addLoading = false;
 								this.popupAddBox = false;
 								this.shadow = false;

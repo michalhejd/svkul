@@ -4,10 +4,12 @@
 		flex-direction: column;
 		gap: 5px;
 		width: 250px;
+		min-width: 250px;
 		min-height: 100%;
 		padding: 10px;
 		background-color: var(--base-color);
 		transition: 0.3s all ease;
+		z-index: 100;
 		> a {
 			padding: 10px;
 			display: flex;
@@ -98,9 +100,6 @@
 					/>
 				</div>
 				<div class="dropdown" v-show="dropdown">
-					<router-link to="" v-if="user.forceChangePassword != true"
-						>Upravit</router-link
-					>
 					<router-link to="/admin/mujucet/changePassword"
 						>Změnit heslo</router-link
 					>
@@ -109,7 +108,7 @@
 		</router-link>
 		<router-link
 			to="/admin/spravauctu"
-			v-if="user.forceChangePassword != true && user.role > 3"
+			v-if="user.forceChangePassword != true && user.role > 4"
 			>Správa účtů</router-link
 		>
 		<router-link
@@ -120,7 +119,7 @@
 		<!--<router-link to="/admin/spravaakci" v-if="user.forceChangePassword != true"
 			>Správa akcí</router-link
 		>-->
-		<router-link to="/admin/spravamista" v-if="user.forceChangePassword != true"
+		<router-link to="/admin/spravamista" v-if="user.forceChangePassword != true && user.role > 4"
 			>Správa míst</router-link
 		>
 		<div class="logout" @click="logout()">Odhlásit se</div>

@@ -10,7 +10,7 @@
 			flex-direction: column;
 			align-items: center;
 			gap: 10px;
-            width: 250px;
+			width: 250px;
 			input {
 				width: 100%;
 				padding: 5px;
@@ -23,7 +23,7 @@
 				transition: 0.05s;
 			}
 			button {
-                margin-top: 10px;
+				margin-top: 10px;
 				width: 80%;
 				padding: 10px;
 				border: none;
@@ -45,14 +45,19 @@
 	<div class="changePassword">
 		<div class="changePassword__box">
 			<h2>Změna hesla</h2>
-			<input type="password" v-model="oldPassword" placeholder="Staré heslo"/>
-			<input type="password" v-model="newPassword" placeholder="Nové heslo"/>
-			<input type="password" v-model="confirmNewPassword" placeholder="Znovu nové heslo"/>
-			<button>Změnit</button>
+			<input type="password" v-model="oldPassword" placeholder="Staré heslo" />
+			<input type="password" v-model="newPassword" placeholder="Nové heslo" />
+			<input
+				type="password"
+				v-model="confirmNewPassword"
+				placeholder="Znovu nové heslo"
+			/>
+			<button @click="changePassword()">Změnit</button>
 		</div>
 	</div>
 </template>
 <script>
+import axios from "axios"
 	export default {
 		data() {
 			return {
@@ -60,6 +65,39 @@
 				newPassword: "",
 				confirmNewPassword: "",
 			};
+		},
+		methods: {
+			async changePassword() {
+				if (this.newPassword === this.confirmNewPassword) {
+					await axios
+						.put("/users/@self", {
+							oldPassword: this.oldPassword,
+							newPassword: this.newPassword,
+						})
+						.then((res) => {
+							if (res.status === 200) {
+								axios.get("/users/@self")
+								.then((res) => {
+									if(res.status === 200) {
+										this.$store.commit("setUser", res.data)
+										this.$router.push("/admin")
+									}
+								})
+								.catch((err) => {
+									console.log(err)
+									alert("Nastala chyba")
+								})
+
+							}
+						})
+						.catch((err) => {
+							console.log(err);
+							alert("Špatné heslo");
+						});
+				} else {
+					alert("Hesla se neshodují");
+				}
+			},
 		},
 		mounted() {},
 		computed: {
