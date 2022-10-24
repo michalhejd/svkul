@@ -8,7 +8,7 @@
 <template>
 	<div class="main-page">
 		<mapping />
-		<news />
+		<news/>
 		<about-project />
 		<disadv-routes />
 		<contact />

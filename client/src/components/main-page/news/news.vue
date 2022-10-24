@@ -70,7 +70,7 @@
 
 </style>
 <template>
-  <div class="news" v-if="loading == false">
+  <div class="news" v-if="loading == false && products != undefined">
     <div class="newAids" v-if="products != undefined">
       <h2>Nejnovější pomůcky</h2>
         <div class="container" >
