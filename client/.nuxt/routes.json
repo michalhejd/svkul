@@ -1,0 +1,87 @@
+[
+  {
+    "path": "/admin",
+    "component": "C:\\\\Users\\\\HWP\\\\Desktop\\\\Projects\\\\Svkul - kopie\\\\pages\\\\admin.vue",
+    "chunkName": "pages/admin",
+    "children": [
+      {
+        "name": "admin",
+        "path": "",
+        "component": "C:\\\\Users\\\\HWP\\\\Desktop\\\\Projects\\\\Svkul - kopie\\\\pages\\\\admin\\\\index.vue",
+        "chunkName": "pages/admin/index",
+        "_name": "_08222cca"
+      },
+      {
+        "name": "admin-profil",
+        "path": "profil",
+        "component": "C:\\\\Users\\\\HWP\\\\Desktop\\\\Projects\\\\Svkul - kopie\\\\pages\\\\admin\\\\profil.vue",
+        "chunkName": "pages/admin/profil",
+        "_name": "_164591c3"
+      },
+      {
+        "name": "admin-spravainstanci",
+        "path": "spravainstanci",
+        "component": "C:\\\\Users\\\\HWP\\\\Desktop\\\\Projects\\\\Svkul - kopie\\\\pages\\\\admin\\\\spravainstanci.vue",
+        "chunkName": "pages/admin/spravainstanci",
+        "_name": "_28fe3d17"
+      },
+      {
+        "name": "admin-spravamist",
+        "path": "spravamist",
+        "component": "C:\\\\Users\\\\HWP\\\\Desktop\\\\Projects\\\\Svkul - kopie\\\\pages\\\\admin\\\\spravamist.vue",
+        "chunkName": "pages/admin/spravamist",
+        "_name": "_50051e7b"
+      },
+      {
+        "name": "admin-spravapomucek",
+        "path": "spravapomucek",
+        "component": "C:\\\\Users\\\\HWP\\\\Desktop\\\\Projects\\\\Svkul - kopie\\\\pages\\\\admin\\\\spravapomucek.vue",
+        "chunkName": "pages/admin/spravapomucek",
+        "_name": "_40671d74"
+      },
+      {
+        "name": "admin-spravauctu",
+        "path": "spravauctu",
+        "component": "C:\\\\Users\\\\HWP\\\\Desktop\\\\Projects\\\\Svkul - kopie\\\\pages\\\\admin\\\\spravauctu.vue",
+        "chunkName": "pages/admin/spravauctu",
+        "_name": "_536c120d"
+      },
+      {
+        "name": "admin-zmenahesla",
+        "path": "zmenahesla",
+        "component": "C:\\\\Users\\\\HWP\\\\Desktop\\\\Projects\\\\Svkul - kopie\\\\pages\\\\admin\\\\zmenahesla.vue",
+        "chunkName": "pages/admin/zmenahesla",
+        "_name": "_b4178726"
+      }
+    ],
+    "_name": "_fc27f5f2"
+  },
+  {
+    "name": "databaze",
+    "path": "/databaze",
+    "component": "C:\\\\Users\\\\HWP\\\\Desktop\\\\Projects\\\\Svkul - kopie\\\\pages\\\\databaze.vue",
+    "chunkName": "pages/databaze",
+    "_name": "_3e4ce84c"
+  },
+  {
+    "name": "kontakt",
+    "path": "/kontakt",
+    "component": "C:\\\\Users\\\\HWP\\\\Desktop\\\\Projects\\\\Svkul - kopie\\\\pages\\\\kontakt.vue",
+    "chunkName": "pages/kontakt",
+    "_name": "_6b9cef50"
+  },
+  {
+    "name": "index",
+    "path": "/",
+    "component": "C:\\\\Users\\\\HWP\\\\Desktop\\\\Projects\\\\Svkul - kopie\\\\pages\\\\index.vue",
+    "chunkName": "pages/index",
+    "_name": "_507cb10a"
+  },
+  {
+    "name": "pomucka",
+    "path": "/:pomucka",
+    "component": "C:\\\\Users\\\\HWP\\\\Desktop\\\\Projects\\\\Svkul - kopie\\\\pages\\\\_pomucka.vue",
+    "chunkName": "pages/_pomucka",
+    "_name": "_04b2e0eb"
+  }
+]
