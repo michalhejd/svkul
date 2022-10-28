@@ -1,0 +1,23 @@
+{
+  "Footer": {
+    "description": "Auto imported from components/footer.vue"
+  },
+  "ItemBox": {
+    "description": "Auto imported from components/item-box.vue"
+  },
+  "Loader": {
+    "description": "Auto imported from components/loader.vue"
+  },
+  "MobileNav": {
+    "description": "Auto imported from components/mobile-nav.vue"
+  },
+  "Nav": {
+    "description": "Auto imported from components/nav.vue"
+  },
+  "AdminMenu": {
+    "description": "Auto imported from components/admin/admin-menu.vue"
+  },
+  "AidsManageItemBox": {
+    "description": "Auto imported from components/aids-manage/aids-manage-item-box.vue"
+  }
+}

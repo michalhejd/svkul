@@ -1,0 +1,75 @@
+[
+  {
+    "path": "/admin",
+    "component": "C:\\\\Users\\\\HWP\\\\Desktop\\\\Projects\\\\Svkul\\\\pages\\\\admin.vue",
+    "chunkName": "pages/admin",
+    "children": [
+      {
+        "name": "admin",
+        "path": "",
+        "component": "C:\\\\Users\\\\HWP\\\\Desktop\\\\Projects\\\\Svkul\\\\pages\\\\admin\\\\index.vue",
+        "chunkName": "pages/admin/index"
+      },
+      {
+        "name": "admin-profil",
+        "path": "profil",
+        "component": "C:\\\\Users\\\\HWP\\\\Desktop\\\\Projects\\\\Svkul\\\\pages\\\\admin\\\\profil.vue",
+        "chunkName": "pages/admin/profil"
+      },
+      {
+        "name": "admin-spravainstanci",
+        "path": "spravainstanci",
+        "component": "C:\\\\Users\\\\HWP\\\\Desktop\\\\Projects\\\\Svkul\\\\pages\\\\admin\\\\spravainstanci.vue",
+        "chunkName": "pages/admin/spravainstanci"
+      },
+      {
+        "name": "admin-spravamist",
+        "path": "spravamist",
+        "component": "C:\\\\Users\\\\HWP\\\\Desktop\\\\Projects\\\\Svkul\\\\pages\\\\admin\\\\spravamist.vue",
+        "chunkName": "pages/admin/spravamist"
+      },
+      {
+        "name": "admin-spravapomucek",
+        "path": "spravapomucek",
+        "component": "C:\\\\Users\\\\HWP\\\\Desktop\\\\Projects\\\\Svkul\\\\pages\\\\admin\\\\spravapomucek.vue",
+        "chunkName": "pages/admin/spravapomucek"
+      },
+      {
+        "name": "admin-spravauctu",
+        "path": "spravauctu",
+        "component": "C:\\\\Users\\\\HWP\\\\Desktop\\\\Projects\\\\Svkul\\\\pages\\\\admin\\\\spravauctu.vue",
+        "chunkName": "pages/admin/spravauctu"
+      },
+      {
+        "name": "admin-zmenahesla",
+        "path": "zmenahesla",
+        "component": "C:\\\\Users\\\\HWP\\\\Desktop\\\\Projects\\\\Svkul\\\\pages\\\\admin\\\\zmenahesla.vue",
+        "chunkName": "pages/admin/zmenahesla"
+      }
+    ]
+  },
+  {
+    "name": "databaze",
+    "path": "/databaze",
+    "component": "C:\\\\Users\\\\HWP\\\\Desktop\\\\Projects\\\\Svkul\\\\pages\\\\databaze.vue",
+    "chunkName": "pages/databaze"
+  },
+  {
+    "name": "kontakt",
+    "path": "/kontakt",
+    "component": "C:\\\\Users\\\\HWP\\\\Desktop\\\\Projects\\\\Svkul\\\\pages\\\\kontakt.vue",
+    "chunkName": "pages/kontakt"
+  },
+  {
+    "name": "index",
+    "path": "/",
+    "component": "C:\\\\Users\\\\HWP\\\\Desktop\\\\Projects\\\\Svkul\\\\pages\\\\index.vue",
+    "chunkName": "pages/index"
+  },
+  {
+    "name": "pomucka",
+    "path": "/:pomucka",
+    "component": "C:\\\\Users\\\\HWP\\\\Desktop\\\\Projects\\\\Svkul\\\\pages\\\\_pomucka.vue",
+    "chunkName": "pages/_pomucka"
+  }
+]
