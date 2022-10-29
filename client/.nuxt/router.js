@@ -4,18 +4,18 @@ import { normalizeURL, decode } from 'ufo'
 import { interopDefault } from './utils'
 import scrollBehavior from './router.scrollBehavior.js'
 
-const _fc27f5f2 = () => interopDefault(import('..\\pages\\admin.vue' /* webpackChunkName: "pages/admin" */))
-const _08222cca = () => interopDefault(import('..\\pages\\admin\\index.vue' /* webpackChunkName: "pages/admin/index" */))
-const _164591c3 = () => interopDefault(import('..\\pages\\admin\\profil.vue' /* webpackChunkName: "pages/admin/profil" */))
-const _28fe3d17 = () => interopDefault(import('..\\pages\\admin\\spravainstanci.vue' /* webpackChunkName: "pages/admin/spravainstanci" */))
-const _50051e7b = () => interopDefault(import('..\\pages\\admin\\spravamist.vue' /* webpackChunkName: "pages/admin/spravamist" */))
-const _40671d74 = () => interopDefault(import('..\\pages\\admin\\spravapomucek.vue' /* webpackChunkName: "pages/admin/spravapomucek" */))
-const _536c120d = () => interopDefault(import('..\\pages\\admin\\spravauctu.vue' /* webpackChunkName: "pages/admin/spravauctu" */))
-const _b4178726 = () => interopDefault(import('..\\pages\\admin\\zmenahesla.vue' /* webpackChunkName: "pages/admin/zmenahesla" */))
-const _3e4ce84c = () => interopDefault(import('..\\pages\\databaze.vue' /* webpackChunkName: "pages/databaze" */))
-const _6b9cef50 = () => interopDefault(import('..\\pages\\kontakt.vue' /* webpackChunkName: "pages/kontakt" */))
-const _507cb10a = () => interopDefault(import('..\\pages\\index.vue' /* webpackChunkName: "pages/index" */))
-const _04b2e0eb = () => interopDefault(import('..\\pages\\_pomucka.vue' /* webpackChunkName: "pages/_pomucka" */))
+const _4ac20c7e = () => interopDefault(import('..\\pages\\admin.vue' /* webpackChunkName: "pages/admin" */))
+const _283ede44 = () => interopDefault(import('..\\pages\\admin\\index.vue' /* webpackChunkName: "pages/admin/index" */))
+const _73f4323a = () => interopDefault(import('..\\pages\\admin\\profil.vue' /* webpackChunkName: "pages/admin/profil" */))
+const _ac4712e4 = () => interopDefault(import('..\\pages\\admin\\spravainstanci.vue' /* webpackChunkName: "pages/admin/spravainstanci" */))
+const _081ea91c = () => interopDefault(import('..\\pages\\admin\\spravamist.vue' /* webpackChunkName: "pages/admin/spravamist" */))
+const _6e9f4dc6 = () => interopDefault(import('..\\pages\\admin\\spravapomucek.vue' /* webpackChunkName: "pages/admin/spravapomucek" */))
+const _0150c1f8 = () => interopDefault(import('..\\pages\\admin\\spravauctu.vue' /* webpackChunkName: "pages/admin/spravauctu" */))
+const _51dfc964 = () => interopDefault(import('..\\pages\\admin\\zmenahesla.vue' /* webpackChunkName: "pages/admin/zmenahesla" */))
+const _7dc8cd16 = () => interopDefault(import('..\\pages\\databaze.vue' /* webpackChunkName: "pages/databaze" */))
+const _94b8e3e2 = () => interopDefault(import('..\\pages\\kontakt.vue' /* webpackChunkName: "pages/kontakt" */))
+const _1952b881 = () => interopDefault(import('..\\pages\\index.vue' /* webpackChunkName: "pages/index" */))
+const _f0fcdbd8 = () => interopDefault(import('..\\pages\\_pomucka.vue' /* webpackChunkName: "pages/_pomucka" */))
 
 const emptyFn = () => {}
 
@@ -30,51 +30,51 @@ export const routerOptions = {
 
   routes: [{
     path: "/admin",
-    component: _fc27f5f2,
+    component: _4ac20c7e,
     children: [{
       path: "",
-      component: _08222cca,
+      component: _283ede44,
       name: "admin"
     }, {
       path: "profil",
-      component: _164591c3,
+      component: _73f4323a,
       name: "admin-profil"
     }, {
       path: "spravainstanci",
-      component: _28fe3d17,
+      component: _ac4712e4,
       name: "admin-spravainstanci"
     }, {
       path: "spravamist",
-      component: _50051e7b,
+      component: _081ea91c,
       name: "admin-spravamist"
     }, {
       path: "spravapomucek",
-      component: _40671d74,
+      component: _6e9f4dc6,
       name: "admin-spravapomucek"
     }, {
       path: "spravauctu",
-      component: _536c120d,
+      component: _0150c1f8,
       name: "admin-spravauctu"
     }, {
       path: "zmenahesla",
-      component: _b4178726,
+      component: _51dfc964,
       name: "admin-zmenahesla"
     }]
   }, {
     path: "/databaze",
-    component: _3e4ce84c,
+    component: _7dc8cd16,
     name: "databaze"
   }, {
     path: "/kontakt",
-    component: _6b9cef50,
+    component: _94b8e3e2,
     name: "kontakt"
   }, {
     path: "/",
-    component: _507cb10a,
+    component: _1952b881,
     name: "index"
   }, {
     path: "/:pomucka",
-    component: _04b2e0eb,
+    component: _f0fcdbd8,
     name: "pomucka"
   }],
 

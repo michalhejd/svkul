@@ -14,10 +14,10 @@
   "Nav": {
     "description": "Auto imported from components/nav.vue"
   },
-  "AidsManageItemBox": {
-    "description": "Auto imported from components/aids-manage/aids-manage-item-box.vue"
-  },
   "AdminMenu": {
     "description": "Auto imported from components/admin/admin-menu.vue"
+  },
+  "AidsManageItemBox": {
+    "description": "Auto imported from components/aids-manage/aids-manage-item-box.vue"
   }
 }

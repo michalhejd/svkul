@@ -11,5 +11,5 @@ You can directly use them in pages and other components without the need to impo
 - `<Loader>` | `<loader>` (components/loader.vue)
 - `<MobileNav>` | `<mobile-nav>` (components/mobile-nav.vue)
 - `<Nav>` | `<nav>` (components/nav.vue)
-- `<AidsManageItemBox>` | `<aids-manage-item-box>` (components/aids-manage/aids-manage-item-box.vue)
 - `<AdminMenu>` | `<admin-menu>` (components/admin/admin-menu.vue)
+- `<AidsManageItemBox>` | `<aids-manage-item-box>` (components/aids-manage/aids-manage-item-box.vue)

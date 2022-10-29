@@ -47,13 +47,12 @@ export default {
     '@nuxt/image',
   ],
 
-  BASE_URL: process.env.BASE_URL || 'http://localhost:3001',
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     '@nuxtjs/axios',
   ],
   axios: {
-    baseURL: process.env.BASE_URL || 'http://localhost:3001',
+    baseURL: '/api',
     credentials: true
   },
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
