@@ -4,3 +4,4 @@ pnpm-lock.yaml
 .env
 .envrc
 ansible/hosts
+client/.nuxt
