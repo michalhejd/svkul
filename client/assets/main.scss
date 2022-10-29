@@ -1,0 +1,44 @@
+@font-face {
+    font-family: "Blinker";
+    src: url("~@/assets/fonts/Blinker/Blinker-Regular.ttf");
+    font-weight: 400;
+    font-style: normal;
+}
+@font-face {
+    font-family: "Blinker";
+    src: url("~@/assets/fonts/Blinker/Blinker-SemiBold.ttf");
+    font-weight: 600;
+    font-style: normal;
+}
+@font-face {
+    font-family: "Blinker";
+    src: url("~@/assets/fonts/Blinker/Blinker-Bold.ttf");
+    font-weight: 700;
+    font-style: normal;
+}
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+    background: transparent;
+  }
+  ::-webkit-scrollbar-track {
+    background: #282828;
+  }
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: rgb(97, 97, 97);
+    border-radius: 10px;
+    
+  }
+  ::-webkit-scrollbar-corner{
+    border-radius: 10px;
+    background: lightgray;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }
+  body{
+    background-color: #f5f5f5;
+  }
