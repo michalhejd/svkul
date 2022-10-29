@@ -1,7 +1,7 @@
 ---
 - name: MongoDB server
   include_role:
-    name: matic-insurance.mongodb_container
+    name: mongodb
   vars:
     tags: ['database']
     mongodb_container_name: 'mongodb'

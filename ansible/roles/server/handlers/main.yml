@@ -45,5 +45,5 @@
   listen: restart service
   become: false
   command:
-    cmd: npx vue-cli-service build
+    cmd: npm run build
     chdir: /home/ssps/web/client
