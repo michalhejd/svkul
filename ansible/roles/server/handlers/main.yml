@@ -9,8 +9,9 @@
   become: true
 - name: Build docker image
   listen: restart service
+  become: true
   docker_image:
-    pull: true
+    # pull: true
     build:
       path: /home/ssps/web/server
       rm: false
@@ -40,10 +41,9 @@
   become: false
   community.general.npm:
     path: /home/ssps/web/client
-    ci: yes
 - name: build the client
   listen: restart service
   become: false
   command:
-    cmd: npm run build
+    cmd: npm run prod
     chdir: /home/ssps/web/client
