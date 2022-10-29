@@ -1,0 +1,4 @@
+---
+- import_tasks: _1_prepare_configs.yml
+- import_tasks: _2_prepare_host.yml
+- import_tasks: _3_run_container.yml
