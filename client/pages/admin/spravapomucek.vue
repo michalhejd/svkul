@@ -468,10 +468,10 @@
 										<td>{{ product.details.author }}</td>
 										<td>{{ product.details.year }}</td>
 										<td>
-											<div class="action">
+											<div class="action" @click="showDeletePopup(product)">
 												<font-awesome-icon
 													icon="fa-solid fa-xmark"
-													@click="showDeletePopup(product)"
+													
 												/>
 											</div>
 										</td>
@@ -489,11 +489,9 @@
 	</div>
 </template>
 <script>
-	import aidsManageItemBox from "@/components/aids-manage/aids-manage-item-box.vue";
 	export default {
 		name: "searchAid",
 		components: {
-			aidsManageItemBox,
 		},
 		data() {
 			return {
@@ -542,6 +540,10 @@
 				popupProduct: undefined,
 			};
 		},
+		async asyncData({ $axios }){
+			const products = await $axios.$get("pomucky/search");
+			return { products };
+		},
 		watch: {
 			async searchAid(newSearch, oldSearch) {
 				setTimeout(() => {
@@ -553,21 +555,13 @@
 								},
 								key: null,
 							};
-							this.$store.dispatch("getProducts", obj);
+							this.getProducts();
 						}
 					}
 					if (newSearch.length == 0) {
-						this.$store.dispatch("getProducts");
+						this.getProducts();
 					}
 				}, 1000);
-			},
-		},
-		beforeMount() {
-			this.$store.dispatch("getProducts");
-		},
-		computed: {
-			products() {
-				return this.$store.state.products;
 			},
 		},
 		methods: {
@@ -585,7 +579,7 @@
 					.delete(`pomucky/${this.popupProduct._id}`)
 					.then((response) => {
 						if (response.status === 200) {
-							this.$store.dispatch("getProducts");
+							this.getProducts();
 							this.popupDeleteBox = false;
 							this.shadow = false;
 						} else {
@@ -616,6 +610,12 @@
 				this.shadow = false;
 				this.addLoading = false;
 			},
+			getProducts() {
+				this.$axios.get("pomucky/search")
+				.then((response) => {
+					this.products = response.data;
+				});
+			},
 			addNewAid() {
 				this.addLoading = true;
 				this.$axios
@@ -634,7 +634,7 @@
 					})
 					.then((response) => {
 						if (response.status === 200) {
-							this.$store.dispatch("getProducts");
+							this.getProducts();
 							this.newProduct = {
 								name: "",
 								signatura: "",
@@ -672,7 +672,7 @@
 											})
 											.then((response) => {
 												if (response.status === 200) {
-													this.$store.dispatch("getProducts");
+													this.getProducts();
 													this.popupAddBox = false;
 													this.shadow = false;
 													this.addLoading = false;

@@ -428,7 +428,11 @@
 				addLoading: false
 			};
 		},
-		components: {},
+		async asyncData({ $axios }) {
+			const users = await $axios.$get("users");
+			const places = await $axios.$get("places");
+			return { users, places };
+		},
 		methods: {
 			openDeletePopup(user) {
 				this.popupDeleteBox = true;
@@ -516,25 +520,6 @@
 						console.log(err);
 					});
 			},
-		},
-		mounted() {
-			this.$store.commit("SET_LOADING", true);
-			this.$axios
-				.get("users")
-				.then((response) => {
-					this.users = response.data;
-					setTimeout(() => {
-						this.$store.commit("SET_LOADING", false);
-					}, 100);
-				})
-				.catch((error) => {
-					setTimeout(() => {
-						this.$store.commit("SET_LOADING", false);
-					}, 100);
-				});
-				this.$axios.get("places").then((response) => {
-					this.places = response.data;
-				});
 		},
 	};
 </script>
