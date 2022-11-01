@@ -52,7 +52,7 @@ export default {
     '@nuxtjs/axios',
   ],
   axios: {
-    baseURL: 'http://localhost:3001/',
+    baseURL: 'https://svkul-api.hejduk.tech',
     credentials: true
   },
   //allow vuetify maps production
