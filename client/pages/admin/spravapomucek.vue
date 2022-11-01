@@ -102,13 +102,30 @@
 		}
 		.around-box {
 			padding: 0 5px;
-			.action{
+			.action {
 				cursor: pointer;
 			}
 			.resaultAid {
 				.resaultAid-content {
 					padding: 10px;
 					text-align: center;
+					//scroll-x wrap
+					.scroll-wrap {
+						width: 100px;
+						overflow-x: auto;
+					}
+					::-webkit-scrollbar {
+						height: 7px;
+					}
+					::-webkit-scrollbar-track {
+						background: #f1f1f1;
+					}
+					::-webkit-scrollbar-thumb {
+						background: #888;
+					}
+					::-webkit-scrollbar-thumb:hover {
+						background: #555;
+					}
 				}
 			}
 		}
@@ -452,8 +469,10 @@
 								</thead>
 								<tbody>
 									<tr v-for="product in products" :key="product._id">
-										<td>{{ product.name }}</td>
-										<td>{{ product.ISXN }}</td>
+										<td>
+											<div class="scroll-wrap">{{ product.name }}</div>
+										</td>
+										<td><div class="scroll-wrap">{{ product.ISXN }}</div></td>
 										<td>
 											<v-chip-group column>
 												<v-chip
@@ -464,15 +483,12 @@
 												>
 											</v-chip-group>
 										</td>
-										<td>{{product.details.company}}</td>
-										<td>{{ product.details.author }}</td>
-										<td>{{ product.details.year }}</td>
+										<td><div class="scroll-wrap">{{ product.details.company }}</div></td>
+										<td><div class="scroll-wrap">{{ product.details.author }}</div></td>
+										<td><div class="scroll-wrap">{{ product.details.year }}</div></td>
 										<td>
 											<div class="action" @click="showDeletePopup(product)">
-												<font-awesome-icon
-													icon="fa-solid fa-xmark"
-													
-												/>
+												<font-awesome-icon icon="fa-solid fa-xmark" />
 											</div>
 										</td>
 									</tr>
@@ -491,8 +507,7 @@
 <script>
 	export default {
 		name: "searchAid",
-		components: {
-		},
+		components: {},
 		data() {
 			return {
 				searchAid: "",
@@ -540,7 +555,7 @@
 				popupProduct: undefined,
 			};
 		},
-		async asyncData({ $axios }){
+		async asyncData({ $axios }) {
 			const products = await $axios.$get("pomucky/search");
 			return { products };
 		},
@@ -611,8 +626,7 @@
 				this.addLoading = false;
 			},
 			getProducts() {
-				this.$axios.get("pomucky/search")
-				.then((response) => {
+				this.$axios.get("pomucky/search").then((response) => {
 					this.products = response.data;
 				});
 			},

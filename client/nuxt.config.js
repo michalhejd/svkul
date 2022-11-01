@@ -52,9 +52,10 @@ export default {
     '@nuxtjs/axios',
   ],
   axios: {
-    baseURL: '/api',
+    baseURL: 'http://localhost:3001/',
     credentials: true
   },
+  //allow vuetify maps production
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
@@ -76,5 +77,11 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+    extend(config, { isClient }) {
+      // Extend only webpack config for client-bundle
+      if (isClient) {
+        config.devtool = 'source-map'
+      }
+    },
   }
 }

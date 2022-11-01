@@ -45,19 +45,25 @@
 		props: ["product"],
 		methods: {
 			click() {
-				this.$router.push(this.product._id);
+				this.$router.push(`/${this.product._id}`);
 			},
 		},
-		data(){
+		data() {
 			return {
-				image: null
-			}
+				image: null,
+			};
 		},
 		mounted() {
-			this.$axios.get(`/pomucky/${this.product._id}/images`)
-			.then((res) => {
-				this.image = `http://localhost:3001/pomucky/${this.product._id}/images/${res.data[0]._id}/data`
-			})
+			console.log(this.product);
+			this.$axios.get(`/pomucky/${this.product._id}/images`).then((res) => {
+				if (res.status == 200) {
+					if (res.data.length > 0) {
+						console.log(
+							`${this.$axios.defaults.baseURL}${this.product._id}/images/${res.data[0]._id}/data`
+						);
+					}
+				}
+			});
 		},
 	};
 </script>

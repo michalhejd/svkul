@@ -79,7 +79,7 @@
 						v-if="products"
 					>
 						<!-- set 4 random from internet images -->
-						<item-box v-for="(product, index) in products" :key="index" :product="product" />
+						<item-box v-for="(product, index) in products.slice(0, 8)" :key="index" :product="product" />
 					</carousel>
 				</no-ssr>
 			</client-only>
@@ -123,7 +123,7 @@
 			itemBox,
 		},
 		async asyncData({ $axios }) {
-			const products = await $axios.$get("/pomucky/search");
+			const products = await $axios.$get("/pomucky/search?sort=newest");
 			return { products };
 		},
 		/*components: {
