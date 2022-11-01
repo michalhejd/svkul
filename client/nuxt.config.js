@@ -83,5 +83,6 @@ export default {
         config.devtool = 'source-map'
       }
     },
+    cssSourceMap: true
   }
 }

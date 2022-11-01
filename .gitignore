@@ -6,3 +6,4 @@ pnpm-lock.yaml
 ansible/hosts
 client/.nuxt
 client/.gitignore
+client/dist/
