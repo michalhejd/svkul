@@ -1,18 +1,15 @@
 <style lang="scss" scoped>
 	.item-box {
-		max-width: 500px;
-		background-color: white;
-		border-radius: 20px;
-		padding: 20px;
 		cursor: pointer;
 		max-width: 300px;
 		box-shadow: 0 30px 80px 0 rgba(0, 0, 0, 0.15);
 		margin-bottom: 120px;
 		margin-top: 60px;
+		padding: 10px;
 		.image {
 			img {
 				width: 100%;
-				height: 200px;
+				height: 300px;
 				object-fit: cover;
 				border-radius: 20px;
 			}
@@ -30,14 +27,15 @@
 	}
 </style>
 <template>
-	<div class="item-box" @click="click()" draggable="true">
+	<NuxtLink :to="`/${product._id}`">
+	<div class="item-box">
 		<div class="image" v-if="image != null">
 			<img :src="image" />
 		</div>
-		<v-skeleton-loader v-else type="image" />
+		<v-skeleton-loader v-else type="image" height="300" min-height="300" />
 		<h1>{{ product.name }}</h1>
-		<p>nevim</p>
-	</div>
+		</div>
+	</NuxtLink>
 </template>
 <script>
 	export default {

@@ -37,7 +37,7 @@
 			margin-right: 100px;
 			border-radius: 7px;
 			border: solid 1px black;
-			box-shadow: 3px 3px 1px 0 rgba(0, 0, 0, 0.37);
+			box-shadow: 2px 2px 1px 0 rgba(0, 0, 0, 0.37);
 			transition: 0.3s;
 			margin-top: -120px;
 			z-index: 1000;
@@ -79,7 +79,7 @@
 						v-if="products"
 					>
 						<!-- set 4 random from internet images -->
-						<item-box v-for="(product, index) in products.slice(0, 8)" :key="index" :product="product" />
+						<item-box v-for="(product, index) in products.slice(0, 8)" :key="index" :product="product" @click="$router.push(`/${product._id}`)" />
 					</carousel>
 				</no-ssr>
 			</client-only>

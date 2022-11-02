@@ -5,6 +5,7 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
+		background-color: #f5f5f5;
 		.changePassword__box {
 			display: flex;
 			flex-direction: column;

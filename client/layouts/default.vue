@@ -127,24 +127,13 @@
 			display: none;
 		}
 	}
-	@media only screen and (max-width: 1650px) {
-		.app-wrap{
-			display: none;
-		}
-		.small-device-text{
-			width: 400px;
-			display: block;
-		}
-	}
 </style>
 <template>
 	<div id="app">
 		<div class="app-wrap">
 			<navigation />
+			<search-container />
 			<Nuxt />
-		</div>
-		<div class="small-device-text">
-			Tato šířka stránky je moc malá, je potřeba, aby jste jí zobrazili na větším zařízení.
 		</div>
 		<footer-bar
 			v-if="this.$route.matched.some(({ name }) => name === '/admin')"
@@ -152,12 +141,15 @@
 	</div>
 </template>
 <script>
+import searchContainer from "@/components/search-container.vue";
 	import navigation from "@/components/nav.vue";
 	import footerBar from "@/components/footer.vue";
+import SearchContainer from '../components/search-container.vue';
 	export default {
 		components: {
 			navigation,
 			footerBar,
+			searchContainer
 		},
 		data() {
 			return {
