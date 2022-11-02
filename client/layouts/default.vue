@@ -136,7 +136,7 @@
 			<Nuxt />
 		</div>
 		<footer-bar
-			v-if="this.$route.matched.some(({ name }) => name === '/admin')"
+			v-if="!this.$route.matched.some(record => record.path == '/admin')"
 		/>
 	</div>
 </template>
@@ -144,7 +144,6 @@
 import searchContainer from "@/components/search-container.vue";
 	import navigation from "@/components/nav.vue";
 	import footerBar from "@/components/footer.vue";
-import SearchContainer from '../components/search-container.vue';
 	export default {
 		components: {
 			navigation,
@@ -190,6 +189,9 @@ import SearchContainer from '../components/search-container.vue';
 			if (this.$router.currentRoute.path == "/admin/profil") {
 				this.dropdown = true;
 			}
+		},
+		mounted(){
+			console.log()
 		},
 		computed: {
 			logged() {
