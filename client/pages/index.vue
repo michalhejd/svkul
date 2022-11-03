@@ -123,7 +123,10 @@
 			itemBox,
 		},
 		async asyncData({ $axios }) {
-			const products = await $axios.$get("/pomucky/search?sort=newest");
+			const products = await $axios.$get("/pomucky/search?sort=newest")
+			.catch((err) => {
+				console.log(err);
+			});
 			return { products };
 		},
 		/*components: {

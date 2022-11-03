@@ -167,31 +167,21 @@ import searchContainer from "@/components/search-container.vue";
 				}
 			},
 		},
-		beforeMount() {
-			this.$axios
-				.$get("users/@self")
+		mounted(){
+			if(this.$store.state.logged == true){
+				this.$axios.get('/users/@self')
 				.then((response) => {
-					if (response.status == 403 || response.status == 401) {
-						this.$store.commit("SET_USER", undefined);
-						this.$store.commit("SET_LOGGED", false);
-					}
-					else{
-						this.$store.commit("SET_USER", response);
-						this.$store.commit("SET_LOGGED", true);
+					if(response.status == 200){
+					this.$store.commit('SET_USER', response.data)
 					}
 				})
-				.catch((error) => {
-					if (error.response.status == 403 || error.response.status == 401) {
-						this.$store.commit("SET_USER", undefined);
-						this.$store.commit("SET_LOGGED", false);
+				.catch((error) =>{
+					if(error.response.status == 401 || error.response.status == 403){
+						this.$store.commit('SET_LOGGED', false)
+						this.$store.commit('SET_USER', undefined)
 					}
-				});
-			if (this.$router.currentRoute.path == "/admin/profil") {
-				this.dropdown = true;
+				})
 			}
-		},
-		mounted(){
-			console.log()
 		},
 		computed: {
 			logged() {
