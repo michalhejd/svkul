@@ -23,7 +23,7 @@
     volumes_from:
       - '{{ mongodb_container_name }}-data'
     ports:
-      - '{{ mongodb_port }}:{{ mongodb_internal_port }}'
+      - '0.0.0.0:{{ mongodb_port }}:{{ mongodb_internal_port }}'
   register: mongodb_container
 
 - name: Wait until mongodb starts up
