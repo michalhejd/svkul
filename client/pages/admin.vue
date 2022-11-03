@@ -5,6 +5,7 @@
 		justify-content: center;
 		align-items: center;
 		min-height: calc(100vh - 75px);
+		background-color: #f5f5f5;
 		.login {
 			width: 475px;
 			border-radius: 20px;
@@ -91,9 +92,14 @@
 			}
 		}
 	}
+	.admin.active{
+		background-image: url("/gfx/admin-overlay/adminBg.jpg");
+		background-size: cover;
+		background-position: center;
+	}
 </style>
 <template>
-	<div class="admin">
+	<div class="admin" :class="{active: user == undefined && logged == false}">
 		<client-only>
 			<div
 				class="login"

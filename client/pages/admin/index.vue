@@ -5,6 +5,7 @@
 	display: grid;
 	grid-template-rows: 1fr 10fr;
 	gap: 10px;
+	background-color: #f5f5f5;
 	.w-message{
 		display: flex;
 		align-items: center;

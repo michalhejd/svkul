@@ -1,6 +1,7 @@
 <style lang="scss" scoped>
 	.accmanage {
 		padding-top: 20px;
+		background-color: #f5f5f5;
 		.confirmPopup {
 			background-color: white;
 			width: 500px;
