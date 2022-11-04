@@ -128,9 +128,9 @@
 			>Správa instancí</router-link
 		>
 		<router-link
-			to="/admin/spravamist"
+			to="/admin/spravauctu"
 			v-if="user.forceChangePassword != true && user.role > 4"
-			>Správa míst</router-link
+			>Správa účtů</router-link
 		>
 		<div class="logout" @click="logout()">Odhlásit se</div>
 	</nav>

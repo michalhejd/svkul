@@ -34,7 +34,7 @@
 </template>
 <script>
 	export default {
-		async asyncData({ $axios, store }) {
+		async asyncData({ $axios, store, $router }) {
 			$axios
 				.get("/users/@self")
 				.then((response) => {
@@ -44,7 +44,7 @@
 					if(error.response.status == 401 || error.response.status == 403){
 						store.commit("SET_LOGGED", false);
 						store.commit("SET_USER", undefined);
-						this.$router.push("/login");
+						$router.push("/login");
 					}
 				});
 		},

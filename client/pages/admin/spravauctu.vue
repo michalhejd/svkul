@@ -417,6 +417,18 @@
 			:class="{ active: shadow }"
 			@click="closeAddPopup(), closeDeletePopup()"
 		></div>
+		<div class="top-bar">
+			<div class="searchplace">
+				<div class="searchplace-input">
+					<input type="text" placeholder="Hledat místo" />
+				</div>
+			</div>
+			<div class="addplace">
+				<div class="circle" @click="clickAddplace()">
+					<font-awesome-icon icon="fa-solid fa-plus" />
+				</div>
+			</div>
+		</div>
 		<div class="place-container">
 			<div class="place-box" v-for="(place, index) in places" :key="index">
 				<!--<div class="place-icon">{{place.name}}</div>-->
@@ -447,20 +459,6 @@
 				shadow: false,
 				addLoading: false,
 			};
-		},
-		async asyncData({ $axios, store }) {
-			$axios
-				.get("/users/@self")
-				.then((response) => {
-					store.commit("SET_USER", response.data);
-				})
-				.catch((error) => {
-					if(error.response.status == 401 || error.response.status == 403){
-						store.commit("SET_LOGGED", false);
-						store.commit("SET_USER", undefined);
-						this.$router.push("/login");
-					}
-				});
 		},
 		async asyncData({ $axios }) {
 			const places = await $axios.$get("places");

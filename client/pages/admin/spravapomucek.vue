@@ -102,13 +102,17 @@
 		}
 		.around-box {
 			padding: 0 5px;
-			.action {
-				cursor: pointer;
-			}
 			.resaultAid {
 				.resaultAid-content {
 					padding: 10px;
-					text-align: center;
+					.text-left {
+						text-align: left;
+					}
+					.action {
+						cursor: pointer;
+						text-align: center;
+					}
+
 					//scroll-x wrap
 					.scroll-wrap {
 						width: 100px;
@@ -464,7 +468,7 @@
 										<th class="text-left">Výrobce</th>
 										<th class="text-left">Autor</th>
 										<th class="text-left">Rok vydání</th>
-										<th class="text-left">Smazat</th>
+										<th class="text-center">Smazat</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -472,7 +476,9 @@
 										<td>
 											<div class="scroll-wrap">{{ product.name }}</div>
 										</td>
-										<td><div class="scroll-wrap">{{ product.ISXN }}</div></td>
+										<td>
+											<div class="scroll-wrap">{{ product.ISXN }}</div>
+										</td>
 										<td>
 											<v-chip-group column>
 												<v-chip
@@ -483,9 +489,19 @@
 												>
 											</v-chip-group>
 										</td>
-										<td><div class="scroll-wrap">{{ product.details.company }}</div></td>
-										<td><div class="scroll-wrap">{{ product.details.author }}</div></td>
-										<td><div class="scroll-wrap">{{ product.details.year }}</div></td>
+										<td>
+											<div class="scroll-wrap">
+												{{ product.details.company }}
+											</div>
+										</td>
+										<td>
+											<div class="scroll-wrap">
+												{{ product.details.author }}
+											</div>
+										</td>
+										<td>
+											<div class="scroll-wrap">{{ product.details.year }}</div>
+										</td>
 										<td>
 											<div class="action" @click="showDeletePopup(product)">
 												<font-awesome-icon icon="fa-solid fa-xmark" />
@@ -507,6 +523,10 @@
 <script>
 	export default {
 		name: "searchAid",
+		async asyncData({ $axios }) {
+			const products = await $axios.$get("/pomucky/search");
+			return { products };
+		},
 		components: {},
 		data() {
 			return {
@@ -549,29 +569,11 @@
 						company: "",
 						author: "",
 						year: "",
-						mistoVydani: "",
 					},
 				},
 				popupProduct: undefined,
+				products: null
 			};
-		},
-		async asyncData({ $axios }) {
-			const products = await $axios.$get("pomucky/search");
-			return { products };
-		},
-		async asyncData({ $axios, store }) {
-			$axios
-				.get("/users/@self")
-				.then((response) => {
-					store.commit("SET_USER", response.data);
-				})
-				.catch((error) => {
-					if(error.response.status == 401 || error.response.status == 403){
-						store.commit("SET_LOGGED", false);
-						store.commit("SET_USER", undefined);
-						this.$router.push("/login");
-					}
-				});
 		},
 		watch: {
 			async searchAid(newSearch, oldSearch) {
@@ -657,7 +659,6 @@
 							company: this.newProduct.details.company,
 							author: this.newProduct.details.author,
 							year: this.newProduct.details.year,
-							mistoVydani: this.newProduct.details.mistoVydani,
 						},
 					})
 					.then((response) => {
@@ -673,7 +674,6 @@
 									company: "",
 									author: "",
 									year: "",
-									mistoVydani: "",
 								},
 							};
 							if (this.images.length > 0) {
