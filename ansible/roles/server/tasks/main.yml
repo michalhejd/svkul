@@ -17,11 +17,14 @@
 - name: create docker network
   docker_network:
     name: mongodb
+    ipam_config:
+      - subnet: 172.28.0.1/24
 - name: Connect mongodb to correct network
   docker_container: 
     name: mongodb
     networks:
       - name: mongodb
+        ipv4_address: 172.28.0.2
 - name: CLIENT - Download sources
   become: false
   git:

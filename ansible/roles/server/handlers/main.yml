@@ -28,6 +28,7 @@
       - 3001:3001
     networks:
       - name: mongodb
+        ipv4_address: 172.28.0.3
     env:
       PRIVATE_RSA_KEY: "{{PRIVATE_RSA_KEY}}"
       PUBLIC_RSA_KEY: "{{PUBLIC_RSA_KEY}}"
