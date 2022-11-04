@@ -561,7 +561,6 @@
 				],
 				newProduct: {
 					name: "",
-					signatura: "",
 					ISXN: "",
 					categories: [],
 					details: {
@@ -572,7 +571,7 @@
 					},
 				},
 				popupProduct: undefined,
-				products: null
+				products: null,
 			};
 		},
 		watch: {
@@ -651,7 +650,6 @@
 				this.$axios
 					.post("pomucky", {
 						name: this.newProduct.name,
-						signatura: this.newProduct.signatura,
 						ISXN: this.newProduct.ISXN,
 						categories: this.newProduct.categories,
 						details: {
@@ -666,7 +664,6 @@
 							this.getProducts();
 							this.newProduct = {
 								name: "",
-								signatura: "",
 								ISXN: "",
 								categories: [],
 								details: {

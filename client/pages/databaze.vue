@@ -97,7 +97,7 @@
 		},
 
         async asyncData({ $axios }) {
-            const products = await $axios.$get("http://213.220.204.181/pomucky/search");
+            const products = await $axios.$get("/pomucky/search");
             return { products };
         },
 

@@ -14,7 +14,6 @@
 			flex-direction: column;
 			gap: 20px;
 			padding: 40px;
-			box-shadow: 0 39px 98px 0px rgba(0, 0, 0, 0.1);
 			form {
 				display: flex;
 				flex-direction: column;
