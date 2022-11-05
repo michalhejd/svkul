@@ -11,6 +11,7 @@
 		gap: 50px;
 		background-image: url("/gfx/aboutProject/aboutProj_edit.png");
 		background-position-y: 0;
+		font-family: 'Poppins', sans-serif;
 		a svg{
 			color: black;
 			font-size: 16px;

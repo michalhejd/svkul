@@ -1,7 +1,6 @@
 <style lang="scss" scoped>
 	.accmanage {
 		padding-top: 20px;
-		background-color: #f5f5f5;
 		.confirmPopup {
 			background-color: white;
 			width: 500px;
@@ -44,7 +43,7 @@
 			z-index: 100;
 			transition: all 0.2s ease-in-out;
 		}
-		.addUserPopup {
+		.addplacePopup {
 			background-color: white;
 			padding: 30px;
 			border-radius: 20px;
@@ -54,7 +53,7 @@
 			left: 50%;
 			transform: translate(-50%, -50%);
 			z-index: 100000;
-			.addUserPopup-content {
+			.addplacePopup-content {
 				display: flex;
 				flex-direction: column;
 				.top-content {
@@ -67,7 +66,7 @@
 						cursor: pointer;
 					}
 				}
-				.user-inputs {
+				.place-inputs {
 					display: flex;
 					flex-direction: column;
 					gap: 10px;
@@ -225,7 +224,7 @@
 			display: grid;
 			padding: 0 20px;
 			grid-template-columns: repeat(5, 1fr);
-			.searchUser {
+			.searchplace {
 				grid-column-start: 2;
 				grid-column-end: 5;
 				input {
@@ -237,7 +236,7 @@
 					font-size: 16px;
 				}
 			}
-			.addUser {
+			.addplace {
 				grid-column: 5;
 				display: flex;
 				justify-content: flex-end;
@@ -264,15 +263,15 @@
 				}
 			}
 		}
-		.user-container{
+		.place-container {
 			margin-top: 50px;
 			display: grid;
 			grid-template-columns: repeat(4, auto);
 			grid-gap: 20px;
 			padding: 0 20px;
-			.user-box{
-				position: relative;
+			.place-box {
 				background-color: white;
+				position: relative;
 				display: flex;
 				flex-direction: column;
 				justify-content: space-between;
@@ -280,41 +279,41 @@
 				padding: 10px;
 				border-radius: 10px;
 				box-shadow: 3px 3px 5px 0px rgb(206, 206, 206);
-				.user-content{
+				.place-content {
 					user-select: none;
 					-moz-user-select: -moz-none;
 					-khtml-user-select: none;
 					-webkit-user-select: none;
 					-ms-user-select: none;
 				}
-				.close{
+				.close {
 					opacity: 0;
 					position: absolute;
 					top: 50%;
 					left: 50%;
 					transform: translate(-50%, -50%);
 				}
-				.user-info{
+				.place-info {
 					display: flex;
 					flex-direction: column;
 					justify-content: center;
 					align-items: center;
-					.user-name{
+					.place-name {
 						font-size: 20px;
 						font-weight: 500;
 						margin-bottom: 10px;
 					}
-					.user-role{
+					.place-role {
 						font-size: 16px;
 						font-weight: 400;
 					}
 				}
-				.user-icons{
+				.place-icons {
 					display: flex;
 					justify-content: space-between;
 					align-items: center;
 					width: 100%;
-					.user-icon{
+					.place-icon {
 						width: 30px;
 						height: 30px;
 						border-radius: 50%;
@@ -323,11 +322,11 @@
 						justify-content: center;
 						align-items: center;
 						cursor: pointer;
-						.fas.fa-pen-to-square{
+						.fas.fa-pen-to-square {
 							color: black;
 							font-size: 20px;
 						}
-						.fas.fa-xmark{
+						.fas.fa-xmark {
 							color: black;
 							font-size: 20px;
 						}
@@ -341,15 +340,15 @@
 	<div class="accmanage">
 		<div class="confirmPopup" v-if="popupDeleteBox">
 			<div class="confirmPopup-content">
-				<h2>Opravdu chcete smazat uživatele {{ popupUser.name }}?</h2>
+				<h2>Opravdu chcete smazat uživatele {{ popupplace.name }}?</h2>
 				<div class="confirmPopup-buttons">
-					<button @click="deleteProduct(popupUser._id)">Ano</button>
+					<button @click="deleteProduct(popupplace._id)">Ano</button>
 					<button @click="closeDeletePopup()">Ne</button>
 				</div>
 			</div>
 		</div>
-		<div class="addUserPopup" v-show="popupAddBox">
-			<div class="addUserPopup-content">
+		<div class="addplacePopup" v-show="popupAddBox">
+			<div class="addplacePopup-content">
 				<div class="top-content">
 					<h2>Přidat uživatele</h2>
 					<font-awesome-icon
@@ -357,24 +356,52 @@
 						@click="closeAddPopup()"
 					/>
 				</div>
-				<div class="user-inputs" data-app>
-					<input type="email" placeholder="Email uživatele" v-model="user.name" autocomplete="false">
-					<input type="password" placeholder="Heslo" v-model="user.password" minlength="6" autocomplete="new-password">
-					<select name="role" id="" v-model="user.role">
-						<option disabled selected value="default">Vyber roli</option>
-						<option value=0>Default</option>
-						<option value=1>Local manager</option>
-						<option value=2>Local admin</option>
-						<option value=3>Global manager</option>
-						<option value=4>Global admin</option>
-						<option value=5>Developer</option>
-					</select>
-					<select name="place" id="place" placeholder="Místo" v-model="user.place">
-						<option disabled selected value="default">Vyber místo</option>
-						<option v-for="(place, index) in places" :value="place._id" :key="index">{{place.name}}</option>
-					</select>
+				<div class="place-inputs" data-app>
+					<input
+						type="text"
+						placeholder="Název místa"
+						v-model="place.name"
+						autocomplete="false"
+					/>
+					<textarea
+						v-model="place.description"
+						name=""
+						id=""
+						cols="30"
+						rows="10"
+						placeholder="Popis"
+					></textarea>
+					<input
+						type="text"
+						placeholder="Odkaz na webovou stránku"
+						v-model="place.website"
+					/>
+					<h3>Kontakt</h3>
+					<input
+						type="email"
+						placeholder="Email"
+						v-model="place.contacts.email"
+					/>
+					<input
+						type="text"
+						placeholder="Telefon"
+						v-model="place.contacts.phone"
+					/>
+					<input
+						type="text"
+						placeholder="Jméno a příjmení"
+						v-model="place.contacts.name"
+					/>
+					<textarea
+						v-model="place.contacts.description"
+						name=""
+						id=""
+						cols="30"
+						rows="10"
+						placeholder="Popis"
+					></textarea>
 					<button
-						@click="addNewUser()"
+						@click="addNewplace()"
 						class="addButton"
 						:disabled="addLoading"
 						:class="{ acitve: addLoading == true }"
@@ -391,21 +418,21 @@
 			@click="closeAddPopup(), closeDeletePopup()"
 		></div>
 		<div class="top-bar">
-			<div class="searchUser">
-				<div class="searchUser-input">
-					<input type="text" placeholder="Hledat uživatele" />
+			<div class="searchplace">
+				<div class="searchplace-input">
+					<input type="text" placeholder="Hledat místo" />
 				</div>
 			</div>
-			<div class="addUser">
-				<div class="circle" @click="clickAddUser()">
+			<div class="addplace">
+				<div class="circle" @click="clickAddplace()">
 					<font-awesome-icon icon="fa-solid fa-plus" />
 				</div>
 			</div>
 		</div>
-		<div class="user-container">
-			<div class="user-box" v-for="(user, index) in users" :key="index">
-				<!--<div class="user-icon">{{user.name}}</div>-->
-				<div class="user-content">{{user.name}}</div>
+		<div class="place-container">
+			<div class="place-box" v-for="(place, index) in places" :key="index">
+				<!--<div class="place-icon">{{place.name}}</div>-->
+				<div class="place-content">{{ place.name }}</div>
 			</div>
 		</div>
 	</div>
@@ -414,34 +441,37 @@
 	export default {
 		data() {
 			return {
-				users: undefined,
 				loading: false,
 				places: undefined,
-				user: {
+				place: {
 					name: "",
-					password: "",
-					role: "default",
-					place: "default",
+					description: "",
+					website: "",
+					contacts: {
+						email: "",
+						phone: "",
+						name: "",
+						description: "",
+					},
 				},
 				popupAddBox: false,
 				popupDeleteBox: false,
 				shadow: false,
-				addLoading: false
+				addLoading: false,
 			};
 		},
 		async asyncData({ $axios }) {
-			const users = await $axios.$get("users");
 			const places = await $axios.$get("places");
-			return { users, places };
+			return { places };
 		},
 		methods: {
-			openDeletePopup(user) {
+			openDeletePopup(place) {
 				this.popupDeleteBox = true;
 				this.shadow = true;
-				this.popupUser = user;
-				console.log(user);
+				this.popupplace = place;
+				console.log(place);
 			},
-			clickAddUser() {
+			clickAddplace() {
 				this.popupAddBox = true;
 				this.shadow = true;
 			},
@@ -453,71 +483,64 @@
 				this.popupDeleteBox = false;
 				this.shadow = false;
 			},
-			deleteUser(user){
+			deleteplace(place) {
 				this.$axios
-					.delete("http://localhost:3000/users/" + user._id)
+					.delete("http://localhost:3000/places/" + place._id)
 					.then((response) => {
 						console.log(response);
-						this.getUsers();
+						this.getplaces();
 					})
 					.catch((error) => {
 						console.log(error);
 					});
 			},
-			addNewUser() {
+			addNewplace() {
 				this.addLoading = true;
-				if(this.user.name == "" || this.user.password == "" || this.user.role == "default" || this.user.place == "default"){
-					alert("Vyplňte všechny údaje");
-					this.addLoading = false;
-				}
-				else if(this.user.password.length < 6){
-					alert("Heslo musí mít alespoň 6 znaků");
-					this.addLoading = false;
-				}
-				else{this.$axios
-					.post("/users", {
-						name: this.user.name,
-						password: this.user.password,
-						role: parseInt(this.user.role),
-						place: this.user.place,
+				this.$axios
+					.post("/places", {
+						name: this.place.name,
+						description: this.place.description,
+						website: this.place.website,
+						contacts: [
+                            {
+                                email: this.place.contacts.email,
+                                phone: this.place.contacts.phone,
+                                name: this.place.contacts.name,
+                                description: this.place.contacts.description,
+                            },
+                        ],
 					})
 					.then((res) => {
 						this.addLoading = false;
 						this.closeAddPopup();
-						this.getUsers();
-						this.user = {
-							name: "",
-							password: "",
-							role: "default",
-							place: "default",
-						}
+						this.getplaces();
+                        this.place = {
+                            name: "",
+                            description: "",
+                            website: "",
+                            contacts: {
+                                email: "",
+                                phone: "",
+                                name: "",
+                                description: "",
+                            },
+                        };
 					})
 					.catch((err) => {
 						this.addLoading = false;
 						console.log(err);
 					});
-				}
 			},
-			getUsers() {
+			getplaces() {
 				this.loading = true;
-				this.$axios
-					.get("/users")
-					.then((res) => {
-						this.users = res.data;
-						this.loading = false;
-					})
-					.catch((err) => {
-						this.loading = false;
-						console.log(err);
-					});
-			},
-			getPlaces() {
 				this.$axios
 					.get("/places")
 					.then((res) => {
 						this.places = res.data;
+						this.loading = false;
 					})
 					.catch((err) => {
+						this.loading = false;
 						console.log(err);
 					});
 			},

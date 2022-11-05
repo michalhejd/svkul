@@ -23,9 +23,17 @@
 			margin-bottom: 50px;
 			display: flex;
 			flex-direction: column;
+			align-items: center;
 			gap: 30px;
 			h1 {
 				text-align: center;
+			}
+			.item-container{
+				width: 100%;
+				padding: 0 60px;
+				display: grid;
+				grid-template-columns: repeat(5, 1fr);
+				gap: 30px;
 			}
 		}
 		button {
@@ -61,10 +69,14 @@
 </style>
 <template>
 	<div class="main-page">
-		<nuxt-img preload src='/gfx/aboutProject/aboutProj_edit_v2.png' class="main-image" />
+		<nuxt-img
+			preload
+			src="/gfx/aboutProject/aboutProj_edit_v2.png"
+			class="main-image"
+		/>
 		<div class="newProducts">
 			<h1>Nové pomůcky</h1>
-			<client-only>
+			<!---<client-only>
 				<no-ssr>
 					<carousel
 						:dots="false"
@@ -78,11 +90,19 @@
 						:autoplayTimeout="5000"
 						v-if="products"
 					>
-						<!-- set 4 random from internet images -->
+						
 						<item-box v-for="(product, index) in products.slice(0, 8)" :key="index" :product="product" @click="$router.push(`/${product._id}`)" />
 					</carousel>
 				</no-ssr>
-			</client-only>
+			</client-only>-->
+			<div class="item-container">
+				<item-box
+					v-for="(product, index) in products.slice(0, 5)"
+					:key="index"
+					:product="product"
+					@click="$router.push(`/${product._id}`)"
+				/>
+			</div>
 		</div>
 		<button draggable="true">Prozkoumat</button>
 		<div class="aboutProject">
@@ -112,27 +132,28 @@
 <script>
 	import itemBox from "@/components/item-box.vue";
 	/*import mapping from "@/components/main-page/mapping.vue";
-									import news from "@/components/main-page/news/news.vue";
-									import aboutProject from "@/components/main-page/about-project.vue";
-									import disadvRoutes from "@/components/main-page/disadv-routes/disadv-routes.vue";
-									import contact from "@/components/main-page/contact.vue";
-									import footerBar from "@/components/main-page/footer-bar.vue";*/
+										import news from "@/components/main-page/news/news.vue";
+										import aboutProject from "@/components/main-page/about-project.vue";
+										import disadvRoutes from "@/components/main-page/disadv-routes/disadv-routes.vue";
+										import contact from "@/components/main-page/contact.vue";
+										import footerBar from "@/components/main-page/footer-bar.vue";*/
 	export default {
 		name: "main-page",
 		components: {
 			itemBox,
 		},
 		async asyncData({ $axios }) {
-			const products = await $axios.$get("/pomucky/search?sort=newest");
+			const products = await $axios
+				.$get("/pomucky/search?sort=newest")
 			return { products };
 		},
 		/*components: {
-											mapping,
-											news,
-											aboutProject,
-											disadvRoutes,
-											contact,
-											footerBar,
-										}*/
+												mapping,
+												news,
+												aboutProject,
+												disadvRoutes,
+												contact,
+												footerBar,
+											}*/
 	};
 </script>

@@ -6,9 +6,17 @@
 		min-width: 300px;
 		min-height: 100%;
 		padding: 10px;
-		background-color: #ffffff;
+		background: linear-gradient(
+			180deg,
+			#f9f9f9 0%,
+			#ffffff 4.69%,
+			#fbfbfb 58.85%,
+			#e8e8e8 100%
+		);
+		border: 1px solid #adadad;
+		border-radius: 15px;
 		transition: 0.3s all ease;
-		border-radius: 20px;
+
 		> a {
 			padding: 10px;
 			display: flex;
@@ -102,9 +110,7 @@
 					<!--<router-link to="" v-if="user.forceChangePassword != true"
 						>Upravit</router-link
 					>-->
-					<router-link to="/admin/zmenahesla"
-						>Změnit heslo</router-link
-					>
+					<router-link to="/admin/zmenahesla">Změnit heslo</router-link>
 				</div>
 			</div>
 		</router-link>
@@ -126,20 +132,17 @@
 			v-if="user.forceChangePassword != true && user.role > 4"
 			>Správa účtů</router-link
 		>
-		<router-link to="/admin/spravamist" v-if="user.forceChangePassword != true && user.role > 4"
-			>Správa míst</router-link
-		>
 		<div class="logout" @click="logout()">Odhlásit se</div>
 	</nav>
 </template>
 <script>
 	export default {
-        data() {
-            return {
-                dropdown: false,
-            }
-        },
-        watch: {
+		data() {
+			return {
+				dropdown: false,
+			};
+		},
+		watch: {
 			$route(to, from) {
 				if (to.path == "/admin/profil" || to.path == "/admin/zmenahesla") {
 					this.dropdown = true;
