@@ -5,12 +5,6 @@
     tag: '{{ mongodb_docker_image_tag }}'
     source: pull
 
-- name: Create data container
-  docker_container:
-    name: '{{ mongodb_container_name }}-data'
-    image: '{{ mongodb_docker_image }}:{{ mongodb_docker_image_tag }}'
-    state: present
-
 - name: Run mongodb container
   docker_container:
     name: '{{ mongodb_container_name }}'
@@ -20,8 +14,6 @@
     memory: '{{ container_memory_limit | default(omit) }}'
     env: '{{ mongodb_env | combine(mongodb_auth_env) }}'
     volumes: '{{ mongodb_volumes + [mongodb_users_config_mount] }}'
-    volumes_from:
-      - '{{ mongodb_container_name }}-data'
     ports:
       - '0.0.0.0:{{ mongodb_port }}:{{ mongodb_internal_port }}'
   register: mongodb_container

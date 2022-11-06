@@ -1,4 +1,8 @@
 ---
+- name: MongoDB data folder exists
+  file:
+    path: /home/ssps/mongo-data
+    state: directory
 - name: MongoDB server
   include_role:
     name: mongodb
@@ -14,6 +18,8 @@
     mongodb_docker_image_tag: 5.0.9
     mongodb_install_cli: false
     mongodb_container_memory_limit: 512m
+    mongodb_volumes:
+      - "/home/ssps/mongo-data:/data/db"
 - name: create docker network
   docker_network:
     name: mongodb
