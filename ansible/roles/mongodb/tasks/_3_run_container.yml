@@ -9,7 +9,7 @@
   docker_container:
     name: '{{ mongodb_container_name }}'
     image: '{{ mongodb_docker_image }}:{{ mongodb_docker_image_tag }}'
-    restart_policy: always
+    # restart_policy: unless-stopped
     state: started
     memory: '{{ container_memory_limit | default(omit) }}'
     env: '{{ mongodb_env | combine(mongodb_auth_env) }}'

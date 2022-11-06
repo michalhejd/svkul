@@ -3,23 +3,24 @@
   file:
     path: /home/ssps/mongo-data
     state: directory
-- name: MongoDB server
-  include_role:
-    name: mongodb
-  vars:
-    tags: ['database']
-    mongodb_container_name: 'mongodb'
-    mongodb_port: 27017
-    mongodb_auth: true
-    mongodb_db: databaze
-    mongodb_user: dbuzivatel
-    mongodb_password: "{{ MONGODB_PASSWORD }}"
-    mongodb_docker_image: mongo
-    mongodb_docker_image_tag: 5.0.9
-    mongodb_install_cli: false
-    mongodb_container_memory_limit: 512m
-    mongodb_volumes:
-      - "/home/ssps/mongo-data:/data/db"
+## Ansible failed. For first run, uncomment, then recomment this.
+# - name: MongoDB server
+#   include_role:
+#     name: mongodb
+#   vars:
+#     tags: ['database']
+#     mongodb_container_name: 'mongodb'
+#     mongodb_port: 27017
+#     mongodb_auth: true
+#     mongodb_db: databaze
+#     mongodb_user: dbuzivatel
+#     mongodb_password: "{{ MONGODB_PASSWORD }}"
+#     mongodb_docker_image: mongo
+#     mongodb_docker_image_tag: 5.0.9
+#     mongodb_install_cli: false
+#     mongodb_container_memory_limit: 512m
+#     mongodb_volumes:
+#       - "/home/ssps/mongo-data:/data/db"
 - name: create docker network
   docker_network:
     name: mongodb
