@@ -12,7 +12,7 @@ export default {
     },
     meta: [
       { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      //{ name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: '' },
       { name: 'format-detection', content: 'telephone=no' }
     ],
@@ -52,7 +52,7 @@ export default {
     '@nuxtjs/axios',
   ],
   axios: {
-    baseURL: process.env.NODE_ENV === 'development' ? 'http://localhost:3001' : 'https://svkul-api.hejduk.tech',
+    baseURL: process.env.NODE_ENV === 'development' ? 'http://localhost:3001' : '/api',
     credentials: true
   },
   //allow vuetify maps production

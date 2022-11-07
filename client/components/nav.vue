@@ -75,8 +75,8 @@
 		></a>
 		<div class="links">
 			<nuxt-link to="/">Domů</nuxt-link>
-			<nuxt-link to="">Pomůcky</nuxt-link>
-			<nuxt-link to="">Kontakt</nuxt-link>
+			<nuxt-link to="/databaze">Pomůcky</nuxt-link>
+			<nuxt-link to="#kontakt">Kontakt</nuxt-link>
 		</div>
 		<div class="search" :class="{ active: searchFocus }">
 			<input

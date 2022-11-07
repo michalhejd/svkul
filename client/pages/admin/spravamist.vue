@@ -53,12 +53,6 @@
 			left: 50%;
 			transform: translate(-50%, -50%);
 			z-index: 100000;
-			.file-text{
-				font-size: 12px;
-				color: gray;
-				position: relative;
-				top: -30px;
-			}
 			.addplacePopup-content {
 				display: flex;
 				flex-direction: column;
@@ -113,7 +107,6 @@
 						font-size: 16px;
 						cursor: pointer;
 						transition: 0.2s;
-						    margin-top: -25px;
 						.addLoader {
 							width: 14px;
 							height: 14px;
@@ -273,9 +266,73 @@
 		.place-container {
 			margin-top: 50px;
 			display: grid;
-			grid-template-columns: repeat(2, 1fr);
+			grid-template-columns: repeat(4, auto);
 			grid-gap: 20px;
 			padding: 0 20px;
+			.place-box {
+				background-color: white;
+				position: relative;
+				display: flex;
+				flex-direction: column;
+				justify-content: space-between;
+				align-items: center;
+				padding: 10px;
+				border-radius: 10px;
+				box-shadow: 3px 3px 5px 0px rgb(206, 206, 206);
+				.place-content {
+					user-select: none;
+					-moz-user-select: -moz-none;
+					-khtml-user-select: none;
+					-webkit-user-select: none;
+					-ms-user-select: none;
+				}
+				.close {
+					opacity: 0;
+					position: absolute;
+					top: 50%;
+					left: 50%;
+					transform: translate(-50%, -50%);
+				}
+				.place-info {
+					display: flex;
+					flex-direction: column;
+					justify-content: center;
+					align-items: center;
+					.place-name {
+						font-size: 20px;
+						font-weight: 500;
+						margin-bottom: 10px;
+					}
+					.place-role {
+						font-size: 16px;
+						font-weight: 400;
+					}
+				}
+				.place-icons {
+					display: flex;
+					justify-content: space-between;
+					align-items: center;
+					width: 100%;
+					.place-icon {
+						width: 30px;
+						height: 30px;
+						border-radius: 50%;
+						background-color: rgb(72, 155, 194);
+						display: flex;
+						justify-content: center;
+						align-items: center;
+						cursor: pointer;
+						.fas.fa-pen-to-square {
+							color: black;
+							font-size: 20px;
+						}
+						.fas.fa-xmark {
+							color: black;
+							font-size: 20px;
+						}
+					}
+				}
+			}
 		}
 	}
 </style>
@@ -343,21 +400,6 @@
 						rows="10"
 						placeholder="Popis"
 					></textarea>
-					<div
-						class="dropzone"
-						@dragover.prevent
-						@drop.prevent="onDrop($event)"
-					>
-						<v-file-input
-							dense
-							label="Přidat banner"
-							append
-							outlined
-							v-model="images"
-							@change="log()"
-						></v-file-input>
-						<span class="file-text">Doporučené rozlišení je 614.5px x 350px</span>
-					</div>
 					<button
 						@click="addNewplace()"
 						class="addButton"
@@ -388,12 +430,14 @@
 			</div>
 		</div>
 		<div class="place-container">
-			<place-box v-for="(place, index) in places" :key="index" :place="place"/>
+			<div class="place-box" v-for="(place, index) in places" :key="index">
+				<!--<div class="place-icon">{{place.name}}</div>-->
+				<div class="place-content">{{ place.name }}</div>
+			</div>
 		</div>
 	</div>
 </template>
 <script>
-import placeBox from '@/components/admin/place-box.vue'
 	export default {
 		data() {
 			return {
@@ -410,28 +454,17 @@ import placeBox from '@/components/admin/place-box.vue'
 						description: "",
 					},
 				},
-				images: null,
 				popupAddBox: false,
 				popupDeleteBox: false,
 				shadow: false,
 				addLoading: false,
 			};
 		},
-		components: {
-			placeBox
-		},
 		async asyncData({ $axios }) {
-			const places = await $axios.$get("places");
+			const places = await $axios.$get("places")
 			return { places };
 		},
 		methods: {
-			onDrop(e) {
-				this.images = e.dataTransfer.files[0];
-				this.log();
-			},
-			log() {
-				console.log(this.images);
-			},
 			openDeletePopup(place) {
 				this.popupDeleteBox = true;
 				this.shadow = true;
@@ -463,110 +496,40 @@ import placeBox from '@/components/admin/place-box.vue'
 			},
 			addNewplace() {
 				this.addLoading = true;
-				if (this.images.length > 0) {
-					for (let i = 0; i < this.images.length; i++) {
-						var reader = new FileReader();
-						reader.readAsDataURL(this.images[i]);
-						reader.onload = () => {
-							//log just base64
-							console.log(reader.result);
-							console.log(reader.result.split(",")[1]);
-							console.log(reader.result.split(",")[0]);
-							console.log(
-								reader.result.split(",")[0].split(":")[1].split(";")[0]
-							);
-						};
-					}
-				}
-				if (this.images != null) {
-					var reader = new FileReader();
-					reader.readAsDataURL(this.images);
-					reader.onload = () => {
-						//log just base64
-						console.log(reader.result);
-						console.log(reader.result.split(",")[1]);
-						console.log(reader.result.split(",")[0]);
-						console.log(reader.result.split(",")[0].split(":")[1].split(";")[0]);
-						this.$axios
-							.post("/places", {
-								name: this.place.name,
-								description: this.place.description,
-								website: this.place.website,
-								contacts: [
-									{
-										email: this.place.contacts.email,
-										phone: this.place.contacts.phone,
-										name: this.place.contacts.name,
-										description: this.place.contacts.description,
-									},
-								],
-								buffer: {
-									data: reader.result.split(",")[1],
-									mimetype: reader.result
-										.split(",")[0]
-										.split(":")[1]
-										.split(";")[0],
-								},
-							})
-							.then((res) => {
-								this.addLoading = false;
-								this.closeAddPopup();
-								this.getplaces();
-								this.place = {
-									name: "",
-									description: "",
-									website: "",
-									contacts: {
-										email: "",
-										phone: "",
-										name: "",
-										description: "",
-									},
-								};
-								this.images = null;
-							})
-							.catch((err) => {
-								this.addLoading = false;
-								console.log(err);
-							});
-					};
-				} else {
-					this.$axios
-						.post("/places", {
-							name: this.place.name,
-							description: this.place.description,
-							website: this.place.website,
-							contacts: [
-								{
-									email: this.place.contacts.email,
-									phone: this.place.contacts.phone,
-									name: this.place.contacts.name,
-									description: this.place.contacts.description,
-								},
-							],
-						})
-						.then((res) => {
-							this.addLoading = false;
-							this.closeAddPopup();
-							this.getplaces();
-							this.place = {
-								name: "",
-								description: "",
-								website: "",
-								contacts: {
-									email: "",
-									phone: "",
-									name: "",
-									description: "",
-								},
-							};
-							this.images = null;
-						})
-						.catch((err) => {
-							this.addLoading = false;
-							console.log(err);
-						});
-				}
+				this.$axios
+					.post("/places", {
+						name: this.place.name,
+						description: this.place.description,
+						website: this.place.website,
+						contacts: [
+                            {
+                                email: this.place.contacts.email,
+                                phone: this.place.contacts.phone,
+                                name: this.place.contacts.name,
+                                description: this.place.contacts.description,
+                            },
+                        ],
+					})
+					.then((res) => {
+						this.addLoading = false;
+						this.closeAddPopup();
+						this.getplaces();
+                        this.place = {
+                            name: "",
+                            description: "",
+                            website: "",
+                            contacts: {
+                                email: "",
+                                phone: "",
+                                name: "",
+                                description: "",
+                            },
+                        };
+					})
+					.catch((err) => {
+						this.addLoading = false;
+						console.log(err);
+					});
 			},
 			getplaces() {
 				this.loading = true;

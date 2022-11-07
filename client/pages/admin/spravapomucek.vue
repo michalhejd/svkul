@@ -524,8 +524,8 @@
 	export default {
 		name: "searchAid",
 		async asyncData({ $axios }) {
-			const products = await $axios.$get("/pomucky/search");
-			return { products };
+			const products = await $axios.$get("/pomucky/search")
+			return { products }
 		},
 		components: {},
 		data() {
@@ -701,11 +701,14 @@
 													this.popupAddBox = false;
 													this.shadow = false;
 													this.addLoading = false;
+													this.images = [];
 												} else {
+													this.images = [];
 													alert("Obrázky se nepodařilo nahrát");
 												}
 											})
 											.catch((error) => {
+												this.images = [];
 												alert("Obrázky se nepodařilo nahrát");
 											});
 										this.addLoading = false;

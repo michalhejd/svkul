@@ -98,6 +98,7 @@
 </style>
 <template>
 	<nav>
+		<router-link to="/admin/">Panel</router-link>
 		<router-link to="/admin/profil">
 			<div class="myacc">
 				<div class="route" @click="dropdown = !dropdown">
@@ -125,12 +126,22 @@
 		<router-link
 			to="/admin/spravainstanci"
 			v-if="user.forceChangePassword != true"
-			>Správa instancí</router-link
+			>Správa půjčených pomůcek</router-link
 		>
 		<router-link
 			to="/admin/spravauctu"
 			v-if="user.forceChangePassword != true && user.role > 4"
 			>Správa účtů</router-link
+		>
+		<router-link
+			to="/admin/spravauzivatelu"
+			v-if="user.forceChangePassword != true && user.role > 4 || user.role == 2"
+			>Správa uživatelů</router-link
+		>
+		<router-link
+			to="/admin/spravamist"
+			v-if="user.forceChangePassword != true && user.role > 4"
+			>Správa míst</router-link
 		>
 		<div class="logout" @click="logout()">Odhlásit se</div>
 	</nav>

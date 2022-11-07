@@ -10,6 +10,12 @@
 		flex-direction: column;
 		background-color: var(--main-color);
 		gap: 30px;
+		img{
+			user-select: none;
+			-moz-user-select: none;
+			-webkit-user-select: none;
+			-ms-user-select: none;
+		}
 		.main-image {
 			width: 100%;
 			margin-top: -60px;
@@ -36,7 +42,12 @@
 				gap: 30px;
 			}
 		}
-		button {
+		> a {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			color: black;
+			text-decoration: none;
 			width: 170px;
 			height: 45px;
 			margin-bottom: 40px;
@@ -63,6 +74,31 @@
 			box-shadow: 0 6px 111px -2px rgba(0, 0, 0, 0.15);
 			h1 {
 				font-size: 52px;
+			}
+		}
+	}
+	@media only screen and (max-width: 1425px){
+		.main-page {
+			.newProducts {
+				.item-container{
+					padding: 0 30px;
+				}
+			}
+		}
+	}
+	@media only screen and (max-width: 1200px){
+		.main-page {
+			gap: 15px;
+			.newProducts {
+				margin-top: -440px;
+				gap: 0px;
+			}
+		}
+	}
+	@media only screen and (max-width: 1150px){
+		.main-page {
+			.aboutProject{
+				padding: 65px;
 			}
 		}
 	}
@@ -104,7 +140,7 @@
 				/>
 			</div>
 		</div>
-		<button draggable="true">Prozkoumat</button>
+		<Nuxt-link to="/databaze"><button draggable="true">Prozkoumat</button></Nuxt-link>
 		<div class="aboutProject">
 			<h1>O projektu</h1>
 			<p>
@@ -118,8 +154,8 @@
 				uživatelům, pozvánky na vzdělávací akce a prostor pro dotazy.
 			</p>
 		</div>
-		<div class="blog">
-			<h1>Blog</h1>
+		<div class="contact" id="kontakt">
+			<h1>Kontakt</h1>
 		</div>
 		<!--<mapping />
 		<news />
