@@ -6,14 +6,14 @@ export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     titleTemplate: '%s - Svkul',
-    title: 'Databáze pomůcek - Svkul',
+    title: 'Databáze pomůcek',
     htmlAttrs: {
       lang: 'cs'
     },
     meta: [
       { charset: 'utf-8' },
       //{ name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' },
+      { hid: 'description', name: 'description', content: 'Databáze učebních pomůcek prezentuje nabídku pomůcek z fondu knihovny a dalších partnerů zapojených do projektu.' },
       { name: 'format-detection', content: 'telephone=no' }
     ],
     link: [
@@ -52,7 +52,7 @@ export default {
     '@nuxtjs/axios',
   ],
   axios: {
-    baseURL: process.env.NODE_ENV === 'development' ? 'http://localhost:3001' : '/api',
+    baseURL: process.env.NODE_ENV === 'development' ? 'http://localhost:3001' : 'https://svkul-api.hejduk.tech',
     credentials: true
   },
   //allow vuetify maps production
